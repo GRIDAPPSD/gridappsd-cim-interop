@@ -57,7 +57,7 @@ The following is the recommended structure for an applications working with grid
 
     ```console
     > cd gridappsd-cim-interop
-    > docker build --network=host -t derms_app .
+    > docker build -t derms_app:local .
     ```
 
 1.  Add the following to the gridappsd-docker/docker-compose.yml file

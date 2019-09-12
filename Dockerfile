@@ -10,7 +10,7 @@ RUN echo $TIMESTAMP > /dockerbuildversion.txt
 # Pick a spot to put our application code
 # (note gridappsd-python is located at /usr/src/gridappsd-python)
 # and is already installed in the app-container-base environment.
-WORKDIR /usr/src/gridappsd-sample
+WORKDIR /usr/src/gridappsd-cim-interop
 
 # Add dependencies to the requirements.txt file before
 # uncommenting the next two lines
@@ -22,4 +22,4 @@ COPY . .
 
 # Use a symbolic link to the sample app rather than having to
 # mount it at run time (note can still be overriden in docker-compose file)
-RUN ln -s /usr/src/gridappsd-sample/sample_app.config /appconfig
+RUN ln -s /usr/src/gridappsd-cim-interop/derms_app.config /appconfig
