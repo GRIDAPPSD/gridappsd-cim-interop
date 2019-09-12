@@ -209,7 +209,7 @@ def _main():
     parser.add_argument("request",
                         help="Simulation Request")
     parser.add_argument("--message_period",
-                        help="How often the sample app will send open/close capacitor message.",
+                        help="How often the DERMS will send open/close capacitor message.",
                         default=DEFAULT_MESSAGE_PERIOD)
     # These are now set through the docker container interface via env variables or defaulted to
     # proper values.

@@ -40,7 +40,7 @@
 import pathlib
 from setuptools import setup
 
-from sample_app import __version__
+from derms_app import __version__
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
@@ -53,5 +53,5 @@ setup(
     name="gridappsd",
     version=__version__,
     install_requires=['PyYaml', 'stomp.py', 'pytz'],
-    packages=['sample_app'],
+    packages=['derms_app'],
 )
