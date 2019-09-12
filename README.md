@@ -48,7 +48,7 @@ The following is the recommended structure for an applications working with grid
 
     ```console
     git clone -b develop https://github.com/temcdrm/gridappsd-docker
-    git clone https://github.com/GRIDAPPSD/gridappsd-cim-interop
+    git clone -b develop https://github.com/GRIDAPPSD/gridappsd-cim-interop
     ```
 
 ## Creating the sample-app application container
@@ -56,15 +56,15 @@ The following is the recommended structure for an applications working with grid
 1.  From the command line execute the following commands to build the sample-app container
 
     ```console
-    osboxes@osboxes> cd gridappsd-cim-interop
-    osboxes@osboxes> docker build --network=host -t derms-app .
+    > cd gridappsd-cim-interop
+    > docker build --network=host -t derms_app .
     ```
 
 1.  Add the following to the gridappsd-docker/docker-compose.yml file
 
     ```` yaml
     dermsapp:
-      image: derms-app
+      image: derms_app
       depends_on: 
         gridappsd    
     ````
