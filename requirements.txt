@@ -5,3 +5,4 @@ stomp.py
 PyYAML
 pytz
 zeep
+Flask
