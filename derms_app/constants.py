@@ -7,7 +7,7 @@ Created on Apr 24, 2018
 # URL for blazegraph
 
 # Using the default blazegraph installation as a standalone
-blazegraph_url = "http://localhost:9999/blazegraph/namespace/kb/sparql"
+# blazegraph_url = "http://localhost:9999/blazegraph/namespace/kb/sparql"
 
 # When running the platform in the docker, the blazegraph URL can be found in
 # /gridappsd/conf/pnnl.goss.gridappsd.cfg. At the time of writing (04/24/18),
@@ -18,7 +18,7 @@ blazegraph_url = "http://localhost:9999/blazegraph/namespace/kb/sparql"
 # blazegraph_url = "http://blazegraph:8080/bigdata/sparql"
 
 # URL from outside the docker container:
-# blazegraph_url = "http://localhost:8889/bigdata/sparql"
+blazegraph_url = "http://localhost:8889/bigdata/sparql"
 
 #******************************************************************************
 # Prefix for blazegraph queries; canonical version is now CIM100
