@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request
 from multiprocessing import Process
 from time import sleep
 
@@ -10,6 +10,15 @@ __proc__ = None
 @app.route('/')
 def root():
     return app.send_static_file('index.html')
+
+
+@app.route('/confirmation', methods = ['POST'])
+def printMesasge():
+    testName = request.form['textName']
+    print('testName: ' + testName)
+    message = request.form['message']
+    print('message: ' + message)
+    return "meesage sent."
 
 
 @app.route('/js/<path:path>')
