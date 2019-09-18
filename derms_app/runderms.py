@@ -53,6 +53,7 @@ import time
 
 from gridappsd import GridAPPSD, DifferenceBuilder, utils
 from gridappsd.topics import simulation_input_topic, simulation_output_topic, simulation_log_topic, simulation_output_topic
+from .server import start_server_proc
 
 DEFAULT_MESSAGE_PERIOD = 5
 
