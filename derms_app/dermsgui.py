@@ -46,8 +46,8 @@ Created on Sep 15, 2019
 __version__ = "0.0.1"
 
 from SPARQLWrapper import SPARQLWrapper2
-from . import constants
-from . import derms_group as grp
+from derms_app import constants
+from derms_app import derms_group as grp
 
 sparql = SPARQLWrapper2(constants.blazegraph_url)
 
