@@ -46,8 +46,8 @@ Created on Sep 15, 2019
 __version__ = "0.0.1"
 
 from SPARQLWrapper import SPARQLWrapper2
-import constants
-import derms_group as grp
+from . import constants
+from . import derms_group as grp
 
 sparql = SPARQLWrapper2(constants.blazegraph_url)
 
@@ -198,4 +198,4 @@ def _main():
 		print (key, val.desc, val.ID, val.get_count(), 0.001 * val.get_total_ratedS(), 0.001 * val.get_total_p())
 
 if __name__ == "__main__":
-  _main()
+	_main()

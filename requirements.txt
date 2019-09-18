@@ -6,3 +6,4 @@ PyYAML
 pytz
 zeep
 Flask
+SPARQLWrapper
