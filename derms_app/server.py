@@ -6,7 +6,7 @@ import uuid
 
 from derms_app import createDeviceJsonConf
 from derms_app import group
-#from .createDeviceJsonConf import getDeviceSubset
+
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
@@ -30,11 +30,6 @@ def createDeviceList():
     assert isinstance(deviceList, list)
     return render_template('devices-template.html', devices=deviceList, mrid=uuid.uuid4())
 
-
-@app.route('/doneCreateDERGroup', methods=['POST'])
-def doneCreateDERGroup():
-    pass
-
 @app.route('/api/create', methods=['POST'])
 def create_group():
     groupName = request.form['groupName']
@@ -53,25 +48,46 @@ def create_group():
 
     # Build an xml structure to send to openderms
     # use zeep to send that xml structure to openderms/test instance and get response
+
     #success = zeep.createGroupCall()
     # if group created successfully
-    if True:
+    if False:
         groupList.append(newGroup)
-        return render_template('groupDetail-template.html', group=newGroup)
+        return render_template('groupDetail-template.html', group=newGroup, message='created')
     else:
-        return render_template('failedGroupCreation-template.html', group=newGroup)
+        return render_template('failedGroup-template.html', group=newGroup, message='create')
 
 
-@app.route('/confirmation', methods=['POST'])
-def printMesasge():
-    # Build an xml structure to send to openderms
-    # use zeep to send that xml structure to openderms/test instance and get response
+@app.route('/delete')
+def deleteAGroup():
+    return render_template('groups-template.html', groups=groupList)
 
-    testName = request.form['textName']
-    print('testName: ' + testName)
-    message = request.form['message']
-    print('message: ' + message)
-    return "meesage sent."
+@app.route('/api/delete', methods=['POST'])
+def delete_group():
+    group = request.form['groups']
+    dgmrid = group.split(',')[1].strip(" ,()'")
+    for grp in groupList:
+        if grp.mrid == dgmrid:
+            # success = zeep.deleteGroupCall()
+            if False:
+                groupList.remove(grp)
+                return render_template('groupDetail-template.html', group=grp, message='deleted')
+            else:
+                return render_template('failedGroup-template.html', group=grp, message='delete')
+
+    return "success"
+
+
+# @app.route('/confirmation', methods=['POST'])
+# def printMesasge():
+#     # Build an xml structure to send to openderms
+#     # use zeep to send that xml structure to openderms/test instance and get response
+#
+#     testName = request.form['textName']
+#     print('testName: ' + testName)
+#     message = request.form['message']
+#     print('message: ' + message)
+#     return "meesage sent."
 
 
 @app.route('/js/<path:path>')

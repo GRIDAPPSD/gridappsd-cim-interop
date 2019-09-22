@@ -6,21 +6,26 @@
 </head>
 <body>
 
-
-<h2>DER group successfully created:</h2>
+<a href="/">Home</a> &nbsp;
+<a href="/create">Create Another Group</a> &nbsp;
+<a href="/delete">Delete Another Group</a>
 <br>
+<br>
+<h2>DER group successfully {{message}}:</h2>
+<br>
+
 
 <p>MRID of the new group:</p>
-<p> {{group.mrid}}</p>
+    <p>{{group.mrid}}</p>
 <br>
 <p>Name of the new group:</p>
-<p> {{group.name}}</p>
+    <p>{{group.name}}</p>
 <br>
 <p>Device(s) of the new group:</p>
 {% for dev in group.devices %}
-<p> {{dev.mrid}}</p>
-<p> {{dev.name}}</p>
-<p> {{dev.type}}</p>
+    <p>{{dev.mrid}}</p>
+    <p>{{dev.name}}</p>
+    <p>{{dev.type}}</p>
 <br>
 {% endfor %}
 
