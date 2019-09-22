@@ -49,17 +49,17 @@ def create_group():
         newDevice = createDeviceJsonConf.Device(devicemrid, deviceName, deviceType)
         devicesList.append(newDevice)
 
+    newGroup = group.Group(groupmrid, groupName, devicesList)
+
     # Build an xml structure to send to openderms
     # use zeep to send that xml structure to openderms/test instance and get response
+    #success = zeep.createGroupCall()
     # if group created successfully
     if True:
-        newGroup = group.Group(groupmrid, groupName, devicesList)
         groupList.append(newGroup)
         return render_template('groupDetail-template.html', group=newGroup)
     else:
-        return "Group Creation Failure!"
-
-    return groupList
+        return render_template('failedGroupCreation-template.html', group=newGroup)
 
 
 @app.route('/confirmation', methods=['POST'])

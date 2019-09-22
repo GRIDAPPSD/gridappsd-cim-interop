@@ -22,7 +22,7 @@ ORDER by ?type ?name
 """
 
 
-class Device():
+class Device:
     def __init__(self, mrid, name, type):
         self.mrid = mrid
         self.name = name
