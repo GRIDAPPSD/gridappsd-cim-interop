@@ -10,7 +10,7 @@
 <br>
 <h2>Delete a DER group</h2>
 <br>
-<form action="/api/delete" method="post">
+<form action="/api/edit" method="post">
     Select device(s):
     <br>
     <select name="groups" required id="selectGroup">
@@ -20,7 +20,8 @@
         </select>
     <br>
     <br>
-    <input type="submit" value="Delete" name="deleteButton">
+    <input type="submit" value="Delete" name="action">
+    <input type="submit" value="Modify" name="action">
 </form>
 </body>
 </html>

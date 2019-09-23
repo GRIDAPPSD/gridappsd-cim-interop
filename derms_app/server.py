@@ -12,7 +12,9 @@ from derms_app import group
 app = Flask(__name__, static_url_path='')
 __proc__ = None
 
+deviceList = []
 groupList = []
+
 
 @app.route('/')
 def root():
@@ -26,7 +28,9 @@ def root():
 
 @app.route('/create')
 def createDeviceList():
-    deviceList = createDeviceJsonConf.getDeviceSubset()
+    a = createDeviceJsonConf.getDeviceSubset()
+    for dev in a:
+        deviceList.append(dev)
     assert isinstance(deviceList, list)
     return render_template('devices-template.html', devices=deviceList, mrid=uuid.uuid4())
 
@@ -35,47 +39,57 @@ def create_group():
     groupName = request.form['groupName']
     groupmrid = request.form['mrid']
     devices = request.form.getlist('devices')
-    devicesList = []
+    thisDevices = []
     for dev in devices:
         devParts = dev.split(',')
         deviceName = devParts[0].strip(" ,()'")
         deviceType = devParts[1].strip(" ,()'")
         devicemrid = devParts[2].strip(" ,()'")
         newDevice = createDeviceJsonConf.Device(devicemrid, deviceName, deviceType)
-        devicesList.append(newDevice)
+        thisDevices.append(newDevice)
 
-    newGroup = group.Group(groupmrid, groupName, devicesList)
+    newGroup = group.Group(groupmrid, groupName, thisDevices)
 
     # Build an xml structure to send to openderms
     # use zeep to send that xml structure to openderms/test instance and get response
 
     #success = zeep.createGroupCall()
     # if group created successfully
-    if False:
+    if True:
         groupList.append(newGroup)
         return render_template('groupDetail-template.html', group=newGroup, message='created')
     else:
         return render_template('failedGroup-template.html', group=newGroup, message='create')
 
 
-@app.route('/delete')
-def deleteAGroup():
+@app.route('/modify')
+def modifyAGroup():
     return render_template('groups-template.html', groups=groupList)
 
-@app.route('/api/delete', methods=['POST'])
-def delete_group():
+@app.route('/api/edit', methods=['POST'])
+def editGroup():
     group = request.form['groups']
     dgmrid = group.split(',')[1].strip(" ,()'")
     for grp in groupList:
         if grp.mrid == dgmrid:
-            # success = zeep.deleteGroupCall()
-            if False:
-                groupList.remove(grp)
-                return render_template('groupDetail-template.html', group=grp, message='deleted')
-            else:
-                return render_template('failedGroup-template.html', group=grp, message='delete')
+            if request.form['action'] == 'Delete':
+                return deleteGroup(grp)
+            elif request.form['action'] == 'Modify':
+                return render_template('devices-template.html', devices=deviceList, mrid=grp.mrid, groupname=grp.name)
 
-    return "success"
+            # if False:
+            #     groupList.remove(grp)
+            #     return render_template('groupDetail-template.html', group=grp, message='deleted')
+            # else:
+            #     return render_template('failedGroup-template.html', group=grp, message='delete')
+
+def deleteGroup(group):
+    # success = zeep.deleteGroupCall()
+    if True:
+        groupList.remove(group)
+        return render_template('groupDetail-template.html', group=group, message='deleted')
+    else:
+        return render_template('failedGroup-template.html', group=group, message='delete')
 
 
 # @app.route('/confirmation', methods=['POST'])

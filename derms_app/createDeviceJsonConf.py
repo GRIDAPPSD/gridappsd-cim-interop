@@ -52,7 +52,8 @@ def getDeviceSubset():
         if type == 'PowerElectronicsConnection':
             mrid = b['mrid'].value
             name = b['name'].value
-            deviceList.append({'name': name, 'mrid': mrid, 'type': type})
+            #deviceList.append({'name': name, 'mrid': mrid, 'type': type})
+            deviceList.append(Device(mrid, name, type))
         # else:
         #     if type not in deviceTypeList:
         #         deviceTypeList.append(type)
