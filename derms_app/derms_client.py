@@ -179,12 +179,14 @@ if __name__ == '__main__':
                     Device("8ac14ae9-9c13-4202-8fa2-944dd4a18029", "dnp3_011", "atype").mrid,
                     Device("4c2a89bc-377a-47cb-ab17-c1462da33760", "dnp3_012", "atype").mrid]
         response1 = create_group(mrid, "a group 6", dev_list)
+        assert response1 is not None, "Invalid response received"
+        assert response1.Reply.Result == "OK", "Failed to create first group perhaps the start state is invalid"
         response2 = create_group(mrid, "a group 6", dev_list)
 
         if response2.Reply.Result == 'FAILED':
-            print("Success")
+            _log.info("Success")
         else:
-            print("Failed")
+            _log.info("Failed")
 
 
     menu = """
