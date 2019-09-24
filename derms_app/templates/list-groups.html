@@ -2,12 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DER Groups</title>
+    <title>DER Groups - List</title>
 </head>
 <body>
 <a href="/create_group">Create Group</a><br />
-{% for g in groups %}
+{% if not groups %}
+<h1>No Groups Found</h1>
+{% endif %}
+{% for k, g in groups.items() %}
 <p>
+    <a href="/api/delete_group/mrid/{{g.mrid}}">Delete {{g.name}}</a>&nbsp;
+    <a href="/edit_group/mrid/{{g.mrid}}">Edit {{g.name}}</a>
     Name: {{ g.name }}<br />
     MRID: {{ g.mrid }}<br />
     Device MRIDs:

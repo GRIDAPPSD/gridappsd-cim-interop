@@ -84,8 +84,8 @@ def create_group(mrid, name, device_mrid_list):
 
     response = client.service.CreateDERGroups(Header=headers, Payload=body)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
-    _log.debug("ZEEP Respons:\n{}".format(response))
-    # _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
+    #_log.debug("ZEEP Respons:\n{}".format(response))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
 
     return response
 
@@ -112,7 +112,8 @@ def create_multiple_group(mrid_list, name_list, device_mrid_list_list):
 
     response = client.service.CreateDERGroups(Header=headers, Payload=body)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
-    _log.debug("ZEEP Respons:\n{}".format(response))
+    # _log.debug("ZEEP Respons:\n{}".format(response))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
 
 
 def change_group(mrid, name, device_mrid_list):
@@ -126,16 +127,26 @@ def change_group(mrid, name, device_mrid_list):
 
     response = client.service.ChangeDERGroups(Header=headers, Payload=body)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
-    _log.debug("ZEEP Respons:\n{}".format(response))
+    # _log.debug("ZEEP Respons:\n{}".format(response))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
 
 
-def delete_group(name):
+def delete_group(name=None, mrid=None):
+    assert name or mrid, "Must have either name or mrid specified"
+    assert not (name and mrid), "Must have either name or mrid specified"
     headers = __build_endpoint_header("delete")
-    body = {
-        "DERGroups": [
-            {"EndDeviceGroup": {"Names": __build_names(name)}}
-        ]
-    }
+    if name:
+        body = {
+            "DERGroups": [
+                {"EndDeviceGroup": {"Names": __build_names(name)}}
+            ]
+        }
+    else:
+        body = {
+            "DERGroups": [
+                {"EndDeviceGroup": {"mRID": str(mrid)}}
+            ]
+        }
 
     history = HistoryPlugin()
     client = Client(c.CHANGE_DERGROUP_ENDPOINT, plugins=[history])
@@ -144,13 +155,14 @@ def delete_group(name):
 
     response = client.service.DeleteDERGroups(Header=headers, Payload=body)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
-    _log.debug("ZEEP Respons:\n{}".format(response))
+    # _log.debug("ZEEP Respons:\n{}".format(response))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
 
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    # from derms_app.createDeviceJsonConf import Device
-    #
+    from derms_app.createDeviceJsonConf import Device
+
     # dev_list = [Device(uuid.uuid4(), "foo", "atype"),
     #             Device(uuid.uuid4(), "bar", "atype"),
     #             Device(uuid.uuid4(), "bim", "atype")]
@@ -165,9 +177,15 @@ if __name__ == '__main__':
     #         Device(uuid.uuid4(), "bar", "atype"),
     #         Device(uuid.uuid4(), "bim", "atype")
     #     ],
-    #     dev_list
+    #     [
+    #         Device(uuid.uuid4(), "fat", "atype"),
+    #         Device(uuid.uuid4(), "cow", "atype"),
+    #         Device(uuid.uuid4(), "rus", "atype")
+    #     ]
     # ]
     #
     # create_multiple_group(mrids, names, list_of_lists)
 
-    delete_group("DG1")
+    # delete_group(name="DG1")
+    delete_group(mrid=uuid.uuid4())
+#    delete_group("DG1")

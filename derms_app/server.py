@@ -55,6 +55,30 @@ def device_group_create(group_mrid, group_name, device_mrid_list):
 write_lock = Lock()
 
 
+@app.route("/api/delete_group/mrid/<mrid>")
+def delete_group_mrid(mrid):
+    return delete_group(mrid=mrid)
+
+
+@app.route("/api/delete_group/name/<name>")
+def delete_group_name(name):
+    return delete_group(name=name)
+
+
+def delete_group(mrid=None, name=None):
+    # name = request.args.get("name")
+    # mrid = request.args.get("mrid")
+
+    assert name or mrid, "Name or mrid must be specified~"
+    if mrid:
+        derms_client.delete_group(mrid=mrid)
+        group.delete_group(group_mrid=mrid)
+    else:
+        derms_client.delete_group(name=name)
+        group.delete_group(group_name=name)
+    return redirect("/list_groups")
+
+
 @app.route("/create_group", methods=['POST', 'GET'])
 def create_group_html():
     if request.method == 'POST':
@@ -91,6 +115,11 @@ def createDeviceList():
     return render_template('devices-template.html', devices=deviceList, mrid=uuid.uuid4())
 
 
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('static/js', path)
+
+
 @app.route('/api/create', methods=['POST'])
 def create_group():
     groupName = request.form['groupName']
@@ -118,7 +147,6 @@ def create_group():
     else:
         return render_template('failedGroup-template.html', group=newGroup, message='create')
 
-
 @app.route('/modify')
 def modifyAGroup():
     return render_template('groups-template.html', groups=groupList)
@@ -140,14 +168,6 @@ def editGroup():
             # else:
             #     return render_template('failedGroup-template.html', group=grp, message='delete')
 
-def deleteGroup(group):
-    # success = zeep.deleteGroupCall()
-    if True:
-        groupList.remove(group)
-        return render_template('groupDetail-template.html', group=group, message='deleted')
-    else:
-        return render_template('failedGroup-template.html', group=group, message='delete')
-
 
 # @app.route('/confirmation', methods=['POST'])
 # def printMesasge():
@@ -161,9 +181,13 @@ def deleteGroup(group):
 #     return "meesage sent."
 
 
-@app.route('/js/<path:path>')
-def send_js(path):
-    return send_from_directory('static/js', path)
+def deleteGroup(group):
+    # success = zeep.deleteGroupCall()
+    if True:
+        groupList.remove(group)
+        return render_template('groupDetail-template.html', group=group, message='deleted')
+    else:
+        return render_template('failedGroup-template.html', group=group, message='delete')
 
 
 def get_app():

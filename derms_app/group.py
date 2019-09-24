@@ -2,7 +2,7 @@ import json
 import os
 from threading import Lock
 
-__groups = []
+__groups = {}
 
 write_lock = Lock()
 
@@ -17,7 +17,10 @@ class Group:
 def get_groups_json():
     if not __groups:
         load_groups()
-    return json.dumps([x.__dict__ for x in __groups])
+    json_dict = {}
+    for k, v in __groups.items():
+        json_dict[k] = v.__dict__
+    return json.dumps(json_dict)
 
 
 def get_groups():
@@ -28,7 +31,24 @@ def get_groups():
 
 
 def add_group(group_mrid, group_name, device_mrids):
-    __groups.append(Group(group_mrid, group_name, device_mrids))
+    __groups[group_mrid] = Group(group_mrid, group_name, device_mrids)
+    with write_lock:
+        save_groups()
+
+
+def delete_group(group_mrid=None, group_name=None):
+    assert group_mrid or group_name, "must specify either group name or group mrid"
+    assert not (group_mrid and group_name), "must specify either group name or group mrid"
+    found_mrid = None
+    if group_mrid:
+        found_mrid = group_mrid
+    else:
+        for k, v in __groups.items():
+            if v.name == group_name:
+                found_mrid = k
+                break
+
+    del __groups[group_mrid]
     with write_lock:
         save_groups()
 
@@ -50,4 +70,4 @@ def load_groups():
         with open(file, "r") as fp:
             data = fp.read()
             if data:
-                __groups = json.loads(fp.read())
+                __groups = json.loads(data)
