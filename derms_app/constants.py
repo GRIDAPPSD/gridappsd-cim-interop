@@ -23,7 +23,9 @@ blazegraph_url = "http://localhost:8889/bigdata/sparql"
 
 # ******************************************************************************
 # URL for derms test instance
-CREATE_DERMS_ENDPOINT = "http://18.216.194.249:8080/61968-5/create/executeDERGroups?wsdl"
+CREATE_DERGROUP_ENDPOINT = "http://18.216.194.249:8080/61968-5/create/executeDERGroups?wsdl"
+CHANGE_DERGROUP_ENDPOINT = "http://18.216.194.249:8080/61968-5/change/executeDERGroups?wsdl" # http://18.216.194.249:8080/61968-5/change/receiveDERGroups?wsdl"
+DISPATCH_DERGROUP_ENDPOINT = "http://18.216.194.249:8080/61968-5/create/executeDERGroupDispatches?wsdl"
 
 # ******************************************************************************
 # Prefix for blazegraph queries; canonical version is now CIM100
