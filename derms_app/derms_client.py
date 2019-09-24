@@ -61,7 +61,7 @@ def __build_names(names):
         names = [names]
 
     name_list = []
-    for name in name_list:
+    for name in names:
         name_list.append({"name": name})
     return name_list
 
@@ -81,13 +81,23 @@ def create_group(mrid, name, device_mrid_list):
     client = Client(c.CREATE_DERGROUP_ENDPOINT, plugins=[history])
     headers = __build_endpoint_header("create")
     body = __get_create_body(mrid, name, device_mrid_list)
-
-    response = client.service.CreateDERGroups(Header=headers, Payload=body)
+    from pprint import pprint
+    print("HEADERS")
+    pprint(headers)
+    print("BODY")
+    pprint(body)
+    response = get_service(client, "create").CreateDERGroups(Header=headers, Payload=body)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
     #_log.debug("ZEEP Respons:\n{}".format(response))
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
 
     return response
+
+
+def get_service(client, verb):
+    bindings = c.SOAP_BINDINGS[verb]
+    service = client.create_service(*bindings)
+    return service
 
 
 def create_multiple_group(mrid_list, name_list, device_mrid_list_list):
@@ -153,7 +163,7 @@ def delete_group(name=None, mrid=None):
     # node = client.create_message(client.service, 'CreateDERGroups', Header=headers, Payload=body)
     # print(node)
 
-    response = client.service.DeleteDERGroups(Header=headers, Payload=body)
+    response = get_service(client, "delete").DeleteDERGroups(Header=headers, Payload=body)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
     # _log.debug("ZEEP Respons:\n{}".format(response))
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
@@ -162,11 +172,12 @@ def delete_group(name=None, mrid=None):
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     from derms_app.createDeviceJsonConf import Device
-
-    # dev_list = [Device(uuid.uuid4(), "foo", "atype"),
-    #             Device(uuid.uuid4(), "bar", "atype"),
-    #             Device(uuid.uuid4(), "bim", "atype")]
-    # create_group(uuid.uuid4(), "a group", dev_list)
+    mrid = uuid.uuid4()
+    dev_list = [Device("2fabd157-a01c-4f87-b4a0-2ee92989766b", "dnp3_010", "atype").mrid,
+                Device("8ac14ae9-9c13-4202-8fa2-944dd4a18029", "dnp3_011", "atype").mrid,
+                Device("4c2a89bc-377a-47cb-ab17-c1462da33760", "dnp3_012", "atype").mrid]
+    create_group(mrid, "a group 4", dev_list)
+    create_group(mrid, "a group 4", dev_list)
 
     # Now go for multiple creations
     # mrids = [uuid.uuid4(), uuid.uuid4()]
@@ -187,5 +198,5 @@ if __name__ == '__main__':
     # create_multiple_group(mrids, names, list_of_lists)
 
     # delete_group(name="DG1")
-    delete_group(mrid=uuid.uuid4())
+    #vdelete_group(mrid=uuid.uuid4())
 #    delete_group("DG1")

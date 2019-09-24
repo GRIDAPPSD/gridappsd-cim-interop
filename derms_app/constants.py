@@ -23,12 +23,31 @@ blazegraph_url = "http://localhost:8889/bigdata/sparql"
 
 # ******************************************************************************
 # URL for derms test instance
-# BASE_URL = "http://172.20.10.6:1080"
-BASE_URL = "http://18.216.194.249:8080"
+BASE_URL = "http://172.20.10.6:9000"
+# BASE_URL = "http://18.216.194.249:8080"
+# CREATE_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/create/executeDERGroups?wsdl"
+CREATE_DERGROUP_ENDPOINT = f"{BASE_URL}/service/org/epri/dergroups/create?wsdl"
+CREATE_NAMESPACE_SOAP_BINDING = (
+        '{http://iec.ch/TC57/2017/ExecuteDERGroups}ExecuteDERGroupsSoapBinding',
+        'http://172.20.10.6:9000/service/org/epri/dergroups/create'
+)
 
-CREATE_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/create/executeDERGroups?wsdl"
-CHANGE_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/change/executeDERGroups?wsdl" # http://18.216.194.249:8080/61968-5/change/receiveDERGroups?wsdl"
+# CHANGE_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/change/executeDERGroups?wsdl"
+CHANGE_DERGROUP_ENDPOINT = f"{BASE_URL}/service/org/epri/dergroups/change?wsdl"
+CHANGE_NAMESPACE_SOAP_BINDING = (
+    '{http://iec.ch/TC57/2017/ExecuteDERGroups}ExecuteDERGroupsSoapBinding',
+    'http://172.20.10.6:9000/service/org/epri/dergroups/change'
+)
+# http://18.216.194.249:8080/61968-5/change/receiveDERGroups?wsdl"
 DISPATCH_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/create/executeDERGroupDispatches?wsdl"
+
+
+SOAP_BINDINGS = dict(
+    create=CREATE_NAMESPACE_SOAP_BINDING,
+    # Both delete and change use the same binding
+    delete=CHANGE_NAMESPACE_SOAP_BINDING,
+    change=CHANGE_NAMESPACE_SOAP_BINDING
+)
 
 # ******************************************************************************
 # Prefix for blazegraph queries; canonical version is now CIM100
