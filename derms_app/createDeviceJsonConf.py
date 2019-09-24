@@ -28,6 +28,10 @@ class Device:
         self.name = name
         self.type = type
 
+    def __json__(self):
+        return json.dumps({"mrid": self.mrid,
+                           "name": self.name,
+                           "type": self.type})
 
 
 def getDevices():

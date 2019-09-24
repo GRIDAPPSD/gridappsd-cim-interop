@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DER Groups</title>
+</head>
+<body>
+<a href="/create_group">Create Group</a><br />
+{% for g in groups %}
+<p>
+    Name: {{ g.name }}<br />
+    MRID: {{ g.mrid }}<br />
+    Device MRIDs:
+    {% for m in g.devices %}
+        <div style="padding-left:10px">{{ m }}</div>
+    {% endfor %}
+</p>
+{% endfor %}
+
+</body>
+</html>

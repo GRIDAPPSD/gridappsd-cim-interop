@@ -1,9 +1,10 @@
-'''
+"""
 Created on Apr 24, 2018
 
 @author: thay838
-'''
-#******************************************************************************
+@author: craig8
+"""
+# ******************************************************************************
 # URL for blazegraph
 
 # Using the default blazegraph installation as a standalone
@@ -20,7 +21,11 @@ Created on Apr 24, 2018
 # URL from outside the docker container:
 blazegraph_url = "http://localhost:8889/bigdata/sparql"
 
-#******************************************************************************
+# ******************************************************************************
+# URL for derms test instance
+CREATE_DERMS_ENDPOINT = "http://18.216.194.249:8080/61968-5/create/executeDERGroups?wsdl"
+
+# ******************************************************************************
 # Prefix for blazegraph queries; canonical version is now CIM100
 
 cim100 = '<http://iec.ch/TC57/CIM100#'

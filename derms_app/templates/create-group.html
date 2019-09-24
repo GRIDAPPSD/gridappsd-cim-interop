@@ -1,0 +1,85 @@
+<html>
+<head>
+    <title>Create DERMS Group</title>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+
+    <script>
+        function hideStatus(){
+            $("#status").hide()
+        }
+        function showStatus(){
+            $("#status").show()
+        }
+
+        function uuidv4() {
+             return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+                 (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+             );
+        }
+
+        $(document).ready(function(){
+           let status = "{{status}}";
+
+           hideStatus()
+           if (status != ""){
+               showStatus()
+           }
+
+           $("#generate_mrid").click(function(){
+               $("#group_mrid").val(uuidv4())
+           })
+
+        });
+    </script>
+<!--    <script>-->
+<!--        $(document).ready(function(){-->
+<!--            //alert("Whats up")-->
+<!--            $("#create_group").click(function(){-->
+<!--                alert("Woot I am here")-->
+<!--            });-->
+<!--        });-->
+<!--        -->
+<!--        function loadDoc() {-->
+<!--          var xhttp = new XMLHttpRequest();-->
+<!--          xhttp.onreadystatechange = function() {-->
+<!--            if (this.readyState == 4 && this.status == 200) {-->
+<!--              document.getElementById("demo").innerHTML = this.responseText;-->
+<!--            }-->
+<!--          };-->
+<!--          xhttp.open("POST", "demo_post.asp", true);-->
+<!--          xhttp.send();-->
+<!--        }-->
+
+<!--        $("alert").click()-->
+<!--    </script>-->
+</head>
+<body>
+<h1 id="status">{{status}}</h1>
+
+<a href="/">Home</a>
+
+<h2>Create a new DER group</h2>
+
+<form action="/create_group" method="post">
+    <p>MRID of the new group:</p>
+    <!--<p>{{mrid}}</p>-->
+    <input type="text" id="group_mrid" name="group_mrid" required value="{{group_mrid}}" size="32" /> <button id="generate_mrid">Generate</button>
+<!--    <input readonly name="mrid" type="text" value="{{mrid}}" size="30">-->
+    <br>&nbsp;<br>
+    Enter group name:
+    <br>
+    <input name="group_name" type="text" size="30" required value="{{group_name}}"><br>&nbsp;<br>
+    Select device(s):
+    <br>
+    <select name="selected_devices" size="20" multiple required id="selected_devices">
+{% for dev in devices %}
+        <option value="{{dev.mrid}}">{{dev.name, dev.type, dev.mrid}}</option>
+{% endfor %}
+        </select>
+    <br>&nbsp;<br>
+    <input type="submit" value="Create Group">
+</form>
+
+
+</body>
+</html>
