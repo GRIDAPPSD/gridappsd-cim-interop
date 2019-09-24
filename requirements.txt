@@ -1,9 +1,35 @@
-# enter requirements that aren't related to connecting to the messagebus here
--e git+https://github.com/GRIDAPPSD/gridappsd-python.git#egg=gridappsd
-
-stomp.py
-PyYAML
-pytz
-zeep
-Flask
-SPARQLWrapper
+aniso8601==8.0.0
+appdirs==1.4.3
+attrs==19.1.0
+cached-property==1.5.1
+certifi==2019.9.11
+chardet==3.0.4
+Click==7.0
+dateutils==0.6.6
+defusedxml==0.6.0
+docopt==0.6.2
+Flask==1.1.1
+Flask-RESTful==0.3.7
+Flask-XML-RPC==0.1.2
+-e git+https://github.com/GRIDAPPSD/gridappsd-python.git@cee87b6380b5fdbafa4f2af61ed42daa826229a3#egg=gridappsd
+idna==2.8
+isodate==0.6.0
+itsdangerous==1.1.0
+Jinja2==2.10.1
+lxml==4.4.1
+MarkupSafe==1.1.1
+pkg-resources==0.0.0
+pyparsing==2.4.2
+python-dateutil==2.8.0
+pytz==2019.2
+PyYAML==5.1.2
+rdflib==4.2.2
+requests==2.22.0
+requests-toolbelt==0.9.1
+six==1.12.0
+SPARQLWrapper==1.8.4
+stomp.py==4.1.22
+urllib3==1.25.3
+Werkzeug==0.15.6
+xmljson==0.2.0
+zeep==3.4.0
