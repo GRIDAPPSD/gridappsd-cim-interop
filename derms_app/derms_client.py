@@ -172,12 +172,43 @@ def delete_group(name=None, mrid=None):
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     from derms_app.createDeviceJsonConf import Device
-    mrid = uuid.uuid4()
-    dev_list = [Device("2fabd157-a01c-4f87-b4a0-2ee92989766b", "dnp3_010", "atype").mrid,
-                Device("8ac14ae9-9c13-4202-8fa2-944dd4a18029", "dnp3_011", "atype").mrid,
-                Device("4c2a89bc-377a-47cb-ab17-c1462da33760", "dnp3_012", "atype").mrid]
-    create_group(mrid, "a group 4", dev_list)
-    create_group(mrid, "a group 4", dev_list)
+
+    def duplicate_group_test():
+        mrid = uuid.uuid4()
+        dev_list = [Device("2fabd157-a01c-4f87-b4a0-2ee92989766b", "dnp3_010", "atype").mrid,
+                    Device("8ac14ae9-9c13-4202-8fa2-944dd4a18029", "dnp3_011", "atype").mrid,
+                    Device("4c2a89bc-377a-47cb-ab17-c1462da33760", "dnp3_012", "atype").mrid]
+        response1 = create_group(mrid, "a group 6", dev_list)
+        response2 = create_group(mrid, "a group 6", dev_list)
+
+        if response2.Reply.Result == 'FAILED':
+            print("Success")
+        else:
+            print("Failed")
+
+
+    menu = """
+Select from the following tests:
+
+    1  Create Multiple
+    h  Repeat Menu
+    q  Quit
+"""
+    print(menu)
+    while True:
+        choice = input(">")
+        if choice not in ('1', 'h', 'q'):
+            print(f"Invalid option choice {choice}")
+            continue
+
+        if choice == 'q' or choice == 'Q':
+            break
+        elif choice == 'h' or choice == 'H':
+            print(menu)
+        elif choice == '1':
+            duplicate_group_test()
+
+
 
     # Now go for multiple creations
     # mrids = [uuid.uuid4(), uuid.uuid4()]
