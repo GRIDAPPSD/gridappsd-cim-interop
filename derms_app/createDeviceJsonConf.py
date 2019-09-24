@@ -47,24 +47,33 @@ def getDevices():
 
 
 def getDeviceSubset():
-    deviceList = []
-    deviceTypeList = []
-    sparql.setQuery(qstrDevice)
-    ret = sparql.query()
-    for b in ret.bindings:
-        type = b['type'].value
-        if type == 'PowerElectronicsConnection':
-            mrid = b['mrid'].value
-            name = b['name'].value
-            #deviceList.append({'name': name, 'mrid': mrid, 'type': type})
-            deviceList.append(Device(mrid, name, type))
-        # else:
-        #     if type not in deviceTypeList:
-        #         deviceTypeList.append(type)
-        #         mrid = b['mrid'].value
-        #         name = b['name'].value
-        #         deviceList.append({'name': name, 'mrid': mrid, 'type': type})
-    return deviceList
+    with open("devices_list.json") as fp:
+        loaded_json = json.loads(fp.read())
+
+    devices_list = []
+
+    for x in loaded_json['devices']:
+        devices_list.append(Device(x['mrid'], x['name'], "ADevice"))
+
+    return devices_list
+    # deviceList = []
+    # deviceTypeList = []
+    # sparql.setQuery(qstrDevice)
+    # ret = sparql.query()
+    # for b in ret.bindings:
+    #     type = b['type'].value
+    #     if type == 'PowerElectronicsConnection':
+    #         mrid = b['mrid'].value
+    #         name = b['name'].value
+    #         #deviceList.append({'name': name, 'mrid': mrid, 'type': type})
+    #         deviceList.append(Device(mrid, name, type))
+    #     # else:
+    #     #     if type not in deviceTypeList:
+    #     #         deviceTypeList.append(type)
+    #     #         mrid = b['mrid'].value
+    #     #         name = b['name'].value
+    #     #         deviceList.append({'name': name, 'mrid': mrid, 'type': type})
+    # return deviceList
 
 
 def writeJsonConf(configFile):
