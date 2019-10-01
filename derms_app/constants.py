@@ -15,31 +15,40 @@ Created on Apr 24, 2018
 # there are two URLs. One for calling from inside the docker container, and one
 # for calling from outside the docker container.
 
+USE_SIMULATOR_FOR_SOAP = True
+
+if USE_SIMULATOR_FOR_SOAP:
+    from . epri_simulator import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
+                                  CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT)
+else:
+    from . epri_opendss import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
+                                CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT)
+
 # URL from inside the docker container:
 # blazegraph_url = "http://blazegraph:8080/bigdata/sparql"
 
 # URL from outside the docker container:
 blazegraph_url = "http://localhost:8889/bigdata/sparql"
-
-# ******************************************************************************
-# URL for derms test instance
-BASE_URL = "http://172.20.10.6:9000"
-# BASE_URL = "http://18.216.194.249:8080"
-# CREATE_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/create/executeDERGroups?wsdl"
-CREATE_DERGROUP_ENDPOINT = f"{BASE_URL}/service/org/epri/dergroups/create?wsdl"
-CREATE_NAMESPACE_SOAP_BINDING = (
-        '{http://iec.ch/TC57/2017/ExecuteDERGroups}ExecuteDERGroupsSoapBinding',
-        'http://172.20.10.6:9000/service/org/epri/dergroups/create'
-)
-
-# CHANGE_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/change/executeDERGroups?wsdl"
-CHANGE_DERGROUP_ENDPOINT = f"{BASE_URL}/service/org/epri/dergroups/change?wsdl"
-CHANGE_NAMESPACE_SOAP_BINDING = (
-    '{http://iec.ch/TC57/2017/ExecuteDERGroups}ExecuteDERGroupsSoapBinding',
-    'http://172.20.10.6:9000/service/org/epri/dergroups/change'
-)
-# http://18.216.194.249:8080/61968-5/change/receiveDERGroups?wsdl"
-DISPATCH_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/create/executeDERGroupDispatches?wsdl"
+#
+# # ******************************************************************************
+# # URL for derms test instance
+# BASE_URL = "http://172.20.10.6:9000"
+# # BASE_URL = "http://18.216.194.249:8080"
+# # CREATE_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/create/executeDERGroups?wsdl"
+# CREATE_DERGROUP_ENDPOINT = f"{BASE_URL}/service/org/epri/dergroups/create?wsdl"
+# CREATE_NAMESPACE_SOAP_BINDING = (
+#         '{http://iec.ch/TC57/2017/ExecuteDERGroups}ExecuteDERGroupsSoapBinding',
+#         'http://172.20.10.6:9000/service/org/epri/dergroups/create'
+# )
+#
+# # CHANGE_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/change/executeDERGroups?wsdl"
+# CHANGE_DERGROUP_ENDPOINT = f"{BASE_URL}/service/org/epri/dergroups/change?wsdl"
+# CHANGE_NAMESPACE_SOAP_BINDING = (
+#     '{http://iec.ch/TC57/2017/ExecuteDERGroups}ExecuteDERGroupsSoapBinding',
+#     'http://172.20.10.6:9000/service/org/epri/dergroups/change'
+# )
+# # http://18.216.194.249:8080/61968-5/change/receiveDERGroups?wsdl"
+# DISPATCH_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/create/executeDERGroupDispatches?wsdl"
 
 
 SOAP_BINDINGS = dict(
