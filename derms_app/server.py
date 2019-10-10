@@ -71,11 +71,17 @@ def delete_group(mrid=None, name=None):
 
     assert name or mrid, "Name or mrid must be specified~"
     if mrid:
-        derms_client.delete_group(mrid=mrid)
-        group.delete_group(group_mrid=mrid)
+        response = derms_client.delete_group(mrid=mrid)
+        if response.Reply.Result == "OK":
+            group.delete_group(group_mrid=mrid)
+        else:
+            return render_template('failedGroup-template.html', group=group.get_group_mrid(mrid), message='delete')
     else:
-        derms_client.delete_group(name=name)
-        group.delete_group(group_name=name)
+        response = derms_client.delete_group(name=name)
+        if response.Reply.Result == "OK":
+            group.delete_group(group_name=name)
+        else:
+            return render_template('failedGroup-template.html', group=group.get_group_name(name), message='delete')
     return redirect("/list_groups")
 
 

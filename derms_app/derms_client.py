@@ -168,6 +168,8 @@ def delete_group(name=None, mrid=None):
     # _log.debug("ZEEP Respons:\n{}".format(response))
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
 
+    return response
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)

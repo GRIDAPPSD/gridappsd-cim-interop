@@ -30,6 +30,20 @@ def get_groups():
     return __groups
 
 
+def get_group_mrid(mrid):
+    if not __groups:
+        load_groups()
+
+    return __groups[mrid]
+
+
+def get_group_name(name):
+    if not __groups:
+        load_groups()
+    groups_by_name = {y.name:y for x,y in __groups.iteritems()}
+    return groups_by_name[name]
+
+
 def add_group(group_mrid, group_name, device_mrids):
     __groups[group_mrid] = Group(group_mrid, group_name, device_mrids)
     with write_lock:
