@@ -33,6 +33,9 @@ class Device:
                            "name": self.name,
                            "type": self.type})
 
+    def tojson(self):
+        return self.__json__()
+
 
 def getDevices():
     deviceDict = {}

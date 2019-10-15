@@ -50,6 +50,14 @@ def add_group(group_mrid, group_name, device_mrids):
         save_groups()
 
 
+
+def add_groups(group_list):
+    for grp in group_list:
+        __groups[grp.mrid] = grp
+    with write_lock:
+        save_groups()
+
+
 def delete_group(group_mrid=None, group_name=None):
     assert group_mrid or group_name, "must specify either group name or group mrid"
     assert not (group_mrid and group_name), "must specify either group name or group mrid"

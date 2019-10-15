@@ -16,7 +16,7 @@ def get_devices():
 
 def get_devices_json():
     lst = get_devices()
-    return json.dumps([ x.__dict__ for x in lst], indent=2)
+    return json.dumps([x.__dict__ for x in lst], indent=2)
 
 
 if __name__ == '__main__':

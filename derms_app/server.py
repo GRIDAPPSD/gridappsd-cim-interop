@@ -88,12 +88,20 @@ def delete_group(mrid=None, name=None):
 @app.route("/create_group", methods=['POST', 'GET'])
 def create_group_html():
     if request.method == 'POST':
-        group_mrid = request.form.get('group_mrid')
-        group_name = request.form.get('group_name')
-        selected_devices = request.form.getlist("selected_devices")
-        response = derms_client.create_group(group_mrid, group_name, selected_devices)
+        number_of_groups = int(request.form.get('number_of_groups'))
+        group_list = []
+        for g_count in range(number_of_groups):
+            group_mrid = request.form.get('group_mrid_' + str(g_count + 1))
+            group_name = request.form.get('group_name_' + str(g_count + 1))
+            selected_devices = request.form.getlist('selected_devices_' + str(g_count + 1))
+            group_list.append(group.Group(group_mrid, group_name, selected_devices))
+        if False:
+            response = derms_client.create_group(group_mrid, group_name, selected_devices)
+        else:
+            response = derms_client.create_groups(group_list)
         if response.Reply.Result == "OK":
-            group.add_group(group_mrid, group_name, selected_devices)
+            # group.add_group(group_mrid, group_name, selected_devices)
+            group.add_groups(group_list)
             return redirect("/list_groups")
         else:
             return render_template("create-group.html", devices=get_devices(), group_mrid=group_mrid,

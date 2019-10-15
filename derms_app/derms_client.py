@@ -76,11 +76,47 @@ def __get_create_body(mrid, name, device_mrid_list):
     return body
 
 
+def __get_create_body_groups(group_list):
+    # end_device_group = []
+    # for grp in group_list:
+    #     end_device_group.append(__build_enddevice_group(grp.mrid, grp.name, grp.devices))
+    # body = {
+    #     "DERGroups": {
+    #         "EndDeviceGroup": end_device_group
+    #     }
+    # }
+    derGroups=[]
+    for grp in group_list:
+        derGroups.append({"EndDeviceGroup": __build_enddevice_group(grp.mrid, grp.name, grp.devices)})
+    body = {
+        "DERGroups": derGroups
+    }
+    return body
+
+
+
 def create_group(mrid, name, device_mrid_list):
     history = HistoryPlugin()
     client = Client(c.CREATE_DERGROUP_ENDPOINT, plugins=[history])
     headers = __build_endpoint_header("create")
     body = __get_create_body(mrid, name, device_mrid_list)
+    from pprint import pprint
+    print("HEADERS")
+    pprint(headers)
+    print("BODY")
+    pprint(body)
+    response = get_service(client, "create").CreateDERGroups(Header=headers, Payload=body)
+    _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
+    #_log.debug("ZEEP Respons:\n{}".format(response))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
+
+    return response
+
+def create_groups(group_list):
+    history = HistoryPlugin()
+    client = Client(c.CREATE_DERGROUP_ENDPOINT, plugins=[history])
+    headers = __build_endpoint_header("create")
+    body = __get_create_body_groups(group_list)
     from pprint import pprint
     print("HEADERS")
     pprint(headers)
