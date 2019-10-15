@@ -77,20 +77,22 @@ def __get_create_body(mrid, name, device_mrid_list):
 
 
 def __get_create_body_groups(group_list):
-    # end_device_group = []
-    # for grp in group_list:
-    #     end_device_group.append(__build_enddevice_group(grp.mrid, grp.name, grp.devices))
-    # body = {
-    #     "DERGroups": {
-    #         "EndDeviceGroup": end_device_group
-    #     }
-    # }
-    derGroups=[]
+    end_device_group = []
     for grp in group_list:
-        derGroups.append({"EndDeviceGroup": __build_enddevice_group(grp.mrid, grp.name, grp.devices)})
+        end_device_group.append(__build_enddevice_group(grp.mrid, grp.name, grp.devices))
     body = {
-        "DERGroups": derGroups
+        "DERGroups": {
+            "EndDeviceGroup": end_device_group
+        }
     }
+
+    # derGroups=[]
+    # for grp in group_list:
+    #     derGroups.append({"EndDeviceGroup": __build_enddevice_group(grp.mrid, grp.name, grp.devices)})
+    # body = {
+    #     "DERGroups": derGroups
+    # }
+
     return body
 
 
