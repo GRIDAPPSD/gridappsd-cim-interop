@@ -23,35 +23,15 @@
             document.getElementById(thisID).value = uuidv4();
         }
 
-        $(document).ready(function(){
-           let status = "{{status}}";
-
-           hideStatus()
-           if (status != ""){
-               showStatus()
-           }
-
-           $("#generate_mrid").click(function(){
-               $("#group_mrid").val(uuidv4())
-           })
-
-           $("#generate_form").click(function(){
-            var number = document.getElementById("number_of_groups").value;
-            var container = document.getElementById("container");
-            while (container.hasChildNodes()) {
-                container.removeChild(container.lastChild);
-            }
-            container.appendChild(document.createElement("br"));
-            var i;
-            for (i=1;i<=number;i++){
-                // add textbox for MRID
+        function generate_form(index){
+                        // add textbox for MRID
                 let pmrid = document.createElement("p");
-                let node = document.createTextNode("MRID of group " + i + " :");
+                let node = document.createTextNode("MRID of group " + index + " :");
                 pmrid.appendChild(node);
                 container.appendChild(pmrid);
                 let inputmrid = document.createElement("input");
                 inputmrid.type = "text";
-                let thisID = 'group_mrid_'+i;
+                let thisID = 'group_mrid_'+index;
                 inputmrid.id = thisID;
                 inputmrid.name=thisID;
                 inputmrid.required = true;
@@ -72,7 +52,7 @@
                 container.appendChild(pname);
                 let inputname = document.createElement("input");
                 inputname.type = "text";
-                let thisnameID = 'group_name_'+i;
+                let thisnameID = 'group_name_'+index;
                 inputname.id = thisnameID;
                 inputname.name=thisnameID;
                 inputname.required = true;
@@ -85,7 +65,7 @@
                 pdevice.appendChild(devicenode);
                 container.appendChild(pdevice);
                 let select_device =  document.createElement("select");
-                let select_id = 'selected_devices_'+i;
+                let select_id = 'selected_devices_'+index;
                 select_device.name = select_id;
                 select_device.id = select_id;
                 select_device.required = true;
@@ -104,7 +84,40 @@
 
                 container.appendChild(document.createElement("br"));
                 container.appendChild(document.createElement("br"));
-                container.appendChild(document.createElement("br"));
+                container.appendChild(document.createElement("br"));}
+
+        $(document).ready(function(){
+           let isHidden = false;
+
+           $("#test").click(function(){
+               if(isHidden){
+                    showStatus();
+               }else{
+                    hideStatus();
+               }
+               isHidden = !isHidden;
+           })
+           let status = "{{status}}";
+
+           hideStatus()
+           if (status != ""){
+               showStatus()
+           }
+
+           $("#generate_mrid").click(function(){
+               $("#group_mrid").val(uuidv4())
+           })
+
+           $("#generate_form").click(function(){
+            var number = document.getElementById("number_of_groups").value;
+            var container = document.getElementById("container");
+            while (container.hasChildNodes()) {
+                container.removeChild(container.lastChild);
+            }
+            container.appendChild(document.createElement("br"));
+            var i;
+            for (i=1;i<=number;i++){
+                generate_form(i);
             }
             var submit_input = document.createElement("input");
             submit_input.type = "submit";
@@ -137,8 +150,8 @@
 <!--    </script>-->
 </head>
 <body>
-<h1 id="status">{{status}}</h1>
-
+<!--<h1 id="status">{{status}}-test</h1>
+<button id="test">Show status</button>-->
 <a href="/">Home</a>
 
 <h2>Create new DER group(s)</h2>

@@ -77,6 +77,7 @@ def __get_create_body(mrid, name, device_mrid_list):
 
 
 def __get_create_body_groups(group_list):
+    # create dictionary of lists of EndDeviceGroup
     end_device_group = []
     for grp in group_list:
         end_device_group.append(__build_enddevice_group(grp.mrid, grp.name, grp.devices))
@@ -86,6 +87,7 @@ def __get_create_body_groups(group_list):
         }
     }
 
+    # create list of dictionary of EndDeviceGroup, which would be duplicate keys in the dictionary
     # derGroups=[]
     # for grp in group_list:
     #     derGroups.append({"EndDeviceGroup": __build_enddevice_group(grp.mrid, grp.name, grp.devices)})

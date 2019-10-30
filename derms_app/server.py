@@ -216,6 +216,8 @@ def start_server_proc():
 
 
 def __start_app__():
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
     app.run(port=8443, debug=True)
 
 
