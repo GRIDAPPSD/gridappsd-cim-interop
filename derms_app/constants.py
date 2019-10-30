@@ -15,6 +15,7 @@ Created on Apr 24, 2018
 # there are two URLs. One for calling from inside the docker container, and one
 # for calling from outside the docker container.
 
+# depends on what we are testing, choose locate gridappsD binding or remote binding
 USE_SIMULATOR_FOR_SOAP = True
 
 if USE_SIMULATOR_FOR_SOAP:

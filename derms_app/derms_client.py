@@ -12,6 +12,13 @@ _log = logging.getLogger(__name__)
 
 
 def __build_endpoint_header(verb, message_id=None, correlation_id=None):
+    '''
+    create message header
+    :param verb: string. create, change, delete execute, get , reply, etc.
+    :param message_id: string. UUID
+    :param correlation_id: string. UUID
+    :return: json string as the header
+    '''
     message_id = message_id if message_id is not None else uuid.uuid4()
     correlation_id = correlation_id if correlation_id is not None else uuid.uuid4()
 
@@ -27,6 +34,19 @@ def __build_endpoint_header(verb, message_id=None, correlation_id=None):
 def __build_der_function(connectDisconnect=True, frequencyWattCurveFunction=False, maxRealPowerLimiting=False,
                          rampRateControl=False, reactivePowerDispatch=False, voltageRegulation=False,
                          realPowerDispatch=True, voltVarCurveFunction=False, voltWattCurveFunction=False):
+    '''
+    create the DERFunction json string
+    :param connectDisconnect:
+    :param frequencyWattCurveFunction:
+    :param maxRealPowerLimiting:
+    :param rampRateControl:
+    :param reactivePowerDispatch:
+    :param voltageRegulation:
+    :param realPowerDispatch:
+    :param voltVarCurveFunction:
+    :param voltWattCurveFunction:
+    :return: json string
+    '''
     return {
         "connectDisconnect": str(connectDisconnect).lower(),
         "frequencyWattCurveFunction": str(frequencyWattCurveFunction).lower(),
@@ -41,6 +61,13 @@ def __build_der_function(connectDisconnect=True, frequencyWattCurveFunction=Fals
 
 
 def __build_enddevice_group(mrid, name, devices_mrid_list):
+    '''
+    create one EndDeviceGroup json string
+    :param mrid: string
+    :param name: string
+    :param devices_mrid_list: list of type Device
+    :return: json string represent a end device group
+    '''
     return {
         "mRID": mrid,
         "description": name,
@@ -57,6 +84,11 @@ def __build_enddevice_group(mrid, name, devices_mrid_list):
 
 
 def __build_names(names):
+    '''
+    create the Names json string
+    :param names: string
+    :return: json string
+    '''
     if not isinstance(names, list):
         names = [names]
 
@@ -67,20 +99,34 @@ def __build_names(names):
 
 
 def __get_create_body(mrid, name, device_mrid_list):
-    devices_mrid_list = [{"mRID": x} for x in device_mrid_list]
+    '''
+    create message body with only 1 group
+    :param mrid: string
+    :param name: string
+    :param device_mrid_list: Lis of type Device
+    :return: json string
+    '''
+    devices_mrid_list = [{"mRID": x} for x in device_mrid_list] # this creates a list of with the same key, could cause problem?
     body = {
         "DERGroups": [{
-            "EndDeviceGroup": __build_enddevice_group(mrid, name, device_mrid_list)
+            "EndDeviceGroup": __build_enddevice_group(mrid, name, devices_mrid_list)
         }]
     }
     return body
 
 
 def __get_create_body_groups(group_list):
+    '''
+    create the body of the message using the list of the groups that need to be created
+    :param group_list: list of groups
+    :return: json string of DERGroups
+    '''
     # create dictionary of lists of EndDeviceGroup
     end_device_group = []
     for grp in group_list:
-        end_device_group.append(__build_enddevice_group(grp.mrid, grp.name, grp.devices))
+        # this creates a list of with the same key, could cause problem
+        devices_mrid_list = [{"mRID": x} for x in grp.devices]
+        end_device_group.append(__build_enddevice_group(grp.mrid, grp.name, devices_mrid_list))
     body = {
         "DERGroups": {
             "EndDeviceGroup": end_device_group
@@ -100,6 +146,13 @@ def __get_create_body_groups(group_list):
 
 
 def create_group(mrid, name, device_mrid_list):
+    '''
+    create one group
+    :param mrid: string
+    :param name: string
+    :param device_mrid_list: List of type Device
+    :return: response from the server
+    '''
     history = HistoryPlugin()
     client = Client(c.CREATE_DERGROUP_ENDPOINT, plugins=[history])
     headers = __build_endpoint_header("create")
@@ -117,6 +170,11 @@ def create_group(mrid, name, device_mrid_list):
     return response
 
 def create_groups(group_list):
+    '''
+    create multiple group
+    :param group_list: List of type Group
+    :return: response from the server
+    '''
     history = HistoryPlugin()
     client = Client(c.CREATE_DERGROUP_ENDPOINT, plugins=[history])
     headers = __build_endpoint_header("create")
@@ -135,12 +193,25 @@ def create_groups(group_list):
 
 
 def get_service(client, verb):
+    '''
+    create service
+    :param client:
+    :param verb: string. create, delete, get, etc.
+    :return: the ServiceProxy object that is created in the Client object
+    '''
     bindings = c.SOAP_BINDINGS[verb]
-    service = client.create_service(*bindings)
+    service = client.create_service(*bindings) # here * is for unpacking
     return service
 
 
 def create_multiple_group(mrid_list, name_list, device_mrid_list_list):
+    '''
+    create multiple groups
+    :param mrid_list: List of string
+    :param name_list: List of string
+    :param device_mrid_list_list: List of list of type Device
+    :return: response from the server
+    '''
     assert len(mrid_list) == len(name_list) == len(device_mrid_list_list), "Passed lists must be the same length"
 
     headers = __build_endpoint_header("create")
@@ -164,6 +235,8 @@ def create_multiple_group(mrid_list, name_list, device_mrid_list_list):
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
     # _log.debug("ZEEP Respons:\n{}".format(response))
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
+
+    return response
 
 
 def change_group(mrid, name, device_mrid_list):

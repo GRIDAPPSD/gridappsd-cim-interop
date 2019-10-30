@@ -87,18 +87,36 @@ def delete_group(mrid=None, name=None):
 
 @app.route("/create_group", methods=['POST', 'GET'])
 def create_group_html():
+    '''
+    if form does not exist yet, show the create_group.html page
+    if form exists, pull user input from the forms and create groups by calling function in derms_client
+    :return:
+    '''
     if request.method == 'POST':
         number_of_groups = int(request.form.get('number_of_groups'))
         group_list = []
+        mrid_list = []
+        name_list = []
+        device_mrid_list_list = []
         for g_count in range(number_of_groups):
             group_mrid = request.form.get('group_mrid_' + str(g_count + 1))
             group_name = request.form.get('group_name_' + str(g_count + 1))
             selected_devices = request.form.getlist('selected_devices_' + str(g_count + 1))
+
+            # sort out form content by group, then need to call create_groups function in derms_client
+            # this way, if create groups return successfully, we can add these groups directly to the groups list
             group_list.append(group.Group(group_mrid, group_name, selected_devices))
-        if False:
-            response = derms_client.create_group(group_mrid, group_name, selected_devices)
-        else:
-            response = derms_client.create_groups(group_list)
+
+            # sort out form content to three lists, then call create_multiple_group function in derms_client
+            # this way, we need to re-group the lists to groups in order to add them to the groups list
+            # mrid_list.append(group_mrid)
+            # name_list.append(group_name)
+            # device_mrid_list_list.append(selected_devices)
+        # if False:
+        #     response = derms_client.create_group(group_mrid, group_name, selected_devices)
+        # else:
+        response = derms_client.create_groups(group_list)
+        # response = derms_client.create_multiple_group(mrid_list, name_list, device_mrid_list_list)
         if response.Reply.Result == "OK":
             # group.add_group(group_mrid, group_name, selected_devices)
             group.add_groups(group_list)
@@ -112,21 +130,24 @@ def create_group_html():
     except (URLError, ConnectionRefusedError) as e:
         return render_template("create-group.html", status="Blazegraph could not be found.")
 
-    return render_template("create-group.html", devices=get_devices())
+    return render_template("create-group.html", devices=devices)
 
 
 @app.route("/list_groups")
 def list_group_html():
+    '''
+    List all created groups.
+    '''
     return render_template("list-groups.html", groups=group.get_groups())
 
 
-@app.route('/create')
-def createDeviceList():
-    a = createDeviceJsonConf.getDeviceSubset()
-    for dev in a:
-        deviceList.append(dev)
-    assert isinstance(deviceList, list)
-    return render_template('devices-template.html', devices=deviceList, mrid=uuid.uuid4())
+# @app.route('/create')
+# def createDeviceList():
+#     a = createDeviceJsonConf.getDeviceSubset()
+#     for dev in a:
+#         deviceList.append(dev)
+#     assert isinstance(deviceList, list)
+#     return render_template('devices-template.html', devices=deviceList, mrid=uuid.uuid4())
 
 
 @app.route('/js/<path:path>')

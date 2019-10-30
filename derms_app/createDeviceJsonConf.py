@@ -50,6 +50,10 @@ def getDevices():
 
 
 def getDeviceSubset():
+    '''
+    read device from json file
+    :return: List of Devices
+    '''
     with open("devices_list.json") as fp:
         loaded_json = json.loads(fp.read())
 

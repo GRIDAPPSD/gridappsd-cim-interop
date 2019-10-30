@@ -109,16 +109,22 @@
            })
 
            $("#generate_form").click(function(){
+           // get user input number of groups to generate
             var number = document.getElementById("number_of_groups").value;
             var container = document.getElementById("container");
             while (container.hasChildNodes()) {
+                // clean out all forms the might exist
                 container.removeChild(container.lastChild);
             }
             container.appendChild(document.createElement("br"));
+
+            //depends on user input for the number of groups, generate enough forms for the number of groups
             var i;
             for (i=1;i<=number;i++){
                 generate_form(i);
             }
+
+            // generate the submit button
             var submit_input = document.createElement("input");
             submit_input.type = "submit";
             submit_input.value = "Create Group(s)";

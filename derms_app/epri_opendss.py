@@ -1,3 +1,4 @@
+#constants for gridappsD opendss bindings
 BASE_URL = "http://172.20.10.6:9000"
 CREATE_DERGROUP_ENDPOINT = f"{BASE_URL}/service/org/epri/dergroups/create?wsdl"
 CREATE_NAMESPACE_SOAP_BINDING = (
