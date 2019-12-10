@@ -1,16 +1,14 @@
-from flask import Flask, send_from_directory, request, render_template, make_response, redirect
-from threading import Lock
 from multiprocessing import Process
+from threading import Lock
 from time import sleep
-import json
-import uuid
 from urllib.error import URLError
 
+from flask import Flask, send_from_directory, request, render_template, make_response, redirect
+
+from derms_app import createDeviceJsonConf
 from derms_app import group, derms_client
-from derms_app.devices import get_devices_json, get_devices
-
-from flask_restful import Resource, Api
-
+# from derms_app.devices import get_devices_json, get_devices
+from derms_app.device import get_devices_json, get_devices
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
@@ -122,11 +120,19 @@ def create_group_html():
             group.add_groups(group_list)
             return redirect("/list_groups")
         else:
-            return render_template("create-group.html", devices=get_devices(), group_mrid=group_mrid,
-                                   group_name=group_name, selected_devices=selected_devices,
-                                   status=response.Reply.Error)
+            # return render_template("create-group.html", devices=get_devices(), group_mrid=group_mrid,
+            #                        group_name=group_name, selected_devices=selected_devices,
+            #                        status=response.Reply.Error)
+            if len(deviceList) == 0:
+                devices = get_devices()
+            else:
+                devices = deviceList
+            return render_template("create-group.html", devices=devices)
     try:
-        devices = get_devices()
+        if len(deviceList) == 0:
+            devices = get_devices()
+        else:
+            devices = deviceList
     except (URLError, ConnectionRefusedError) as e:
         return render_template("create-group.html", status="Blazegraph could not be found.")
 
@@ -140,6 +146,25 @@ def list_group_html():
     '''
     return render_template("list-groups.html", groups=group.get_groups())
 
+
+@app.route("/list_devices")
+def list_devices():
+    try:
+        global deviceList
+        if len(deviceList) == 0:
+            deviceList = derms_client.get_devices()
+        return render_template("list-device-template.html", devices=deviceList)
+    except Exception as ex:
+        return f'Error Getting Devices.<br />{str(ex)}'
+        # return 'Error Getting Devices.\n{}'.format(str(ex))
+    # s = response[0]
+    # so = response[1]
+    # b = response[2]
+    # a = 0
+    # if response.Reply.Result == "OK":
+    #     return "devices listed"
+    # else:
+    #     return "failed getting devices"
 
 # @app.route('/create')
 # def createDeviceList():
@@ -239,7 +264,7 @@ def start_server_proc():
 def __start_app__():
     import logging
     logging.basicConfig(level=logging.DEBUG)
-    app.run(port=8443, debug=True)
+    app.run(port=8442, debug=True)
 
 
 if __name__ == '__main__':

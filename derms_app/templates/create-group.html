@@ -77,7 +77,7 @@
                 {% for item in devices %}
                     option = document.createElement("option");
                     option.value = '{{item.mrid}}';
-                    option_text = document.createTextNode('{{item.mrid}}' + ', ' + '{{item.name}}' + ', ' + '{{item.type}}');
+                    option_text = document.createTextNode('{{item.mrid}}' + ', ' + '{{item.name}}' + ', ' + '{{item.__class__.__name__}}');
                     option.appendChild(option_text);
                     select_device.appendChild(option);
                 {% endfor %}

@@ -1,12 +1,14 @@
 import datetime
 import logging
 from lxml import etree
+import xml.etree.ElementTree as ET
 import uuid
 
-from zeep import Client
+from zeep import Client, helpers
 from zeep.plugins import HistoryPlugin
 
 from derms_app import constants as c
+from derms_app.device import Device, SynchronousMachine, Solar, Battery
 
 _log = logging.getLogger(__name__)
 
@@ -144,6 +146,95 @@ def __get_create_body_groups(group_list):
     return body
 
 
+def get_devices():
+    history = HistoryPlugin()
+    client = Client(c.GET_DEVICE_ENDPOINT, plugins=[history])
+    # with client.settings(raw_response=True):
+    #     r = client.service.GetDevices()
+    # print(client.wsdl.bindings)
+    r = client.service.GetDevices()
+    deviceList = []
+    for d in r.synchronousMachines.SynchronousMachine:
+        deviceList.append(d)
+    for d in r.solars.Solar:
+        deviceList.append(d)
+    for d in r.batterys.Battery:
+        deviceList.append(d)
+
+    # for deviceType in r:
+        # print(deviceType.tag)
+        # print(type(deviceType))
+        # data = deviceType.find('data')
+        # results = data.find('results')
+        # for binding in results:
+        #     # name = binding.find('name').findtext('value')
+        #     for attribute in binding:
+        #         # print(attribute.tag, attribute.text)
+        #         if attribute.tag == "name":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     name = item2.text
+        #         elif attribute.tag == "bus":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     bus = item2.text
+        #         elif attribute.tag == "phases":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     phases = item2.text
+        #         elif attribute.tag == "ratedS":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     ratedS = item2.text
+        #         elif attribute.tag == "ratedU":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     ratedU = item2.text
+        #         elif attribute.tag == "p":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     p = item2.text
+        #         elif attribute.tag == "q":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     q = item2.text
+        #         elif attribute.tag == "id":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     id = item2.text
+        #         elif attribute.tag == "fdrid":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     fdrid = item2.text
+        #         elif attribute.tag == "ipu":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     ipu = item2.text
+        #         elif attribute.tag == "ratedE":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     ratedE = item2.text
+        #         elif attribute.tag == "storedE":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     storedE = item2.text
+        #         elif attribute.tag == "state":
+        #             for item2 in attribute:
+        #                 if item2.tag == 'value':
+        #                     state = item2.text
+        #     if deviceType.tag == 'SynchronousMachine':
+        #         newDevice = SynchronousMachine(name, bus, ratedS, ratedU, p, q, id, fdrid, phases)
+        #         deviceList.append(newDevice)
+        #     if deviceType.tag == 'Solar':
+        #         newDevice = Solar(name, bus, ratedS, ratedU, ipu, p, q, fdrid, phases)
+        #         deviceList.append(newDevice)
+        #     if deviceType.tag == 'Battery':
+        #         newDevice = Battery(name, bus, ratedS, ratedU, ipu, ratedE, storedE, state, p, q, id, fdrid, phases)
+        #         deviceList.append(newDevice)
+
+    _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
+    return deviceList
 
 def create_group(mrid, name, device_mrid_list):
     '''
@@ -184,7 +275,7 @@ def create_groups(group_list):
     pprint(headers)
     print("BODY")
     pprint(body)
-    response = get_service(client, "create").CreateDERGroups(Header=headers, Payload=body)
+    response = get_service(client, "create").CreateDERGroups(headers, body)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
     #_log.debug("ZEEP Respons:\n{}".format(response))
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))

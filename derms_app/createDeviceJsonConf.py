@@ -3,6 +3,7 @@ import json
 
 from SPARQLWrapper import SPARQLWrapper2
 from derms_app import constants
+from .devices import Device
 from derms_app import derms_group as grp
 
 sparql = SPARQLWrapper2(constants.blazegraph_url)
@@ -20,21 +21,6 @@ qstrDevice = constants.prefix +"""SELECT ?type ?name ?mrid WHERE {
 }
 ORDER by ?type ?name
 """
-
-
-class Device:
-    def __init__(self, mrid, name, type):
-        self.mrid = mrid
-        self.name = name
-        self.type = type
-
-    def __json__(self):
-        return json.dumps({"mrid": self.mrid,
-                           "name": self.name,
-                           "type": self.type})
-
-    def tojson(self):
-        return self.__json__()
 
 
 def getDevices():

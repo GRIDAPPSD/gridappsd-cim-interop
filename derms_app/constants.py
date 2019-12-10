@@ -16,14 +16,14 @@ Created on Apr 24, 2018
 # for calling from outside the docker container.
 
 # depends on what we are testing, choose locate gridappsD binding or remote binding
-USE_SIMULATOR_FOR_SOAP = True
+USE_SIMULATOR_FOR_SOAP = False
 
 if USE_SIMULATOR_FOR_SOAP:
     from . epri_simulator import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
                                   CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT)
 else:
     from . epri_opendss import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
-                                CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT)
+                                CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT, GET_DEVICE_ENDPOINT)
 
 # URL from inside the docker container:
 # blazegraph_url = "http://blazegraph:8080/bigdata/sparql"

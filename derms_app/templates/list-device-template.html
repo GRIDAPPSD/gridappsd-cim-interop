@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Available Device List</title>
+</head>
+<body>
+{% if not devices %}
+<h1>No devices Found</h1>
+{% endif %}
+{% for d in devices %}
+<p>
+    Name: {{ d.name }}<br />
+    mRID: {{ d.mrid }}<br />
+    Type: {{ d.__class__.__name__ }}<br />
+    ratedS: {{ d.ratedS}}<br />
+    ratedU: {{ d.ratedU}}<br />
+    ipu: {{ d.ipu}}<br />
+    ratedE: {{ d.ratedE}}<br />
+    storedE: {{ d.storedE}}<br />
+    state: {{ d.state}}<br />
+    p: {{ d.p}}<br />
+    q: {{ d.q}}<br />
+    fdrid: {{ d.fdrid}}<br />
+    phases: {{ d.phases}}<br />
+<!--    Device MRIDs:-->
+<!--    {% for m in g.devices %}-->
+<!--        <div style="padding-left:10px">{{ m }}</div>-->
+<!--    {% endfor %}-->
+    <a href="/api/delete_group/mrid/{{g.mrid}}">Delete {{d.name}}</a>&nbsp;
+    <a href="/edit_group/mrid/{{g.mrid}}">Edit {{d.name}}</a>
+</p>
+{% endfor %}
+</body>
+</html>

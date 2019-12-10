@@ -8,6 +8,9 @@ write_lock = Lock()
 
 
 class Group:
+    '''
+    class represent a DERM group
+    '''
     def __init__(self, mrid, name, deviceList):
         self.mrid = mrid
         self.name = name
