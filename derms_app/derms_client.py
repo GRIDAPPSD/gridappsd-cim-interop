@@ -158,7 +158,7 @@ def get_devices():
         deviceList.append(d)
     for d in r.solars.Solar:
         deviceList.append(d)
-    for d in r.batterys.Battery:
+    for d in r.batteries.Battery:
         deviceList.append(d)
 
     # for deviceType in r:

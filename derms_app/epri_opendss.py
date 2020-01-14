@@ -13,14 +13,15 @@
 
 # test my soap server binding
 BASE_URL = "http://127.0.0.1:8008"
+Namespace_URL = 'der.pnnl.gov'
 GET_DEVICE_ENDPOINT = f"{BASE_URL}/getDevices?wsdl"
 GET_DEVICE_SOAP_BINDING = (
-        f'{{{BASE_URL}}}GetDevicesService',
+        f'{{{Namespace_URL}}}GetDevicesService',
         f"{BASE_URL}/getDevices"
 )
 CREATE_DERGROUP_ENDPOINT = f"{BASE_URL}/createDERGroups?wsdl"
 CREATE_NAMESPACE_SOAP_BINDING = (
-        f'{{{BASE_URL}}}CreateDERGroupsService',
+        f'{{{Namespace_URL}}}CreateDERGroupsService',
         f"{BASE_URL}/createDERGroups"
 )
 CHANGE_DERGROUP_ENDPOINT = f"{BASE_URL}/createDERGroups?wsdl"
