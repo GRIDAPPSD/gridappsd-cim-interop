@@ -5,21 +5,27 @@
     <title>DER Groups - List</title>
 </head>
 <body>
+<a href="/">Home</a>
 <a href="/create_group">Create Group</a><br />
 {% if not groups %}
 <h1>No Groups Found</h1>
 {% endif %}
-{% for k, g in groups.items() %}
-<p>
-    <a href="/api/delete_group/mrid/{{g.mrid}}">Delete {{g.name}}</a>&nbsp;
-    <a href="/edit_group/mrid/{{g.mrid}}">Edit {{g.name}}</a>
-    Name: {{ g.name }}<br />
-    MRID: {{ g.mrid }}<br />
-    Device MRIDs:
-    {% for m in g.devices %}
-        <div style="padding-left:10px">{{ m }}</div>
-    {% endfor %}
-</p>
+{% if groups %}
+<h2>Existing Groups:</h2>
+{% endif %}
+{% for g in groups %}
+<div>
+        Name: {{ g.description }}<br />
+        mRID: {{ g.mRID }}<br />
+        Devices:<br />
+        {% for mm in g.EndDevices %}
+        <div style="padding-left:30px">mRID: {{ mm.mRID }}</div>
+            <!--<div style="padding-left:10px">name: {{ mm.Names }}</div>-->
+        {% endfor %}
+    <a href="/api/delete_group/mrid/{{g.mRID}}">Delete {{g.description}}</a>&nbsp;
+    <a href="/edit_group/mrid/{{g.mRID}}">Edit {{g.description}}</a><br />
+    <hr width="500px" align="left">
+</div>
 {% endfor %}
 
 </body>

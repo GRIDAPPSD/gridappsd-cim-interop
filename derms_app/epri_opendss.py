@@ -19,6 +19,8 @@ GET_DEVICE_SOAP_BINDING = (
         f'{{{Namespace_URL}}}GetDevicesService',
         f"{BASE_URL}/getDevices"
 )
+GET_DERGROUPS_ENDPOINT = f"{BASE_URL}/getDERGroups?wsdl"
+
 CREATE_DERGROUP_ENDPOINT = f"{BASE_URL}/createDERGroups?wsdl"
 CREATE_NAMESPACE_SOAP_BINDING = (
         f'{{{Namespace_URL}}}CreateDERGroupsService',

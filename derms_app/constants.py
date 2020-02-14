@@ -23,7 +23,8 @@ if USE_SIMULATOR_FOR_SOAP:
                                   CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT)
 else:
     from . epri_opendss import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
-                                CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT, GET_DEVICE_ENDPOINT)
+                                CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT, GET_DEVICE_ENDPOINT,
+                                GET_DERGROUPS_ENDPOINT)
 
 # URL from inside the docker container:
 # blazegraph_url = "http://blazegraph:8080/bigdata/sparql"
@@ -53,10 +54,10 @@ blazegraph_url = "http://localhost:8889/bigdata/sparql"
 
 
 SOAP_BINDINGS = dict(
-    create=CREATE_NAMESPACE_SOAP_BINDING,
+    CREATE=CREATE_NAMESPACE_SOAP_BINDING,
     # Both delete and change use the same binding
-    delete=CHANGE_NAMESPACE_SOAP_BINDING,
-    change=CHANGE_NAMESPACE_SOAP_BINDING
+    DELETE=CHANGE_NAMESPACE_SOAP_BINDING,
+    CHANGE=CHANGE_NAMESPACE_SOAP_BINDING
 )
 
 # ******************************************************************************

@@ -144,7 +144,11 @@ def list_group_html():
     '''
     List all created groups.
     '''
-    return render_template("list-groups.html", groups=group.get_groups())
+    try:
+        derGroups = derms_client.get_end_device_groups()
+        return render_template("list-groups.html", groups=derGroups)
+    except Exception as ex:
+        return f'Error Getting DER Groups. <br />{str(ex)}'
 
 
 @app.route("/list_devices")
