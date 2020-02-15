@@ -355,7 +355,7 @@ def change_group(mrid, name, device_mrid_list):
 def delete_group(name=None, mrid=None):
     assert name or mrid, "Must have either name or mrid specified"
     assert not (name and mrid), "Must have either name or mrid specified"
-    headers = __build_endpoint_header("delete")
+    headers = __build_endpoint_header("DELETE")
     if name:
         body = {
             "DERGroups": [
@@ -368,13 +368,14 @@ def delete_group(name=None, mrid=None):
                 {"EndDeviceGroup": {"mRID": str(mrid)}}
             ]
         }
-
+    message = {"Header": headers, "Payload": body}
+    print(message)
     history = HistoryPlugin()
     client = Client(c.CHANGE_DERGROUP_ENDPOINT, plugins=[history])
     # node = client.create_message(client.service, 'CreateDERGroups', Header=headers, Payload=body)
     # print(node)
 
-    response = get_service(client, "delete").DeleteDERGroups(Header=headers, Payload=body)
+    response = get_service(client, "DELETE").DeleteDERGroups(request=message)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
     # _log.debug("ZEEP Respons:\n{}".format(response))
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
