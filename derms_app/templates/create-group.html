@@ -34,7 +34,7 @@
                 let thisID = 'group_mrid_'+index;
                 inputmrid.id = thisID;
                 inputmrid.name=thisID;
-                inputmrid.required = true;
+                inputmrid.required = false;
                 inputmrid.size="32";
                 container.appendChild(inputmrid);
                 let button = document.createElement("button");
@@ -44,6 +44,20 @@
                 button.onclick = function(){ document.getElementById(thisID).value = uuidv4();};
                 var buttonLabel = document.createTextNode("Generate");
                 button.appendChild(buttonLabel);
+
+                // add the textbox for group name
+                let pdes = document.createElement("p");
+                let pdesnode = document.createTextNode("Enter description: ");
+                pdes.appendChild(pdesnode);
+                container.appendChild(pdes);
+                let inputdes = document.createElement("input");
+                inputdes.type = "text";
+                let thisdescription = 'group_description_'+index;
+                inputdes.id = thisdescription;
+                inputdes.name=thisdescription;
+                inputdes.required = false;
+                inputdes.size="32";
+                container.appendChild(inputdes);
 
                 // add the textbox for group name
                 let pname = document.createElement("p");
@@ -87,22 +101,21 @@
                 container.appendChild(document.createElement("br"));}
 
         $(document).ready(function(){
-           let isHidden = false;
+<!--&lt;!&ndash;           let isHidden = false;-->
 
-           $("#test").click(function(){
-               if(isHidden){
-                    showStatus();
-               }else{
-                    hideStatus();
-               }
-               isHidden = !isHidden;
-           })
-           let status = "{{status}}";
+<!--           $("#test").click(function(){-->
+<!--               if(isHidden){-->
+<!--                    showStatus();-->
+<!--               }else{-->
+<!--                    hideStatus();-->
+<!--               }-->
+<!--               isHidden = !isHidden;-->
+<!--           })-->
 
-           hideStatus()
-           if (status != ""){
-               showStatus()
-           }
+<!--           hideStatus()-->
+<!--           if (status != ""){-->
+<!--               showStatus()-->
+<!--           }&ndash;&gt;-->
 
            $("#generate_mrid").click(function(){
                $("#group_mrid").val(uuidv4())
@@ -119,7 +132,7 @@
             container.appendChild(document.createElement("br"));
 
             //depends on user input for the number of groups, generate enough forms for the number of groups
-            var i;
+            let i=1;
             for (i=1;i<=number;i++){
                 generate_form(i);
             }
@@ -132,6 +145,64 @@
             container.appendChild(submit_input);
            })
         });
+        function saveData(){
+            localStorage.clear();
+            let numberOfGroups = document.getElementById("number_of_groups").value;
+            localStorage.setItem("number_of_groups", numberOfGroups);
+            let i=1;
+            for (i=1;i<=numberOfGroups;i++){
+                let thisID = 'group_mrid_' + i;
+                let thisIDValue = document.getElementById(thisID).value;
+                localStorage.setItem(thisID, thisIDValue);
+                let thisName = 'group_name_' + i;
+                let thisNameValue = document.getElementById(thisName).value;
+                localStorage.setItem(thisName, thisNameValue);
+                let thisdes = 'group_description_' + i;
+                let thisdesValue = document.getElementById(thisdes).value;
+                localStorage.setItem(thisdes, thisdesValue);
+                let thisSelect = 'selected_devices_' + i;
+                let selectedOptions = [];
+                $("#" + thisSelect + " option:selected").each(function() {
+                    selectedOptions.push($(this).val());
+                });
+                localStorage["selectedOptions_" + i] = selectedOptions.join(',');
+                //let thisSelectValue = document.getElementById(thisSelect).value;
+                //localStorage.setItem(thisSelect, thisSelectValue);
+            }
+            console.log("data saved!");
+        }
+        function loadSavedData(){
+            console.log(localStorage);
+            let numberOfGroups = localStorage.getItem("number_of_groups");
+            if(numberOfGroups){
+                document.getElementById("number_of_groups").value = numberOfGroups;
+                var container = document.getElementById("container");
+                container.appendChild(document.createElement("br"));
+                let i=1;
+                for (i=1;i<=numberOfGroups;i++){
+                    generate_form(i);
+                    let thisID = 'group_mrid_' + i;
+                    document.getElementById(thisID).value = localStorage.getItem(thisID);
+                    let thisName = 'group_name_' + i;
+                    document.getElementById(thisName).value = localStorage.getItem(thisName);
+                    let thisdes = 'group_description_' + i;
+                    document.getElementById(thisdes).value = localStorage.getItem(thisdes);
+                    let thisSelect = 'selected_devices_' + i;
+                    //document.getElementById(thisSelect).value = localStorage.getItem(thisSelect);
+                    let selectedOptions = "selectedOptions_" + i;
+                    let options = localStorage.getItem(selectedOptions);
+                    $("#" + thisSelect).val(options.split(","));
+                }
+
+                // generate the submit button
+                var submit_input = document.createElement("input");
+                submit_input.type = "submit";
+                submit_input.value = "Create Group(s)";
+                submit_input.form = "container";
+                container.appendChild(submit_input);
+            }
+            console.log("data loaded!");
+        }
     </script>
 <!--    <script>-->
 <!--        $(document).ready(function(){-->
@@ -160,13 +231,76 @@
 <button id="test">Show status</button>-->
 <a href="/">Home</a>
 
+{% if status %}
+<p id="status" style="color:red">Error creating DER group: {{status.reason}}.
+    Reason: duplicate group {{status.ID.kind}}: {{status.ID._value_1}}
+</p>
+{% endif %}
+
 <h2>Create new DER group(s)</h2>
 <br>
+
 Create <input type="number" id="number_of_groups" name="number_of_groups" form="container" required placeholder="number of groups to create" min="1" size="32" autofocus> group(s).
 <button id="generate_form" type="button">GO</button>
-<form id="container" action="/create_group" method="post">
+<form id="container" action="/create_group" method="post" onsubmit="saveData()">
 </form>
+{% if status %}
+    <script>
+        loadSavedData()
+    </script>
+{% endif %}
+<!--{% if not groups%}-->
+<!--{% else %}-->
+<!--&lt;!&ndash;<p id="testInElse">in else</p>&ndash;&gt;-->
+<!--&lt;!&ndash;<p id="testInElse2"></p>&ndash;&gt;-->
+<!--    <script>-->
+<!--&lt;!&ndash;    let count = '{{groups.__len__()}}';&ndash;&gt;-->
+<!--&lt;!&ndash;    document.getElementById("number_of_groups").value = count;&ndash;&gt;-->
+<!--&lt;!&ndash;    document.getElementById("testInElse2").innerHTML = '{{groups[0].mrid}}';&ndash;&gt;-->
+<!--&lt;!&ndash;    let ii=0;&ndash;&gt;-->
 
+<!--&lt;!&ndash;    {% for item in groups %}&ndash;&gt;-->
+<!--&lt;!&ndash;        ii = ii+1;&ndash;&gt;-->
+<!--&lt;!&ndash;        generate_form(ii);&ndash;&gt;-->
+<!--&lt;!&ndash;        document.getElementById('group_mrid_' + ii).value = '{{item.mrid}}';&ndash;&gt;-->
+<!--&lt;!&ndash;        document.getElementById('group_name_' + ii).value = '{{item.name}}';&ndash;&gt;-->
+<!--&lt;!&ndash;        {% for d in item.devices%}&ndash;&gt;-->
+<!--&lt;!&ndash;            document.getElementById('selected_devices_' + ii).value = '{{d}}';&ndash;&gt;-->
+<!--&lt;!&ndash;        {% endfor %}&ndash;&gt;-->
+<!--&lt;!&ndash;    {% endfor %}&ndash;&gt;-->
+
+<!--    //for (ii=1;ii<=count;ii++){-->
+<!--    //    generate_form(ii);-->
+<!--    //    let mridid = 'group_mrid_' + ii;-->
+<!--    //    let indexid = ii - 1;-->
+<!--    //    document.getElementById(mridid).value = '{{groups[0].mrid}}';-->
+<!--    //      document.getElementById('group_name_1').value = {{groups[0].name}};-->
+<!--    //}-->
+
+<!--    // generate the submit button-->
+<!--&lt;!&ndash;    var submit_input = document.createElement("input");&ndash;&gt;-->
+<!--&lt;!&ndash;    submit_input.type = "submit";&ndash;&gt;-->
+<!--&lt;!&ndash;    submit_input.value = "Create Group(s)";&ndash;&gt;-->
+<!--&lt;!&ndash;    submit_input.form = "container";&ndash;&gt;-->
+<!--&lt;!&ndash;    container.appendChild(submit_input);&ndash;&gt;-->
+
+<!--    //document.write(count);-->
+<!--    //var c = 0;-->
+<!--    //{% for item in groups %}-->
+<!--    //    c = c+1;-->
+<!--    //    document.getElementById("testInElse2").innerHTML = '{{groups.count}}' + 'count';-->
+<!--    //{% endfor %}-->
+<!--    </script>-->
+<!--{% endif %}-->
+<!--{% if oldform %}-->
+<!--    <p id="formFound">found form</p>-->
+<!--    <p id="formFound2"></p>-->
+<!--    <script>-->
+<!--        document.write('{{oldform}}');-->
+<!--        var info = {{oldform.get('number_of_groups')}}-->
+<!--        document.getElementById("formFound2").innerHTML = info + ' info';-->
+<!--    </script>-->
+<!--{% endif %}-->
 
 <!--<form action="/create_group" method="post">-->
 <!--    <p>MRID of the new group:</p>-->

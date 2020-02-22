@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit DERMS Group</title>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script>
+    var selecteddct;
+    $(document).ready(function() {
+        var radios = document.getElementsByName("groupBy");
+        var val = localStorage.getItem('groupBy');
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].value == val) {
+              radios[i].checked = true;
+            }
+        }
+        $('input[name="groupBy"]').on('change', function() {
+            localStorage.setItem('groupBy', $(this).val());
+            changeDropDownMenu();
+        });
+        if($('input[name="groupBy"]:checked').length > 0){
+            changeDropDownMenu();
+        }
+    });
+
+    function changeDropDownMenu(){
+        var container = document.getElementById("chooseGroupContainer");
+        var combobox = document.getElementById("groupChoices");
+        if(combobox){
+            container.removeChild(combobox);
+        }
+        let select_group =  document.createElement("select");
+        select_group.id = 'groupChoices';
+        select_group.name = 'groupChoices';
+        select_group.required = true;
+        select_group.multiple = false;
+        select_group.style = "width: 300px";
+        select_group.onchange = function() {groupSelected()};
+        container.appendChild(select_group);
+        if (document.getElementById('byName').checked) {
+            selecteddct = {{names|safe}};
+            //addSelections(, select_group);
+        }else{
+            selecteddct = {{mRIDs|safe}};
+            //addSelections({{mRIDs|safe}}, select_group);
+        }
+        addSelections(selecteddct, select_group);
+        groupSelected();
+    }
+
+    function addSelections(dct, select_group){
+        var option, option_text;
+        for (var key in dct){
+            //console.log(key)
+            option = document.createElement("option");
+            option.value = key;
+            option_text = document.createTextNode(key);
+            option.appendChild(option_text);
+            select_group.appendChild(option);
+        }
+    }
+
+    function groupSelected(){
+        let groupid = document.getElementById("groupChoices").value;
+        let group = selecteddct[groupid];
+        var groupDetail = document.getElementById("groupDetail");
+        while (groupDetail.hasChildNodes()) {
+            groupDetail.removeChild(groupDetail.lastChild);
+        }
+
+        let node = document.createTextNode("Group Name: " + group.name);
+        groupDetail.appendChild(node);
+        groupDetail.appendChild(document.createElement("br"));
+        let node2 = document.createTextNode("Group mRID: " + group.mrid);
+        groupDetail.appendChild(node2);
+        groupDetail.appendChild(document.createElement("br"));
+        let node3 = document.createTextNode("Devices:");
+        groupDetail.appendChild(node3);
+        groupDetail.appendChild(document.createElement("br"));
+
+        let i = 0;
+        group.devices.forEach(function(k, v){
+            i += 1;
+            let newDiv = document.createElement('div');
+            newDiv.style="padding-left:30px";
+            newDiv.id = "device_" + i;
+            let dnode = document.createTextNode(k);
+            newDiv.appendChild(dnode);
+            groupDetail.appendChild(newDiv);
+            //groupDetail.appendChild(document.createElement("br"));
+            //console.log(`Key is ${k} and value is ${v}`)
+        });
+        groupDetail.appendChild(document.createElement("br"));
+
+        var edit_button = document.createElement("button");
+        edit_button.id = "editButton";
+        edit_button.type = "button";
+        groupDetail.appendChild(edit_button);
+        edit_button.onclick = function(){ };
+        var buttonLabel = document.createTextNode("Edit This Group");
+        edit_button.appendChild(buttonLabel);
+
+//<!--        edit_button.value = "Edit This Group";-->
+//<!--        edit_button.form = "modifyGroupContainer";-->
+//<!--        groupDetail.appendChild(edit_button);-->
+    }
+    </script>
+</head>
+<body>
+<a href="/">Home</a>&nbsp;
+<a href="/list_groups">List Groups</a><br />
+
+{% if not groups%}
+<h1>No Groups Found</h1>
+{% endif %}
+
+<div id="chooseGroupContainer">
+    <p>List groups by:</p>
+    <input type="radio" id="byName" name="groupBy" value="listGroupsByName">
+    <label for="byName">List groups by name</label><br>
+    <input type="radio" id="bymRID" name="groupBy" value="listGroupsBymRID">
+    <label for="bymRID">List groups by mRID</label><br>
+</div>
+<form id="modifyGroupContainer">
+    <p id="groupDetail"></p>
+<!--    <input type="submit" value="Edit" name="EditButton">-->
+</form>
+
+
+
+
+</body>
+</html>

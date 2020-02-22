@@ -24,20 +24,20 @@ class Device:
 devices = []
 
 
-def get_devices():
-    with open("devices_list.json") as fp:
-        loaded_json = json.loads(fp.read())
-
-    devices_list = []
-
-    for x in loaded_json['devices']:
-        devices_list.append(Device(x['mrid'], x['name'], "ADevice"))
-
-    if not devices:
-        for device in devices_list:
-            devices.append(device)
-
-    return devices
+# def get_devices():
+#     with open("devices_list.json") as fp:
+#         loaded_json = json.loads(fp.read())
+#
+#     devices_list = []
+#
+#     for x in loaded_json['devices']:
+#         devices_list.append(Device(x['mrid'], x['name'], "ADevice"))
+#
+#     if not devices:
+#         for device in devices_list:
+#             devices.append(device)
+#
+#     return devices
 
 
 def get_devices_json():

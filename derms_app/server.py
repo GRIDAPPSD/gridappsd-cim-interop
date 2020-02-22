@@ -3,12 +3,13 @@ from threading import Lock
 from time import sleep
 from urllib.error import URLError
 
-from flask import Flask, send_from_directory, request, render_template, make_response, redirect
+from flask import Flask, send_from_directory, request, render_template, make_response, redirect, url_for
 
 from derms_app import createDeviceJsonConf
 from derms_app import group, derms_client
 # from derms_app.devices import get_devices_json, get_devices
-from derms_app.device import get_devices_json, get_devices
+from derms_app.device import get_devices_json
+import json, jsons
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
@@ -16,6 +17,8 @@ __proc__ = None
 
 deviceList = []
 groupList = []
+groupListByName = {}
+groupListBymRID = {}
 
 #groups =
 
@@ -71,13 +74,15 @@ def delete_group(mrid=None, name=None):
     if mrid:
         response = derms_client.delete_group(mrid=mrid)
         if response.Reply.Result == "OK":
-            group.delete_group(group_mrid=mrid)
+            pass
+            # group.delete_group(group_mrid=mrid)
         else:
             return render_template('failedGroup-template.html', group=group.get_group_mrid(mrid), message='delete')
     else:
         response = derms_client.delete_group(name=name)
         if response.Reply.Result == "OK":
-            group.delete_group(group_name=name)
+            pass
+            # group.delete_group(group_name=name)
         else:
             return render_template('failedGroup-template.html', group=group.get_group_name(name), message='delete')
     return redirect("/list_groups")
@@ -99,11 +104,12 @@ def create_group_html():
         for g_count in range(number_of_groups):
             group_mrid = request.form.get('group_mrid_' + str(g_count + 1))
             group_name = request.form.get('group_name_' + str(g_count + 1))
+            group_description = request.form.get('group_description_' + str(g_count + 1))
             selected_devices = request.form.getlist('selected_devices_' + str(g_count + 1))
 
             # sort out form content by group, then need to call create_groups function in derms_client
             # this way, if create groups return successfully, we can add these groups directly to the groups list
-            group_list.append(group.Group(group_mrid, group_name, selected_devices))
+            group_list.append(group.Group(group_mrid, group_name, group_description, selected_devices))
 
             # sort out form content to three lists, then call create_multiple_group function in derms_client
             # this way, we need to re-group the lists to groups in order to add them to the groups list
@@ -118,25 +124,44 @@ def create_group_html():
         if response.Reply.Result == "OK":
             # group.add_group(group_mrid, group_name, selected_devices)
             group.add_groups(group_list)
-            return redirect("/list_groups")
+            return redirect(url_for("list_group_html", status="Group created successfully!"))
         else:
             # return render_template("create-group.html", devices=get_devices(), group_mrid=group_mrid,
             #                        group_name=group_name, selected_devices=selected_devices,
             #                        status=response.Reply.Error)
+            global deviceList
             if len(deviceList) == 0:
-                devices = get_devices()
+                deviceList = derms_client.get_devices()
+                devices = deviceList
             else:
                 devices = deviceList
-            return render_template("create-group.html", devices=devices)
+            group_list.__len__()
+            # return render_template("create-group.html", devices=devices, status=response.Reply.Error, groups=group_list, oldform=request.form)
+            return render_template("create-group.html", devices=devices, status=response.Reply.Error)
     try:
         if len(deviceList) == 0:
-            devices = get_devices()
+            deviceList = derms_client.get_devices()
+            devices = deviceList
         else:
             devices = deviceList
     except (URLError, ConnectionRefusedError) as e:
         return render_template("create-group.html", status="Blazegraph could not be found.")
 
     return render_template("create-group.html", devices=devices)
+
+
+def _sortGroups(derGroups):
+    groupList.clear()
+    groupListByName.clear()
+    groupListBymRID.clear()
+    for g in derGroups:
+        devices = []
+        for d in g.EndDevices:
+            devices.append(d.mRID)
+        this_group = group.Group(g.mRID, g.Names, g.description, devices)
+        groupList.append(this_group)
+        groupListByName[g.description] = this_group
+        groupListBymRID[g.mRID] = this_group
 
 
 @app.route("/list_groups")
@@ -146,7 +171,8 @@ def list_group_html():
     '''
     try:
         derGroups = derms_client.get_end_device_groups()
-        return render_template("list-groups.html", groups=derGroups)
+        _sortGroups(derGroups)
+        return render_template("list-groups.html", groups=derGroups, status=request.args.get('status'))
     except Exception as ex:
         return f'Error Getting DER Groups. <br />{str(ex)}'
 
@@ -169,6 +195,15 @@ def list_devices():
     #     return "devices listed"
     # else:
     #     return "failed getting devices"
+
+
+@app.route("/edit_group")
+def edit_group():
+    if not groupList:
+        derGroups = derms_client.get_end_device_groups()
+        _sortGroups(derGroups)
+    return render_template("modify-groups-template.html", names=jsons.dump(groupListByName), mRIDs=groupListBymRID, groups=groupList)
+
 
 # @app.route('/create')
 # def createDeviceList():

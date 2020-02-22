@@ -7,6 +7,9 @@
 <body>
 <a href="/">Home</a>&nbsp;
 <a href="/create_group">Create Group</a><br />
+{% if status %}
+<p id="status" style="color:green">{{status}}</p>
+{% endif %}
 {% if not groups %}
 <h1>No Groups Found</h1>
 {% endif %}
@@ -23,7 +26,7 @@
             <!--<div style="padding-left:10px">name: {{ mm.Names }}</div>-->
         {% endfor %}
     <a href="/api/delete_group/mrid/{{g.mRID}}">Delete {{g.description}}</a>&nbsp;
-    <a href="/edit_group/mrid/{{g.mRID}}">Edit {{g.description}}</a><br />
+<!--    <a href="/api/edit_group/mrid/{{g.mRID}}">Edit {{g.description}}</a><br />-->
     <hr width="500px" align="left">
 </div>
 {% endfor %}

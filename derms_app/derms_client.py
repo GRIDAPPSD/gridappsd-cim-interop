@@ -62,7 +62,7 @@ def __build_der_function(connectDisconnect=True, frequencyWattCurveFunction=Fals
     }
 
 
-def __build_enddevice_group(mrid, name, devices_mrid_list):
+def __build_enddevice_group(mrid, name, description, devices_mrid_list):
     '''
     create one EndDeviceGroup json string
     :param mrid: string
@@ -72,7 +72,7 @@ def __build_enddevice_group(mrid, name, devices_mrid_list):
     '''
     return {
         "mRID": mrid,
-        "description": name,
+        "description": description,
         "DERFunction": __build_der_function(),
         "EndDevices": devices_mrid_list,
         "Names": __build_names(name),
@@ -85,19 +85,20 @@ def __build_enddevice_group(mrid, name, devices_mrid_list):
     }
 
 
-def __build_names(names):
+def __build_names(name):
     '''
     create the Names json string
     :param names: string
     :return: json string
     '''
-    if not isinstance(names, list):
-        names = [names]
-
-    name_list = []
-    for name in names:
-        name_list.append({"name": name})
-    return name_list
+    # if not isinstance(names, list):
+    #     names = [names]
+    #
+    # name_list = []
+    # for name in names:
+    #     name_list.append({"name": name})
+    # return name_list
+    return {"name": name};
 
 
 def __get_create_body(mrid, name, device_mrid_list):
@@ -128,7 +129,7 @@ def __get_create_body_groups(group_list):
     for grp in group_list:
         # this creates a list of with the same key, could cause problem
         devices_mrid_list = [{"mRID": x} for x in grp.devices]
-        end_device_group.append(__build_enddevice_group(grp.mrid, grp.name, devices_mrid_list))
+        end_device_group.append(__build_enddevice_group(grp.mrid, grp.name, grp.description, devices_mrid_list))
     body = {
         "DERGroups": {
             "EndDeviceGroup": end_device_group
@@ -236,6 +237,7 @@ def get_devices():
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
     return deviceList
 
+
 def create_group(mrid, name, device_mrid_list):
     '''
     create one group
@@ -259,6 +261,7 @@ def create_group(mrid, name, device_mrid_list):
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
 
     return response
+
 
 def create_groups(group_list):
     '''
