@@ -158,7 +158,7 @@ def _sortGroups(derGroups):
         devices = []
         for d in g.EndDevices:
             devices.append(d.mRID)
-        this_group = group.Group(g.mRID, g.Names, g.description, devices)
+        this_group = group.Group(g.mRID, g.Names[0].name, g.description, devices)
         groupList.append(this_group)
         groupListByName[g.description] = this_group
         groupListBymRID[g.mRID] = this_group

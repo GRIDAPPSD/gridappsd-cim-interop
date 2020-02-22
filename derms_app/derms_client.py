@@ -332,6 +332,7 @@ def create_multiple_group(mrid_list, name_list, device_mrid_list_list):
 
     return response
 
+
 def get_end_device_groups():
     history = HistoryPlugin()
     client = Client(c.GET_DERGROUPS_ENDPOINT, plugins=[history])
