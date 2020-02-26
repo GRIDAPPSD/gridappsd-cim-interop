@@ -77,16 +77,24 @@
         let node3 = document.createTextNode("Devices:");
         groupDetail.appendChild(node3);
         groupDetail.appendChild(document.createElement("br"));
+        let devicediv = document.createElement("div");
+        groupDetail.appendChild(devicediv);
 
         let i = 0;
         group.devices.forEach(function(k, v){
             i += 1;
             let newDiv = document.createElement('div');
-            newDiv.style="padding-left:30px";
-            newDiv.id = "device_" + i;
-            let dnode = document.createTextNode(k);
+            newDiv.style="padding-left:30px; float:left; width:400px";
+            newDiv.id = "devicemrid_" + i;
+            let dnode = document.createTextNode('mRID: ' + k.mRID);
             newDiv.appendChild(dnode);
-            groupDetail.appendChild(newDiv);
+            devicediv.appendChild(newDiv);
+            let newDiv2 = document.createElement('div');
+            newDiv2.style="padding-left:30px; float:left;";
+            newDiv2.id = "devicename_" + i;
+            let dnode2 = document.createTextNode('name: ' + k.name);
+            newDiv2.appendChild(dnode2);
+            devicediv.appendChild(newDiv2);
             //groupDetail.appendChild(document.createElement("br"));
             //console.log(`Key is ${k} and value is ${v}`)
         });
@@ -122,7 +130,7 @@
     <label for="bymRID">List groups by mRID</label><br>
 </div>
 <form id="modifyGroupContainer">
-    <p id="groupDetail"></p>
+    <p id="groupDetail" style="width:800px"></p>
 <!--    <input type="submit" value="Edit" name="EditButton">-->
 </form>
 

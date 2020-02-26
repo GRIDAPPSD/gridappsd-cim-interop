@@ -90,8 +90,14 @@
                 var option, option_text;
                 {% for item in devices %}
                     option = document.createElement("option");
-                    option.value = '{{item.mrid}}';
-                    option_text = document.createTextNode('{{item.mrid}}' + ', ' + '{{item.name}}' + ', ' + '{{item.__class__.__name__}}');
+                    option.value = '{{item.mRID}}';
+                    if ('{{item.isSmartInverter}}'=='True'){
+                        var type = "smart inverter"
+                    }else{
+                        var type = "not smart inverter"
+                    }
+                    //option_text = document.createTextNode('{{item.mRID}}' + ', ' + '{{item.name}}' + ', ' + '{{item.__class__.__name__}}');
+                    option_text = document.createTextNode('{{item.mRID}}' + ', ' + '{{item.name}}' + ', ' + type);
                     option.appendChild(option_text);
                     select_device.appendChild(option);
                 {% endfor %}

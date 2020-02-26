@@ -8,7 +8,7 @@ from flask import Flask, send_from_directory, request, render_template, make_res
 from derms_app import createDeviceJsonConf
 from derms_app import group, derms_client
 # from derms_app.devices import get_devices_json, get_devices
-from derms_app.device import get_devices_json
+from derms_app.device import Device
 import json, jsons
 
 # set the project root directory as the static folder, you can set others.
@@ -39,7 +39,8 @@ def json_response(content):
 
 @app.route("/api/devices")
 def device_list():
-    return json_response(get_devices_json())
+    pass
+    # return json_response(get_devices_json())
 
 
 @app.route("/api/derm_groups")
@@ -157,11 +158,17 @@ def _sortGroups(derGroups):
     for g in derGroups:
         devices = []
         for d in g.EndDevices:
-            devices.append(d.mRID)
-        this_group = group.Group(g.mRID, g.Names[0].name, g.description, devices)
-        groupList.append(this_group)
-        groupListByName[g.description] = this_group
-        groupListBymRID[g.mRID] = this_group
+            dname = d.Names[0].name
+            devices.append(Device(mRID=d.mRID, name=dname))
+        if g.Names:
+            gname = g.Names[0].name
+        else:
+            gname = None
+        if g.mRID:
+            this_group = group.Group(g.mRID, gname, g.description, devices)
+            groupList.append(this_group)
+            groupListByName[gname] = this_group
+            groupListBymRID[g.mRID] = this_group
 
 
 @app.route("/list_groups")
@@ -172,7 +179,7 @@ def list_group_html():
     try:
         derGroups = derms_client.get_end_device_groups()
         _sortGroups(derGroups)
-        return render_template("list-groups.html", groups=derGroups, status=request.args.get('status'))
+        return render_template("list-groups.html", groups=groupList, status=request.args.get('status'))
     except Exception as ex:
         return f'Error Getting DER Groups. <br />{str(ex)}'
 
@@ -202,7 +209,7 @@ def edit_group():
     if not groupList:
         derGroups = derms_client.get_end_device_groups()
         _sortGroups(derGroups)
-    return render_template("modify-groups-template.html", names=jsons.dump(groupListByName), mRIDs=groupListBymRID, groups=groupList)
+    return render_template("modify-groups-template.html", names=groupListByName, mRIDs=groupListBymRID, groups=groupList)
 
 
 # @app.route('/create')

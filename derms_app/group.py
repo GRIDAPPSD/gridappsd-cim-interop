@@ -1,4 +1,4 @@
-import json
+import jsons
 import os
 from threading import Lock
 
@@ -21,7 +21,7 @@ class Group:
         return self.__dict__
 
     def __repr__(self):
-        return json.dumps(self.__dict__)
+        return jsons.dumps(self.__dict__)
 
 
 def get_groups_json():

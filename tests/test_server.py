@@ -1,6 +1,6 @@
 import unittest
 import mock
-from derms_app import server, device
+from derms_app import server, equipment
 
 
 class ServerTestCase(unittest.TestCase):
@@ -14,7 +14,7 @@ class ServerTestCase(unittest.TestCase):
         self.assertFalse(mock_derms_client.get_devices.called, "List devices already populated")
 
         server.deviceList = []
-        mock_derms_client.get_devices.return_value = [device.Device('name', 'mrid')]
+        mock_derms_client.get_devices.return_value = [equipment.Equipment('name', 'mrid')]
         server.list_devices()
         self.assertTrue(mock_derms_client.get_devices.called, "Failed to load devices")
         assert len(server.deviceList) == 1
@@ -33,12 +33,12 @@ class ServerTestCase(unittest.TestCase):
         mock_teamplate.return_value = 'true'
 
         mock_request.method = 'GET'
-        server.deviceList = [device.Device('name', 'mrid')]
+        server.deviceList = [equipment.Equipment('name', 'mrid')]
         server.create_group_html()
         self.assertFalse(mock_derms_client.create_groups.called, "No group should have been created.")
 
         server.deviceList = []
-        mock_get_devices.return_value = [device.Device('name', 'mrid')]
+        mock_get_devices.return_value = [equipment.Equipment('name', 'mrid')]
         server.create_group_html()
         self.assertFalse(mock_derms_client.create_groups.called, "No group should have been created.")
         mock_get_devices.assert_called_once()
@@ -57,7 +57,7 @@ class ServerTestCase(unittest.TestCase):
         self.assertEqual(mock_get_devices.call_count, 2)
         # mock_get_devices.assert_called_once()
 
-        server.deviceList = [device.Device('name', 'mrid')]
+        server.deviceList = [equipment.Equipment('name', 'mrid')]
         mock_get_devices.reset_mock()
         server.create_group_html()
         self.assertTrue(mock_derms_client.create_groups.called, "Failed to create group.")

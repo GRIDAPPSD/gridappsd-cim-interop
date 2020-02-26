@@ -8,7 +8,7 @@ from zeep import Client, helpers
 from zeep.plugins import HistoryPlugin
 
 from derms_app import constants as c
-from derms_app.device import Device, SynchronousMachine, Solar, Battery
+from derms_app.equipment import Equipment, SynchronousMachine, Solar, Battery
 
 _log = logging.getLogger(__name__)
 
@@ -154,13 +154,13 @@ def get_devices():
     #     r = client.service.GetDevices()
     # print(client.wsdl.bindings)
     r = client.service.GetDevices()
-    deviceList = []
-    for d in r.synchronousMachines.SynchronousMachine:
-        deviceList.append(d)
-    for d in r.solars.Solar:
-        deviceList.append(d)
-    for d in r.batteries.Battery:
-        deviceList.append(d)
+    deviceList = r
+    # for d in r.synchronousMachines.SynchronousMachine:
+    #     deviceList.append(d)
+    # for d in r.solars.Solar:
+    #     deviceList.append(d)
+    # for d in r.batteries.Battery:
+    #     deviceList.append(d)
 
     # for deviceType in r:
         # print(deviceType.tag)
@@ -393,9 +393,9 @@ if __name__ == '__main__':
 
     def duplicate_group_test():
         mrid = uuid.uuid4()
-        dev_list = [Device("2fabd157-a01c-4f87-b4a0-2ee92989766b", "dnp3_010", "atype").mrid,
-                    Device("8ac14ae9-9c13-4202-8fa2-944dd4a18029", "dnp3_011", "atype").mrid,
-                    Device("4c2a89bc-377a-47cb-ab17-c1462da33760", "dnp3_012", "atype").mrid]
+        dev_list = [Equipment("2fabd157-a01c-4f87-b4a0-2ee92989766b", "dnp3_010", "atype").mrid,
+                    Equipment("8ac14ae9-9c13-4202-8fa2-944dd4a18029", "dnp3_011", "atype").mrid,
+                    Equipment("4c2a89bc-377a-47cb-ab17-c1462da33760", "dnp3_012", "atype").mrid]
         response1 = create_group(mrid, "a group 6", dev_list)
         assert response1 is not None, "Invalid response received"
         assert response1.Reply.Result == "OK", "Failed to create first group perhaps the start state is invalid"

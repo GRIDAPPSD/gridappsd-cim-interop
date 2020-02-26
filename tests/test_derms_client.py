@@ -3,7 +3,7 @@ import unittest, pytest
 from uuid import UUID
 
 import mock
-from derms_app import derms_client, device, group
+from derms_app import derms_client, equipment, group
 
 
 

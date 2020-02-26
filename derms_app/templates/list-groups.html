@@ -17,16 +17,19 @@
 <h2>Existing Groups:</h2>
 {% endif %}
 {% for g in groups %}
-<div>
-        Name: {{ g.Names[0].name }}<br />
-        mRID: {{ g.mRID }}<br />
+<div style="width:1000px">
+        Name: {{ g.name }}<br />
+        mRID: {{ g.mrid }}<br />
         description: {{ g.description }}<br />
         Devices:<br />
-        {% for mm in g.EndDevices %}
-        <div style="padding-left:30px">mRID: {{ mm.mRID }}</div>
+        {% for mm in g.devices %}
+        <div style="width:800px">
+            <div style="padding-left:30px; float:left; width:400px">mRID: {{ mm.mRID }}, </div>
+            <div style="padding-left:30px; float:left;">Name: {{mm.name}}</div>
+        </div><br>
             <!--<div style="padding-left:10px">name: {{ mm.Names }}</div>-->
         {% endfor %}
-    <a href="/api/delete_group/mrid/{{g.mRID}}">Delete {{g.Names[0].name}}</a>&nbsp;
+    <a href="/api/delete_group/mrid/{{g.mrid}}">Delete {{g.name}}</a>&nbsp;
 <!--    <a href="/api/edit_group/mrid/{{g.mRID}}">Edit {{g.description}}</a><br />-->
     <hr width="500px" align="left">
 </div>
