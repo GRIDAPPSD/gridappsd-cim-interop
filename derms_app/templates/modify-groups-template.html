@@ -74,6 +74,7 @@
         let node2 = document.createTextNode("Group mRID: " + group.mrid);
         groupDetail.appendChild(node2);
         groupDetail.appendChild(document.createElement("br"));
+        groupDetail.appendChild(document.createElement("br"));
         let node3 = document.createTextNode("Devices:");
         groupDetail.appendChild(node3);
         groupDetail.appendChild(document.createElement("br"));
@@ -98,24 +99,66 @@
             //groupDetail.appendChild(document.createElement("br"));
             //console.log(`Key is ${k} and value is ${v}`)
         });
-        groupDetail.appendChild(document.createElement("br"));
+        let brBeforefunc = document.createElement("br");
+        brBeforefunc.style = "clear:both";
+        groupDetail.appendChild(brBeforefunc);
 
-        var edit_button = document.createElement("button");
-        edit_button.id = "editButton";
-        edit_button.type = "button";
-        groupDetail.appendChild(edit_button);
-        edit_button.onclick = function(){ };
-        var buttonLabel = document.createTextNode("Edit This Group");
-        edit_button.appendChild(buttonLabel);
+        let pfuncs = document.createElement('p');
+        pfuncs.id = "funcsLabel";
+        let node4 = document.createTextNode("DERFunctions:");
+        pfuncs.appendChild(node4);
+        groupDetail.appendChild(pfuncs);
+
+
+        let funcs = group.derFunctions;
+        let funcdiv = document.createElement('div');
+        funcdiv.style = "padding-left:30px";
+        funcdiv.id = "derfunctions";
+        pfuncs.appendChild(funcdiv);
+
+        for (var key in funcs){
+            console.log(key, funcs[key]);
+            addDERfuncCheckbox(key, funcs[key]);
+        }
+
+<!--        var edit_button = document.createElement("button");-->
+<!--        edit_button.id = "editButton";-->
+<!--        edit_button.type = "button";-->
+<!--        groupDetail.appendChild(edit_button);-->
+<!--        edit_button.onclick = function(){ };-->
+<!--        var buttonLabel = document.createTextNode("Edit This Group");-->
+<!--        edit_button.appendChild(buttonLabel);-->
 
 //<!--        edit_button.value = "Edit This Group";-->
 //<!--        edit_button.form = "modifyGroupContainer";-->
 //<!--        groupDetail.appendChild(edit_button);-->
     }
+
+    function addDERfuncCheckbox(k, v){
+        let container = document.getElementById("derfunctions");
+        let func = document.createElement("input");
+        let thisLbl = k;
+        func.id = thisLbl;
+        func.name = thisLbl;
+        func.type = "checkbox";
+        func.value = thisLbl;
+        container.appendChild(func);
+        if(v){
+            func.checked = true;
+        }
+
+        let funcLabel = document.createElement("label");
+        funcLabel.for = func.id;
+        let cdnode = document.createTextNode(k);
+        funcLabel.appendChild(cdnode);
+        container.appendChild(funcLabel);
+        container.appendChild(document.createElement("br"));
+    }
     </script>
 </head>
 <body>
-<a href="/">Home</a>&nbsp;
+<a href="/">Home</a>&nbsp;&nbsp;
+<a href="/create_group">Create Group</a>&nbsp;&nbsp;
 <a href="/list_groups">List Groups</a><br />
 
 {% if not groups%}
@@ -131,6 +174,10 @@
 </div>
 <form id="modifyGroupContainer">
     <p id="groupDetail" style="width:800px"></p>
+    <p style="clear:both;">
+        <br>
+        <button id="editButton" onclick="">Edit This Group</button>
+    </p>
 <!--    <input type="submit" value="Edit" name="EditButton">-->
 </form>
 

@@ -11,11 +11,12 @@ class Group:
     '''
     class represent a DERM group
     '''
-    def __init__(self, mrid, name, description, deviceList):
+    def __init__(self, mrid, name, description, deviceList, derFunctions=None):
         self.mrid = mrid
         self.name = name
         self.description = description
         self.devices = deviceList
+        self.derFunctions = derFunctions
 
     def tojson(self):
         return self.__dict__
@@ -24,14 +25,36 @@ class Group:
         return jsons.dumps(self.__dict__)
 
 
-def get_groups_json():
-    if not __groups:
-        pass
-        # load_groups()
-    json_dict = {}
-    for k, v in __groups.items():
-        json_dict[k] = v.__dict__
-    return json.dumps(json_dict)
+class DERFunctions(object):
+    '''
+    represent the DER Functions
+    '''
+
+    def __init__(self, connectDisconnect=None, frequencyWattCurveFunction=None, maxRealPowerLimiting=None,
+                 rampRateControl=None, reactivePowerDispatch=None, realPowerDispatch=None, voltageRegulation=None,
+                 voltVarCurveFunction=None, voltWattCurveFunction=None):
+        self.connectDisconnect = connectDisconnect
+        self.frequencyWattCurveFunction = frequencyWattCurveFunction
+        self.maxRealPowerLimiting = maxRealPowerLimiting
+        self.rampRateControl = rampRateControl
+        self.reactivePowerDispatch = reactivePowerDispatch
+        self.realPowerDispatch = realPowerDispatch
+        self.voltageRegulation = voltageRegulation
+        self.voltVarCurveFunction = voltVarCurveFunction
+        self.voltWattCurveFunction = voltWattCurveFunction
+
+    def __repr__(self):
+        return jsons.dumps(self.__dict__)
+
+
+# def get_groups_json():
+#     if not __groups:
+#         pass
+#         # load_groups()
+#     json_dict = {}
+#     for k, v in __groups.items():
+#         json_dict[k] = v.__dict__
+#     return json.dumps(json_dict)
 
 
 def get_groups():

@@ -99,27 +99,27 @@ def create_group_html():
     if request.method == 'POST':
         number_of_groups = int(request.form.get('number_of_groups'))
         group_list = []
-        mrid_list = []
-        name_list = []
-        device_mrid_list_list = []
         for g_count in range(number_of_groups):
             group_mrid = request.form.get('group_mrid_' + str(g_count + 1))
             group_name = request.form.get('group_name_' + str(g_count + 1))
             group_description = request.form.get('group_description_' + str(g_count + 1))
             selected_devices = request.form.getlist('selected_devices_' + str(g_count + 1))
 
+            derFunctions = group.DERFunctions()
+            derFunctions.connectDisconnect = request.form.get('connectDisconnect_' + str(g_count + 1)) is not None
+            derFunctions.frequencyWattCurveFunction = request.form.get('frequencyWattCurveFunction_' + str(g_count + 1)) is not None
+            derFunctions.maxRealPowerLimiting = request.form.get('maxRealPowerLimiting_' + str(g_count + 1)) is not None
+            derFunctions.rampRateControl = request.form.get('rampRateControl_' + str(g_count + 1)) != None
+            derFunctions.reactivePowerDispatch = request.form.get('reactivePowerDispatch_' + str(g_count + 1)) != None
+            derFunctions.realPowerDispatch = request.form.get('realPowerDispatch_' + str(g_count + 1)) != None
+            derFunctions.voltageRegulation = request.form.get('voltageRegulation_' + str(g_count + 1)) != None
+            derFunctions.voltVarCurveFunction = request.form.get('voltVarCurveFunction_' + str(g_count + 1)) != None
+            derFunctions.voltWattCurveFunction = request.form.get('voltWattCurveFunction_' + str(g_count + 1)) != None
+
             # sort out form content by group, then need to call create_groups function in derms_client
             # this way, if create groups return successfully, we can add these groups directly to the groups list
-            group_list.append(group.Group(group_mrid, group_name, group_description, selected_devices))
+            group_list.append(group.Group(group_mrid, group_name, group_description, selected_devices, derFunctions))
 
-            # sort out form content to three lists, then call create_multiple_group function in derms_client
-            # this way, we need to re-group the lists to groups in order to add them to the groups list
-            # mrid_list.append(group_mrid)
-            # name_list.append(group_name)
-            # device_mrid_list_list.append(selected_devices)
-        # if False:
-        #     response = derms_client.create_group(group_mrid, group_name, selected_devices)
-        # else:
         response = derms_client.create_groups(group_list)
         # response = derms_client.create_multiple_group(mrid_list, name_list, device_mrid_list_list)
         if response.Reply.Result == "OK":
@@ -151,6 +151,11 @@ def create_group_html():
     return render_template("create-group.html", devices=devices)
 
 
+@app.route("/retrieve_groups")
+def retrieve_groups_html():
+    return send_from_directory('static', 'retrieve_groups.html')
+
+
 def _sortGroups(derGroups):
     groupList.clear()
     groupListByName.clear()
@@ -164,8 +169,27 @@ def _sortGroups(derGroups):
             gname = g.Names[0].name
         else:
             gname = None
+        if g.DERFunction != None:
+            # derfuncs=group.DERFunctions(connectDisconnect=g.DERFunction.connectDisconnect,
+            #              frequencyWattCurveFunction=g.DERFunction.frequencyWattCurveFunction,
+            #              maxRealPowerLimiting=g.DERFunction.maxRealPowerLimiting,
+            #              rampRateControl=g.DERFunction.rampRateControl,
+            #              reactivePowerDispatch=g.DERFunction.reactivePowerDispatch,
+            #              realPowerDispatch=g.DERFunction.realPowerDispatch,
+            #              voltageRegulation=g.DERFunction.voltageRegulation,
+            #              voltVarCurveFunction=g.DERFunction.voltVarCurveFunction,
+            #              voltWattCurveFunction=g.DERFunction.voltWattCurveFunction)
+            derfuncs={'connectDisconnect': g.DERFunction.connectDisconnect,
+                         'frequencyWattCurveFunction': g.DERFunction.frequencyWattCurveFunction,
+                         'maxRealPowerLimiting': g.DERFunction.maxRealPowerLimiting,
+                         'rampRateControl': g.DERFunction.rampRateControl,
+                         'reactivePowerDispatch': g.DERFunction.reactivePowerDispatch,
+                         'realPowerDispatch': g.DERFunction.realPowerDispatch,
+                         'voltageRegulation': g.DERFunction.voltageRegulation,
+                         'voltVarCurveFunction': g.DERFunction.voltVarCurveFunction,
+                         'voltWattCurveFunction': g.DERFunction.voltWattCurveFunction}
         if g.mRID:
-            this_group = group.Group(g.mRID, gname, g.description, devices)
+            this_group = group.Group(g.mRID, gname, g.description, devices, derFunctions=derfuncs)
             groupList.append(this_group)
             groupListByName[gname] = this_group
             groupListBymRID[g.mRID] = this_group

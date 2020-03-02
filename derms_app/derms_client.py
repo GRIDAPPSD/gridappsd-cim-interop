@@ -33,9 +33,7 @@ def __build_endpoint_header(verb, message_id=None, correlation_id=None):
     }
 
 
-def __build_der_function(connectDisconnect=True, frequencyWattCurveFunction=False, maxRealPowerLimiting=False,
-                         rampRateControl=False, reactivePowerDispatch=False, voltageRegulation=False,
-                         realPowerDispatch=True, voltVarCurveFunction=False, voltWattCurveFunction=False):
+def __build_der_function(derFunctions):
     '''
     create the DERFunction json string
     :param connectDisconnect:
@@ -50,19 +48,19 @@ def __build_der_function(connectDisconnect=True, frequencyWattCurveFunction=Fals
     :return: json string
     '''
     return {
-        "connectDisconnect": str(connectDisconnect).lower(),
-        "frequencyWattCurveFunction": str(frequencyWattCurveFunction).lower(),
-        "maxRealPowerLimiting": str(maxRealPowerLimiting).lower(),
-        "rampRateControl": str(rampRateControl).lower(),
-        "reactivePowerDispatch": str(reactivePowerDispatch).lower(),
-        "voltageRegulation": str(voltageRegulation).lower(),
-        "realPowerDispatch": str(realPowerDispatch).lower(),
-        "voltVarCurveFunction": str(voltVarCurveFunction).lower(),
-        "voltWattCurveFunction": str(voltWattCurveFunction).lower()
+        "connectDisconnect": str(derFunctions.connectDisconnect).lower(),
+        "frequencyWattCurveFunction": str(derFunctions.frequencyWattCurveFunction).lower(),
+        "maxRealPowerLimiting": str(derFunctions.maxRealPowerLimiting).lower(),
+        "rampRateControl": str(derFunctions.rampRateControl).lower(),
+        "reactivePowerDispatch": str(derFunctions.reactivePowerDispatch).lower(),
+        "voltageRegulation": str(derFunctions.voltageRegulation).lower(),
+        "realPowerDispatch": str(derFunctions.realPowerDispatch).lower(),
+        "voltVarCurveFunction": str(derFunctions.voltVarCurveFunction).lower(),
+        "voltWattCurveFunction": str(derFunctions.voltWattCurveFunction).lower()
     }
 
 
-def __build_enddevice_group(mrid, name, description, devices_mrid_list):
+def __build_enddevice_group(mrid, name, description, devices_mrid_list, derFunctions):
     '''
     create one EndDeviceGroup json string
     :param mrid: string
@@ -73,7 +71,7 @@ def __build_enddevice_group(mrid, name, description, devices_mrid_list):
     return {
         "mRID": mrid,
         "description": description,
-        "DERFunction": __build_der_function(),
+        "DERFunction": __build_der_function(derFunctions),
         "EndDevices": devices_mrid_list,
         "Names": __build_names(name),
         "version": {
@@ -129,7 +127,7 @@ def __get_create_body_groups(group_list):
     for grp in group_list:
         # this creates a list of with the same key, could cause problem
         devices_mrid_list = [{"mRID": x} for x in grp.devices]
-        end_device_group.append(__build_enddevice_group(grp.mrid, grp.name, grp.description, devices_mrid_list))
+        end_device_group.append(__build_enddevice_group(grp.mrid, grp.name, grp.description, devices_mrid_list, grp.derFunctions))
     body = {
         "DERGroups": {
             "EndDeviceGroup": end_device_group
@@ -238,29 +236,29 @@ def get_devices():
     return deviceList
 
 
-def create_group(mrid, name, device_mrid_list):
-    '''
-    create one group
-    :param mrid: string
-    :param name: string
-    :param device_mrid_list: List of type Device
-    :return: response from the server
-    '''
-    history = HistoryPlugin()
-    client = Client(c.CREATE_DERGROUP_ENDPOINT, plugins=[history])
-    headers = __build_endpoint_header("create")
-    body = __get_create_body(mrid, name, device_mrid_list)
-    from pprint import pprint
-    print("HEADERS")
-    pprint(headers)
-    print("BODY")
-    pprint(body)
-    response = get_service(client, "create").CreateDERGroups(Header=headers, Payload=body)
-    _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
-    #_log.debug("ZEEP Respons:\n{}".format(response))
-    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
-
-    return response
+# def create_group(mrid, name, device_mrid_list):
+#     '''
+#     create one group
+#     :param mrid: string
+#     :param name: string
+#     :param device_mrid_list: List of type Device
+#     :return: response from the server
+#     '''
+#     history = HistoryPlugin()
+#     client = Client(c.CREATE_DERGROUP_ENDPOINT, plugins=[history])
+#     headers = __build_endpoint_header("create")
+#     body = __get_create_body(mrid, name, device_mrid_list)
+#     from pprint import pprint
+#     print("HEADERS")
+#     pprint(headers)
+#     print("BODY")
+#     pprint(body)
+#     response = get_service(client, "create").CreateDERGroups(Header=headers, Payload=body)
+#     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
+#     #_log.debug("ZEEP Respons:\n{}".format(response))
+#     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
+#
+#     return response
 
 
 def create_groups(group_list):
@@ -391,42 +389,42 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     from derms_app.createDeviceJsonConf import Device
 
-    def duplicate_group_test():
-        mrid = uuid.uuid4()
-        dev_list = [Equipment("2fabd157-a01c-4f87-b4a0-2ee92989766b", "dnp3_010", "atype").mrid,
-                    Equipment("8ac14ae9-9c13-4202-8fa2-944dd4a18029", "dnp3_011", "atype").mrid,
-                    Equipment("4c2a89bc-377a-47cb-ab17-c1462da33760", "dnp3_012", "atype").mrid]
-        response1 = create_group(mrid, "a group 6", dev_list)
-        assert response1 is not None, "Invalid response received"
-        assert response1.Reply.Result == "OK", "Failed to create first group perhaps the start state is invalid"
-        response2 = create_group(mrid, "a group 6", dev_list)
-
-        if response2.Reply.Result == 'FAILED':
-            _log.info("Success")
-        else:
-            _log.info("Failed")
-
-
-    menu = """
-Select from the following tests:
-
-    1  Create Multiple
-    h  Repeat Menu
-    q  Quit
-"""
-    print(menu)
-    while True:
-        choice = input(">")
-        if choice not in ('1', 'h', 'q'):
-            print(f"Invalid option choice {choice}")
-            continue
-
-        if choice == 'q' or choice == 'Q':
-            break
-        elif choice == 'h' or choice == 'H':
-            print(menu)
-        elif choice == '1':
-            duplicate_group_test()
+#     def duplicate_group_test():
+#         mrid = uuid.uuid4()
+#         dev_list = [Equipment("2fabd157-a01c-4f87-b4a0-2ee92989766b", "dnp3_010", "atype").mrid,
+#                     Equipment("8ac14ae9-9c13-4202-8fa2-944dd4a18029", "dnp3_011", "atype").mrid,
+#                     Equipment("4c2a89bc-377a-47cb-ab17-c1462da33760", "dnp3_012", "atype").mrid]
+#         response1 = create_group(mrid, "a group 6", dev_list)
+#         assert response1 is not None, "Invalid response received"
+#         assert response1.Reply.Result == "OK", "Failed to create first group perhaps the start state is invalid"
+#         response2 = create_group(mrid, "a group 6", dev_list)
+#
+#         if response2.Reply.Result == 'FAILED':
+#             _log.info("Success")
+#         else:
+#             _log.info("Failed")
+#
+#
+#     menu = """
+# Select from the following tests:
+#
+#     1  Create Multiple
+#     h  Repeat Menu
+#     q  Quit
+# """
+#     print(menu)
+#     while True:
+#         choice = input(">")
+#         if choice not in ('1', 'h', 'q'):
+#             print(f"Invalid option choice {choice}")
+#             continue
+#
+#         if choice == 'q' or choice == 'Q':
+#             break
+#         elif choice == 'h' or choice == 'H':
+#             print(menu)
+#         elif choice == '1':
+#             duplicate_group_test()
 
 
 

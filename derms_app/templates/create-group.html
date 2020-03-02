@@ -24,88 +24,139 @@
         }
 
         function generate_form(index){
-                        // add textbox for MRID
-                let pmrid = document.createElement("p");
-                let node = document.createTextNode("MRID of group " + index + " :");
-                pmrid.appendChild(node);
-                container.appendChild(pmrid);
-                let inputmrid = document.createElement("input");
-                inputmrid.type = "text";
-                let thisID = 'group_mrid_'+index;
-                inputmrid.id = thisID;
-                inputmrid.name=thisID;
-                inputmrid.required = false;
-                inputmrid.size="32";
-                container.appendChild(inputmrid);
-                let button = document.createElement("button");
-                button.id = "generate_mrid";
-                button.type = "button";
-                container.appendChild(button);
-                button.onclick = function(){ document.getElementById(thisID).value = uuidv4();};
-                var buttonLabel = document.createTextNode("Generate");
-                button.appendChild(buttonLabel);
+                    // add textbox for MRID
+            let pmrid = document.createElement("p");
+            let node = document.createTextNode("MRID of group " + index + " :");
+            pmrid.appendChild(node);
+            container.appendChild(pmrid);
+            let inputmrid = document.createElement("input");
+            inputmrid.type = "text";
+            let thisID = 'group_mrid_'+index;
+            inputmrid.id = thisID;
+            inputmrid.name=thisID;
+            inputmrid.required = false;
+            inputmrid.size="32";
+            container.appendChild(inputmrid);
+            let button = document.createElement("button");
+            button.id = "generate_mrid";
+            button.type = "button";
+            container.appendChild(button);
+            button.onclick = function(){ document.getElementById(thisID).value = uuidv4();};
+            var buttonLabel = document.createTextNode("Generate");
+            button.appendChild(buttonLabel);
 
-                // add the textbox for group name
-                let pdes = document.createElement("p");
-                let pdesnode = document.createTextNode("Enter description: ");
-                pdes.appendChild(pdesnode);
-                container.appendChild(pdes);
-                let inputdes = document.createElement("input");
-                inputdes.type = "text";
-                let thisdescription = 'group_description_'+index;
-                inputdes.id = thisdescription;
-                inputdes.name=thisdescription;
-                inputdes.required = false;
-                inputdes.size="32";
-                container.appendChild(inputdes);
+            // add the textbox for group name
+            let pdes = document.createElement("p");
+            let pdesnode = document.createTextNode("Enter description: ");
+            pdes.appendChild(pdesnode);
+            container.appendChild(pdes);
+            let inputdes = document.createElement("input");
+            inputdes.type = "text";
+            let thisdescription = 'group_description_'+index;
+            inputdes.id = thisdescription;
+            inputdes.name=thisdescription;
+            inputdes.required = false;
+            inputdes.size="32";
+            container.appendChild(inputdes);
 
-                // add the textbox for group name
-                let pname = document.createElement("p");
-                let pnode = document.createTextNode("Enter group name: ");
-                pname.appendChild(pnode);
-                container.appendChild(pname);
-                let inputname = document.createElement("input");
-                inputname.type = "text";
-                let thisnameID = 'group_name_'+index;
-                inputname.id = thisnameID;
-                inputname.name=thisnameID;
-                inputname.required = true;
-                inputname.size="32";
-                container.appendChild(inputname);
+            // add the textbox for group name
+            let pname = document.createElement("p");
+            let pnode = document.createTextNode("Enter group name: ");
+            pname.appendChild(pnode);
+            container.appendChild(pname);
+            let inputname = document.createElement("input");
+            inputname.type = "text";
+            let thisnameID = 'group_name_'+index;
+            inputname.id = thisnameID;
+            inputname.name=thisnameID;
+            inputname.required = true;
+            inputname.size="32";
+            container.appendChild(inputname);
 
-                // add the select box
-                let pdevice = document.createElement("p");
-                let devicenode = document.createTextNode("Select device(s): ");
-                pdevice.appendChild(devicenode);
-                container.appendChild(pdevice);
-                let select_device =  document.createElement("select");
-                let select_id = 'selected_devices_'+index;
-                select_device.name = select_id;
-                select_device.id = select_id;
-                select_device.required = true;
-                select_device.multiple = true;
-                select_device.size = 20;
-                container.appendChild(select_device);
+            // add the select box
+            let pdevice = document.createElement("p");
+            let devicenode = document.createTextNode("Select device(s): ");
+            pdevice.appendChild(devicenode);
+            container.appendChild(pdevice);
+            let select_device =  document.createElement("select");
+            let select_id = 'selected_devices_'+index;
+            select_device.name = select_id;
+            select_device.id = select_id;
+            select_device.required = true;
+            select_device.multiple = true;
+            select_device.size = 20;
+            container.appendChild(select_device);
 
-                var option, option_text;
-                {% for item in devices %}
-                    option = document.createElement("option");
-                    option.value = '{{item.mRID}}';
-                    if ('{{item.isSmartInverter}}'=='True'){
-                        var type = "smart inverter"
-                    }else{
-                        var type = "not smart inverter"
-                    }
-                    //option_text = document.createTextNode('{{item.mRID}}' + ', ' + '{{item.name}}' + ', ' + '{{item.__class__.__name__}}');
-                    option_text = document.createTextNode('{{item.mRID}}' + ', ' + '{{item.name}}' + ', ' + type);
-                    option.appendChild(option_text);
-                    select_device.appendChild(option);
-                {% endfor %}
+            var option, option_text;
+            {% for item in devices %}
+                option = document.createElement("option");
+                option.value = '{{item.mRID}}';
+                if ('{{item.isSmartInverter}}'=='True'){
+                    var type = "smart inverter"
+                }else{
+                    var type = "not smart inverter"
+                }
+                //option_text = document.createTextNode('{{item.mRID}}' + ', ' + '{{item.name}}' + ', ' + '{{item.__class__.__name__}}');
+                option_text = document.createTextNode('{{item.mRID}}' + ', ' + '{{item.name}}' + ', ' + type);
+                option.appendChild(option_text);
+                select_device.appendChild(option);
+            {% endfor %}
 
-                container.appendChild(document.createElement("br"));
-                container.appendChild(document.createElement("br"));
-                container.appendChild(document.createElement("br"));}
+            container.appendChild(document.createElement("br"));
+            container.appendChild(document.createElement("br"));
 
+            // add DER functions as checkboxes
+            let derfunctions = document.createElement("p");
+            let dernode = document.createTextNode("Select DER Functions: ");
+            derfunctions.appendChild(dernode);
+            container.appendChild(derfunctions);
+
+            let derFunctions = ['connectDisconnect', 'frequencyWattCurveFunction', 'maxRealPowerLimiting',
+                                'rampRateControl', 'reactivePowerDispatch', 'realPowerDispatch',
+                                'voltageRegulation', 'voltVarCurveFunction', 'voltWattCurveFunction'];
+            let funcLen = derFunctions.length;
+            for(let idx = 0; idx < funcLen; idx++){
+                addDERfuncCheckbox(derFunctions[idx], index);
+            }
+<!--            derFunctions.forEach(function(f, index){-->
+<!--                let func = document.createElement("input");-->
+<!--                let thisLbl = f + '_' + index;-->
+<!--                func.id = thisLbl;-->
+<!--                func.name = thisLbl;-->
+<!--                func.type = "checkbox";-->
+<!--                func.value = thisLbl;-->
+<!--                container.appendChild(func);-->
+
+<!--                let funcLabel = document.createElement("label");-->
+<!--                funcLabel.for = func.id;-->
+<!--                let cdnode = document.createTextNode(f);-->
+<!--                funcLabel.appendChild(cdnode);-->
+<!--                container.appendChild(funcLabel);-->
+<!--                container.appendChild(document.createElement("br"));-->
+<!--            });-->
+
+
+            container.appendChild(document.createElement("br"));
+            container.appendChild(document.createElement("br"));
+            container.appendChild(document.createElement("br"));
+        }
+
+        function addDERfuncCheckbox(f, index){
+            let func = document.createElement("input");
+            let thisLbl = f + '_' + index;
+            func.id = thisLbl;
+            func.name = thisLbl;
+            func.type = "checkbox";
+            func.value = thisLbl;
+            container.appendChild(func);
+
+            let funcLabel = document.createElement("label");
+            funcLabel.for = func.id;
+            let cdnode = document.createTextNode(f);
+            funcLabel.appendChild(cdnode);
+            container.appendChild(funcLabel);
+            container.appendChild(document.createElement("br"));
+        }
         $(document).ready(function(){
 <!--&lt;!&ndash;           let isHidden = false;-->
 
