@@ -15,7 +15,11 @@
 <h1>No Groups Found</h1>
 {% endif %}
 {% if groups %}
-<h2>Existing Groups:</h2>
+    {%if query%}
+        <h2>Query Returned Groups:</h2>
+    {%else%}
+        <h2>Existing Groups:</h2>
+    {%endif%}
 {% endif %}
 {% for g in groups %}
 <div style="width:1000px">

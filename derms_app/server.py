@@ -8,7 +8,7 @@ from flask import Flask, send_from_directory, request, render_template, make_res
 from derms_app import createDeviceJsonConf
 from derms_app import group, derms_client
 # from derms_app.devices import get_devices_json, get_devices
-from derms_app.device import Device
+from derms_app.device import Device, get_devices
 import json, jsons
 
 # set the project root directory as the static folder, you can set others.
@@ -141,7 +141,10 @@ def create_group_html():
             return render_template("create-group.html", devices=devices, status=response.Reply.Error)
     try:
         if len(deviceList) == 0:
-            deviceList = derms_client.get_devices()
+            try:
+                deviceList = derms_client.get_devices()
+            except Exception as e:
+                deviceList = get_devices()
             devices = deviceList
         else:
             devices = deviceList
@@ -153,7 +156,72 @@ def create_group_html():
 
 @app.route("/retrieve_groups")
 def retrieve_groups_html():
-    return send_from_directory('static', 'retrieve_groups.html')
+    if not groupList:
+        response = derms_client.query_all_groups()
+        _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
+    # return send_from_directory('static', 'retrieve_groups_template.html')
+    return render_template('retrieve_groups_template.html', names=groupListByName, mRIDs=groupListBymRID)
+
+
+@app.route("/query_group", methods=["POST"])
+def query_groups():
+    method = request.form.get('retrieveChoices')
+    ngroup = request.form.get('ngroup')
+    groupName = []
+    groupMrid = []
+    if method == "name":
+        if ngroup == "oneGroup":
+            groupName.append(request.form.get('queryid1'))
+        else:
+            groupName.append(request.form.get('queryid1'))
+            groupName.append(request.form.get('queryid2'))
+    else:
+        if ngroup == "oneGroup":
+            groupMrid.append(request.form.get('queryid1'))
+        else:
+            groupMrid.append(request.form.get('queryid1'))
+            groupMrid.append(request.form.get('queryid2'))
+    assert groupName or groupMrid
+    assert not (groupName and groupMrid)
+    if groupName:
+        try:
+            response = derms_client.query_groups_byName(groupName)
+        except Exception as e:
+            return "Query group by name failed.<br />" + str(e)
+    elif groupMrid:
+        try:
+            response = derms_client.query_groups_bymRID(groupMrid)
+        except Exception as e:
+            return "Query group by mRID failed.<br />" + str(e)
+
+    if response.Reply.Result == "OK":
+        groups = []
+        for g in response.Payload.DERGroups.EndDeviceGroup:
+            devices = []
+            for d in g.EndDevices:
+                dname = d.Names[0].name
+                devices.append(Device(mRID=d.mRID, name=dname))
+            if g.Names:
+                gname = g.Names[0].name
+            else:
+                gname = None
+            if g.DERFunction != None:
+                derfuncs={'connectDisconnect': g.DERFunction.connectDisconnect,
+                             'frequencyWattCurveFunction': g.DERFunction.frequencyWattCurveFunction,
+                             'maxRealPowerLimiting': g.DERFunction.maxRealPowerLimiting,
+                             'rampRateControl': g.DERFunction.rampRateControl,
+                             'reactivePowerDispatch': g.DERFunction.reactivePowerDispatch,
+                             'realPowerDispatch': g.DERFunction.realPowerDispatch,
+                             'voltageRegulation': g.DERFunction.voltageRegulation,
+                             'voltVarCurveFunction': g.DERFunction.voltVarCurveFunction,
+                             'voltWattCurveFunction': g.DERFunction.voltWattCurveFunction}
+            if g.mRID:
+                this_group = group.Group(g.mRID, gname, g.description, devices, derFunctions=derfuncs)
+                groups.append(this_group)
+        return render_template("list-groups.html", groups=groups, status="Group query returned successfully!",
+                               query=True)
+    else:
+        return "Error query group"
 
 
 def _sortGroups(derGroups):
@@ -201,11 +269,12 @@ def list_group_html():
     List all created groups.
     '''
     try:
-        derGroups = derms_client.get_end_device_groups()
-        _sortGroups(derGroups)
+        # derGroups = derms_client.get_end_device_groups()
+        response = derms_client.query_all_groups()
+        _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
         return render_template("list-groups.html", groups=groupList, status=request.args.get('status'))
     except Exception as ex:
-        return f'Error Getting DER Groups. <br />{str(ex)}'
+        return f'Error Query all DER Groups. <br />{str(ex)}'
 
 
 @app.route("/list_devices")
@@ -213,7 +282,13 @@ def list_devices():
     try:
         global deviceList
         if len(deviceList) == 0:
-            deviceList = derms_client.get_devices()
+            try:
+                deviceList = derms_client.get_devices()
+            except Exception as e:
+                deviceList = get_devices()
+            # with open("devices_list.json", "w") as fp:
+            #     a = json.dumps([d.__json__() for d in deviceList])
+            #     fp.write(a)
         return render_template("list-device-template.html", devices=deviceList)
     except Exception as ex:
         return f'Error Getting Devices.<br />{str(ex)}'
@@ -231,8 +306,10 @@ def list_devices():
 @app.route("/edit_group")
 def edit_group():
     if not groupList:
-        derGroups = derms_client.get_end_device_groups()
-        _sortGroups(derGroups)
+        response = derms_client.query_all_groups()
+        _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
+        # derGroups = derms_client.get_end_device_groups()
+        # _sortGroups(derGroups)
     return render_template("modify-groups-template.html", names=groupListByName, mRIDs=groupListBymRID, groups=groupList)
 
 

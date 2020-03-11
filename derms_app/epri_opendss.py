@@ -31,3 +31,8 @@ CHANGE_NAMESPACE_SOAP_BINDING = (
         f'{{{Namespace_URL}}}ExecuteDERGroupsService',
         f"{BASE_URL}/change/executeDERGroups"
 )
+QUERY_DERGROUP_ENDPOINT = f"{BASE_URL}/get/queryDERGroups?wsdl"
+QUERY_NAMESPACE_SOAP_BINDING = (
+        f'{{{Namespace_URL}}}QueryDERGroupsService',
+        f'{BASE_URL}/get/queryDERGroups'
+)

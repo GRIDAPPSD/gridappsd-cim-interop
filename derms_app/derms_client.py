@@ -125,7 +125,7 @@ def __get_create_body_groups(group_list):
     # create dictionary of lists of EndDeviceGroup
     end_device_group = []
     for grp in group_list:
-        # this creates a list of with the same key, could cause problem
+        # this creates a list of with the same key, could cause problem, actually, it does not cause problem, and better than the later way
         devices_mrid_list = [{"mRID": x} for x in grp.devices]
         end_device_group.append(__build_enddevice_group(grp.mrid, grp.name, grp.description, devices_mrid_list, grp.derFunctions))
     body = {
@@ -134,7 +134,7 @@ def __get_create_body_groups(group_list):
         }
     }
 
-    # create list of dictionary of EndDeviceGroup, which would be duplicate keys in the dictionary
+    # create list of dictionary of EndDeviceGroup, which would be duplicate keys in the dictionary, it might not work
     # derGroups=[]
     # for grp in group_list:
     #     derGroups.append({"EndDeviceGroup": __build_enddevice_group(grp.mrid, grp.name, grp.devices)})
@@ -143,6 +143,42 @@ def __get_create_body_groups(group_list):
     # }
 
     return body
+
+
+def __build_query_request_byNames(names):
+    groups = []
+    for name in names:
+        groups.append({'Names': {'name': name}})
+    # only this way works, i.e., 'EndDeviceGroup' is a list of dictionary
+    # if I put 'EndDeviceGroup' in front of each 'Names' to form a list of EndDeviceGroup dictionary,
+    # it won't work for multiples of EndDeviceGroup
+    request = {
+        # 'ID': uuid.uuid4(),
+        # 'StartTime': datetime.datetime.now(),
+        # 'EndTime': datetime.datetime.now(),
+        'DERGroupQueries': {
+            'EndDeviceGroup': groups
+        }
+    }
+    return request
+
+
+def __build_query_request_bymRIDs(mrids):
+    groups = []
+    for mrid in mrids:
+        groups.append({'mRID': mrid})
+    # only this way works, i.e., 'EndDeviceGroup' is a list of dictionary
+    # if I put 'EndDeviceGroup' in front of each 'Names' to form a list of EndDeviceGroup dictionary,
+    # it won't work for multiples of EndDeviceGroup
+    request = {
+        # 'ID': uuid.uuid4(),
+        # 'StartTime': datetime.datetime.now(),
+        # 'EndTime': datetime.datetime.now(),
+        'DERGroupQueries': {
+            'EndDeviceGroup': groups
+        }
+    }
+    return request
 
 
 def get_devices():
@@ -331,12 +367,58 @@ def create_multiple_group(mrid_list, name_list, device_mrid_list_list):
     return response
 
 
-def get_end_device_groups():
+# def get_end_device_groups():
+#     history = HistoryPlugin()
+#     client = Client(c.QUERY_DERGROUP_ENDPOINT, plugins=[history])
+#     r = client.service.GetDERGroups()
+#     print(r)
+#     return r
+
+
+def query_groups_byName(names):
+    headers = __build_endpoint_header("GET")
+    request = __build_query_request_byNames(names)
+    print(request)
     history = HistoryPlugin()
-    client = Client(c.GET_DERGROUPS_ENDPOINT, plugins=[history])
-    r = client.service.GetDERGroups()
-    print(r)
-    return r
+    client = Client(c.QUERY_DERGROUP_ENDPOINT, plugins=[history])
+    try:
+        response = get_service(client, "GET").QueryDERGroups(headers, request)
+    except Exception as e:
+        raise e
+    # try:
+    #     response = client.service.QueryDERGroups(Header=headers, Request=request)
+    # except Exception as e:
+    #     pass
+    _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
+    return response
+
+
+def query_groups_bymRID(mrids):
+    headers = __build_endpoint_header("GET")
+    request = __build_query_request_bymRIDs(mrids)
+    history = HistoryPlugin()
+    client = Client(c.QUERY_DERGROUP_ENDPOINT, plugins=[history])
+    try:
+        response = get_service(client, "GET").QueryDERGroups(headers, request)
+    except Exception as e:
+        raise e
+    return response
+
+
+def query_all_groups():
+    headers = __build_endpoint_header("GET")
+    request = {
+        'DERGroupQueries': {
+        }
+    }
+    history = HistoryPlugin()
+    client = Client(c.QUERY_DERGROUP_ENDPOINT, plugins=[history])
+    try:
+        response = get_service(client, "GET").QueryDERGroups(headers, request)
+    except Exception as e:
+        raise e
+    return response
 
 
 def change_group(mrid, name, device_mrid_list):

@@ -10,3 +10,8 @@ CHANGE_NAMESPACE_SOAP_BINDING = (
         '{http://change.ws.server.sixthc.com/}ExecuteDERGroupsServiceSoapBinding',
         f'{BASE_URL}/61968-5/change/executeDERGroups'
 )
+QUERY_DERGROUP_ENDPOINT = f"{BASE_URL}/61968-5/get/queryDERGroups?wsdl"
+QUERY_NAMESPACE_SOAP_BINDING = (
+        '{http://get.ws.server.sixthc.com/}QueryDERGroupsServiceSoapBinding',
+        f'{BASE_URL}/61968-5/get/queryDERGroups'
+)
