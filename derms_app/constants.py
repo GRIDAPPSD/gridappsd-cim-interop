@@ -16,15 +16,29 @@ Created on Apr 24, 2018
 # for calling from outside the docker container.
 
 # depends on what we are testing, choose locate gridappsD binding or remote binding
-USE_SIMULATOR_FOR_SOAP = True
+USE_SIMULATOR_FOR_SOAP = None
 
-if USE_SIMULATOR_FOR_SOAP:
-    from . epri_simulator import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
-                                  CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT, QUERY_DERGROUP_ENDPOINT, QUERY_NAMESPACE_SOAP_BINDING)
-else:
-    from . epri_opendss import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
-                                CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT, GET_DEVICE_ENDPOINT,
-                                GET_DERGROUPS_ENDPOINT, QUERY_DERGROUP_ENDPOINT, QUERY_NAMESPACE_SOAP_BINDING)
+# if USE_SIMULATOR_FOR_SOAP:
+#     from .epri_simulator import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
+#                                  CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT, QUERY_DERGROUP_ENDPOINT,
+#                                  QUERY_NAMESPACE_SOAP_BINDING)
+# else:
+from .epri_opendss import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
+                           CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT, GET_DEVICE_ENDPOINT,
+                           GET_DERGROUPS_ENDPOINT, QUERY_DERGROUP_ENDPOINT, QUERY_NAMESPACE_SOAP_BINDING)
+
+
+def re_import():
+    import sys
+    print(sys.modules)
+    if USE_SIMULATOR_FOR_SOAP:
+        from importlib import reload
+        from .epri_simulator import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
+                                      CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT,
+                                      QUERY_DERGROUP_ENDPOINT, QUERY_NAMESPACE_SOAP_BINDING)
+        print(CREATE_NAMESPACE_SOAP_BINDING)
+
+
 
 # URL from inside the docker container:
 # blazegraph_url = "http://blazegraph:8080/bigdata/sparql"

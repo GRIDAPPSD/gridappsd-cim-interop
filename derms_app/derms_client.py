@@ -116,6 +116,18 @@ def __get_create_body(mrid, name, device_mrid_list):
     return body
 
 
+def __get_create_body_group(group):
+    end_device_group = []
+    devices_mrid_list = [{"mRID": x.mRID} for x in group.devices]
+    end_device_group.append(__build_enddevice_group(group.mrid, group.name, group.description, devices_mrid_list, group.derFunctions))
+    body = {
+        "DERGroups": {
+            "EndDeviceGroup": end_device_group
+        }
+    }
+    return body
+
+
 def __get_create_body_groups(group_list):
     '''
     create the body of the message using the list of the groups that need to be created
@@ -312,7 +324,7 @@ def create_groups(group_list):
     pprint(headers)
     print("BODY")
     pprint(body)
-    response = get_service(client, "CREATE").CreateDERGroups(headers, body)
+    response = get_service(client, "CREATE").CreateDERGroups(Header=headers, Payload=body)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
     #_log.debug("ZEEP Respons:\n{}".format(response))
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
@@ -408,16 +420,40 @@ def query_groups_bymRID(mrids):
 
 def query_all_groups():
     headers = __build_endpoint_header("GET")
+    print(headers)
     request = {
         'DERGroupQueries': {
+            'EndDeviceGroup': {}
         }
     }
+    print(request)
     history = HistoryPlugin()
     client = Client(c.QUERY_DERGROUP_ENDPOINT, plugins=[history])
     try:
         response = get_service(client, "GET").QueryDERGroups(headers, request)
     except Exception as e:
         raise e
+    return response
+
+
+def modify_a_group(originalgroup, modifiedgroup):
+    history = HistoryPlugin()
+    client = Client(c.CHANGE_DERGROUP_ENDPOINT, plugins=[history])
+    # can compare the original with modified to find out if derfunction changed, make payload only contain derfunctions
+    # can compare the original with modified to find out if der devices changed, make payload only the added device mrid
+    # do the above and delete the missing device
+    # however, since the epri test harness cannot distinguish the payload, I will just put everything in
+    # _compare_der_functions(originalgroup, modifiedgroup)
+    headers = __build_endpoint_header("CHANGE")
+    payload = __get_create_body_group(modifiedgroup)
+    from pprint import pprint
+    print("HEADERS")
+    pprint(headers)
+    print("PAYLOAD")
+    pprint(payload)
+    response = get_service(client, "CHANGE").ChangeDERGroups(Header=headers, Payload=payload)
+    _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
     return response
 
 
@@ -459,7 +495,7 @@ def delete_group(name=None, mrid=None):
     # node = client.create_message(client.service, 'CreateDERGroups', Header=headers, Payload=body)
     # print(node)
 
-    response = get_service(client, "DELETE").DeleteDERGroups(request=message)
+    response = get_service(client, "DELETE").DeleteDERGroups(Header=headers, Payload=body)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
     # _log.debug("ZEEP Respons:\n{}".format(response))
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))

@@ -5,11 +5,12 @@ from urllib.error import URLError
 
 from flask import Flask, send_from_directory, request, render_template, make_response, redirect, url_for
 
-from derms_app import createDeviceJsonConf
+# from derms_app import createDeviceJsonConf
 from derms_app import group, derms_client
 # from derms_app.devices import get_devices_json, get_devices
 from derms_app.device import Device, get_devices
 import json, jsons
+
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
@@ -26,6 +27,35 @@ groupListBymRID = {}
 def root():
     return app.send_static_file('index.html')
 
+
+@app.route('/menu', methods=['GET', 'POST'])
+def target_chosen():
+    if request.method == 'POST':
+        target = request.form['target']
+        # from derms_app import constants as c
+        if target == 'epri':
+            derms_client.c.USE_SIMULATOR_FOR_SOAP = True
+            # derms_client.c.re_import()
+            from epri_simulator import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
+                                          CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT,
+                                          QUERY_DERGROUP_ENDPOINT, QUERY_NAMESPACE_SOAP_BINDING)
+            derms_client.c.CHANGE_NAMESPACE_SOAP_BINDING = CHANGE_NAMESPACE_SOAP_BINDING
+            derms_client.c.CREATE_NAMESPACE_SOAP_BINDING = CREATE_NAMESPACE_SOAP_BINDING
+            derms_client.c.CREATE_DERGROUP_ENDPOINT = CREATE_DERGROUP_ENDPOINT
+            derms_client.c.CHANGE_DERGROUP_ENDPOINT = CHANGE_DERGROUP_ENDPOINT
+            derms_client.c.QUERY_DERGROUP_ENDPOINT = QUERY_DERGROUP_ENDPOINT
+            derms_client.c.QUERY_NAMESPACE_SOAP_BINDING = QUERY_NAMESPACE_SOAP_BINDING
+            derms_client.c.SOAP_BINDINGS = dict(
+                CREATE=CREATE_NAMESPACE_SOAP_BINDING,
+                # Both delete and change use the same binding
+                DELETE=CHANGE_NAMESPACE_SOAP_BINDING,
+                CHANGE=CHANGE_NAMESPACE_SOAP_BINDING,
+                GET=QUERY_NAMESPACE_SOAP_BINDING
+            )
+        else:
+            derms_client.c.USE_SIMULATOR_FOR_SOAP = False
+    return app.send_static_file('menu.html')
+    # return app.send_static_file('index.html')
 
 #@app.route('/static/<path:path>')
 #def send_static_html(path):
@@ -59,15 +89,15 @@ write_lock = Lock()
 
 @app.route("/api/delete_group/mrid/<mrid>")
 def delete_group_mrid(mrid):
-    return delete_group(mrid=mrid)
+    return _delete_group(mrid=mrid)
 
 
 @app.route("/api/delete_group/name/<name>")
 def delete_group_name(name):
-    return delete_group(name=name)
+    return _delete_group(name=name)
 
 
-def delete_group(mrid=None, name=None):
+def _delete_group(mrid=None, name=None):
     # name = request.args.get("name")
     # mrid = request.args.get("mrid")
 
@@ -87,6 +117,15 @@ def delete_group(mrid=None, name=None):
         else:
             return render_template('failedGroup-template.html', group=group.get_group_name(name), message='delete')
     return redirect("/list_groups")
+
+
+@app.route("/delete_group/<group>")
+def delete_group(group):
+    print(group)
+    if group in groupListBymRID:
+        return _delete_group(mrid=group)
+    else:
+        return _delete_group(name=group)
 
 
 @app.route("/create_group", methods=['POST', 'GET'])
@@ -199,7 +238,10 @@ def query_groups():
         for g in response.Payload.DERGroups.EndDeviceGroup:
             devices = []
             for d in g.EndDevices:
-                dname = d.Names[0].name
+                if d.Names:
+                    dname = d.Names[0].name
+                else:
+                    dname = None
                 devices.append(Device(mRID=d.mRID, name=dname))
             if g.Names:
                 gname = g.Names[0].name
@@ -231,7 +273,10 @@ def _sortGroups(derGroups):
     for g in derGroups:
         devices = []
         for d in g.EndDevices:
-            dname = d.Names[0].name
+            if d.Names:
+                dname = d.Names[0].name
+            else:
+                dname = None
             devices.append(Device(mRID=d.mRID, name=dname))
         if g.Names:
             gname = g.Names[0].name
@@ -310,7 +355,13 @@ def edit_group():
         _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
         # derGroups = derms_client.get_end_device_groups()
         # _sortGroups(derGroups)
-    return render_template("modify-groups-template.html", names=groupListByName, mRIDs=groupListBymRID, groups=groupList)
+    global deviceList
+    if len(deviceList) == 0:
+        try:
+            deviceList = derms_client.get_devices()
+        except Exception as e:
+            deviceList = get_devices()
+    return render_template("modify-groups-template.html", names=groupListByName, mRIDs=groupListBymRID, groups=groupList, devices=deviceList)
 
 
 # @app.route('/create')
@@ -327,36 +378,99 @@ def send_js(path):
     return send_from_directory('static/js', path)
 
 
-@app.route('/api/create', methods=['POST'])
-def create_group():
-    groupName = request.form['groupName']
-    groupmrid = request.form['mrid']
-    devices = request.form.getlist('devices')
-    thisDevices = []
-    for dev in devices:
-        devParts = dev.split(',')
-        deviceName = devParts[0].strip(" ,()'")
-        deviceType = devParts[1].strip(" ,()'")
-        devicemrid = devParts[2].strip(" ,()'")
-        newDevice = createDeviceJsonConf.Device(devicemrid, deviceName, deviceType)
-        thisDevices.append(newDevice)
+# @app.route('/api/create', methods=['POST'])
+# def create_group():
+#     groupName = request.form['groupName']
+#     groupmrid = request.form['mrid']
+#     devices = request.form.getlist('devices')
+#     thisDevices = []
+#     for dev in devices:
+#         devParts = dev.split(',')
+#         deviceName = devParts[0].strip(" ,()'")
+#         deviceType = devParts[1].strip(" ,()'")
+#         devicemrid = devParts[2].strip(" ,()'")
+#         newDevice = createDeviceJsonConf.Device(devicemrid, deviceName, deviceType)
+#         thisDevices.append(newDevice)
+#
+#     newGroup = group.Group(groupmrid, groupName, thisDevices)
+#
+#     # Build an xml structure to send to openderms
+#     # use zeep to send that xml structure to openderms/test instance and get response
+#
+#     #success = zeep.createGroupCall()
+#     # if group created successfully
+#     if True:
+#         groupList.append(newGroup)
+#         return render_template('groupDetail-template.html', group=newGroup, message='created')
+#     else:
+#         return render_template('failedGroup-template.html', group=newGroup, message='create')
 
-    newGroup = group.Group(groupmrid, groupName, thisDevices)
-
-    # Build an xml structure to send to openderms
-    # use zeep to send that xml structure to openderms/test instance and get response
-
-    #success = zeep.createGroupCall()
-    # if group created successfully
-    if True:
-        groupList.append(newGroup)
-        return render_template('groupDetail-template.html', group=newGroup, message='created')
-    else:
-        return render_template('failedGroup-template.html', group=newGroup, message='create')
-
-@app.route('/modify')
+@app.route('/modify', methods=['POST'])
 def modifyAGroup():
-    return render_template('groups-template.html', groups=groupList)
+    # agroup = request.args.get('agroup')
+    # print(agroup)
+    if request.method == 'POST':
+        devices = request.form.getlist('selected_devices')
+        groupBy = request.form.get('groupBy')
+        groupChoices = request.form.get('groupChoices')
+        if groupBy == "listGroupsByName":
+            originalgroup = groupListByName[groupChoices]
+        else:
+            originalgroup = groupListBymRID[groupChoices]
+        devicesl = []
+        devicedict = {x.mRID: x for x in deviceList}
+        for d in devices:
+            devicesl.append(devicedict[d])
+
+        derFunctions = group.DERFunctions()
+        if request.form.get('connectDisconnect'):
+            derFunctions.connectDisconnect = True
+        else:
+            derFunctions.connectDisconnect = False
+        if request.form.get('frequencyWattCurveFunction'):
+            derFunctions.frequencyWattCurveFunction = True
+        else:
+            derFunctions.frequencyWattCurveFunction = False
+        if request.form.get('maxRealPowerLimiting'):
+            derFunctions.maxRealPowerLimiting = True
+        else:
+            derFunctions.maxRealPowerLimiting = False
+        if request.form.get('rampRateControl'):
+            derFunctions.rampRateControl = True
+        else:
+            derFunctions.rampRateControl = False
+        if request.form.get('reactivePowerDispatch'):
+            derFunctions.reactivePowerDispatch = True
+        else:
+            derFunctions.reactivePowerDispatch = False
+        if request.form.get('realPowerDispatch'):
+            derFunctions.realPowerDispatch = True
+        else:
+            derFunctions.realPowerDispatch = False
+        if request.form.get('voltageRegulation'):
+            derFunctions.voltageRegulation = True
+        else:
+            derFunctions.voltageRegulation = False
+        if request.form.get('voltVarCurveFunction'):
+            derFunctions.voltVarCurveFunction = True
+        else:
+            derFunctions.voltVarCurveFunction = False
+        if request.form.get('voltWattCurveFunction'):
+            derFunctions.voltWattCurveFunction = True
+        else:
+            derFunctions.voltWattCurveFunction = False
+        modifiedgroup = group.Group(originalgroup.mrid, originalgroup.name, originalgroup.description, devicesl, derFunctions)
+
+        try:
+            response = derms_client.modify_a_group(originalgroup, modifiedgroup)
+        except Exception as e:
+            return "Modify a group by name failed.<br />" + str(e)
+
+        if response.Reply.Result == "OK":
+            return render_template('groupDetail-template.html', group=modifiedgroup, message="modified")
+        else:
+            return "Modify a group failed.<br />" + str(response.Reply.Error)
+
 
 @app.route('/api/edit', methods=['POST'])
 def editGroup():
