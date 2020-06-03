@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- un-comment this line to enable validation
+-->
+<rdf:RDF xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<!--
+-->
+<cim:IEC61970CIMVersion rdf:ID="_96A580E9-40C7-480D-A628-EB5BC0D1F233">
+  <cim:IEC61970CIMVersion.version>IEC61970CIM100</cim:IEC61970CIMVersion.version>
+  <cim:IEC61970CIMVersion.date>2019-04-01</cim:IEC61970CIMVersion.date>
+</cim:IEC61970CIMVersion>
+<cim:EnergySource rdf:ID="_89C11D19-197E-4CF1-8ED0-2134C5502E94">
+  <cim:EnergySource.voltageMagnitude>115000</cim:EnergySource.voltageMagnitude>
+  <cim:EnergySource.voltageAngle>0.52359878</cim:EnergySource.voltageAngle>
+</cim:EnergySource>
+<cim:RatioTapChanger rdf:ID="_681D5629-A8AB-4615-9EFC-04DCE23B122F">
+  <cim:TapChanger.controlEnabled>true</cim:TapChanger.controlEnabled>
+  <cim:TapChanger.step>10</cim:TapChanger.step>
+</cim:RatioTapChanger>
+<cim:RatioTapChanger rdf:ID="_8334BFBA-9C18-4ED0-B8E4-99FF1E8B7076">
+  <cim:TapChanger.controlEnabled>true</cim:TapChanger.controlEnabled>
+  <cim:TapChanger.step>8</cim:TapChanger.step>
+</cim:RatioTapChanger>
+<cim:RatioTapChanger rdf:ID="_E2F282D7-969D-4395-ABAA-28B1FA30C89B">
+  <cim:TapChanger.controlEnabled>true</cim:TapChanger.controlEnabled>
+  <cim:TapChanger.step>11</cim:TapChanger.step>
+</cim:RatioTapChanger>
+<cim:LoadBreakSwitch rdf:ID="_40A3F8D9-236B-4C61-90CD-5DED97F8B56D">
+  <cim:Switch.open>false</cim:Switch.open>
+</cim:LoadBreakSwitch>
+<cim:EnergyConsumer rdf:ID="_A178435D-E006-4CF5-B06F-8410159811B3">
+  <cim:EnergyConsumer.p>1155000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>660000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumer rdf:ID="_4605B99B-1F49-4414-B5E3-C02CB42D658C">
+  <cim:EnergyConsumer.p>160000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>110000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_82A470D0-C6E2-4032-8F76-0D63BAFAE440">
+  <cim:EnergyConsumerPhase.p>160000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>110000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_2BFF8F27-09FD-4AD7-AC38-689BDDF624AC">
+  <cim:EnergyConsumer.p>120000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>90000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_775469D0-48C1-42F1-8E8C-0DFD838C6E4E">
+  <cim:EnergyConsumerPhase.p>120000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>90000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_BB5BEE17-B618-425C-B2AE-E458CBD433CD">
+  <cim:EnergyConsumer.p>120000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>90000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_0E697A96-B7A0-46C3-A484-ED601ADC3088">
+  <cim:EnergyConsumerPhase.p>120000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>90000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_3BD0DF72-F5E5-4223-B534-F702D806F875">
+  <cim:EnergyConsumer.p>170000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>125000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_4A6C031D-0631-4213-96DE-D1235266AB5E">
+  <cim:EnergyConsumerPhase.p>170000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>125000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_65CCB880-8B20-4E44-9400-387C0B919E4D">
+  <cim:EnergyConsumer.p>230000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>132000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_3312E118-960A-492E-B63C-992E3EFA7CCB">
+  <cim:EnergyConsumerPhase.p>230000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>132000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_56865FD7-AD25-402B-A242-EC9BCF014CBD">
+  <cim:EnergyConsumer.p>170000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>151000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_EFE7C556-4E7A-4DEE-B45F-33A5BD912C00">
+  <cim:EnergyConsumerPhase.p>170000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>151000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_242909B0-28BF-4A2B-B6B5-DD437695539B">
+  <cim:EnergyConsumer.p>485000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>190000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_D11C74B4-E9E8-4462-A13C-0313FFCCF325">
+  <cim:EnergyConsumerPhase.p>485000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>190000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_61109E18-595E-4213-AED0-4043743098FA">
+  <cim:EnergyConsumer.p>68000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>60000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_BE1E0D29-098B-4106-A68B-461F901A198B">
+  <cim:EnergyConsumerPhase.p>68000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>60000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_483376A1-D2F5-42A7-B98B-534AF6D7171E">
+  <cim:EnergyConsumer.p>290000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>212000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_71B2B3EB-1BF9-4313-8E60-B25E05B628DE">
+  <cim:EnergyConsumerPhase.p>290000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>212000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_B3C640A6-DCAA-4A57-BD7E-5179A6D77856">
+  <cim:EnergyConsumer.p>170000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>80000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_14A2DED3-C553-4B39-95C8-296B017A2729">
+  <cim:EnergyConsumerPhase.p>170000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>80000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_A734642F-F0EC-4E71-A8D0-3CA3DBEC4019">
+  <cim:EnergyConsumer.p>128000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>86000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_CA4F516C-A629-4676-AA96-1FA99F2FCBE4">
+  <cim:EnergyConsumerPhase.p>128000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>86000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_B72D9FCE-AC4D-41A1-B6A1-E35BAD450A0C">
+  <cim:EnergyConsumer.p>17000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>10000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_35458F43-6496-493D-AF12-467E973A2FE7">
+  <cim:EnergyConsumerPhase.p>17000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>10000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_58C13768-7DB0-4D8B-AE14-978D1CD6BC54">
+  <cim:EnergyConsumer.p>66000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>38000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_3C2A8213-C6DF-4B84-8636-379E59506CB7">
+  <cim:EnergyConsumerPhase.p>66000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>38000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+<cim:EnergyConsumer rdf:ID="_A963DF37-B0EB-4DE7-B2CD-568AC9095932">
+  <cim:EnergyConsumer.p>117000</cim:EnergyConsumer.p>
+  <cim:EnergyConsumer.q>68000</cim:EnergyConsumer.q>
+</cim:EnergyConsumer>
+<cim:EnergyConsumerPhase rdf:ID="_ED14668B-3743-468D-AA09-181852142424">
+  <cim:EnergyConsumerPhase.p>117000</cim:EnergyConsumerPhase.p>
+  <cim:EnergyConsumerPhase.q>68000</cim:EnergyConsumerPhase.q>
+</cim:EnergyConsumerPhase>
+</rdf:RDF>

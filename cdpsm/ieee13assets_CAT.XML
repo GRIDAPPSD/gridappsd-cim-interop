@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- un-comment this line to enable validation
+-->
+<rdf:RDF xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<!--
+-->
+<cim:IEC61970CIMVersion rdf:ID="_96A580E9-40C7-480D-A628-EB5BC0D1F233">
+  <cim:IEC61970CIMVersion.version>IEC61970CIM100</cim:IEC61970CIMVersion.version>
+  <cim:IEC61970CIMVersion.date>2019-04-01</cim:IEC61970CIMVersion.date>
+</cim:IEC61970CIMVersion>
+<cim:PowerTransformerInfo rdf:ID="_363BFFC4-FA44-41BA-9A17-7BE62E82025C">
+  <cim:IdentifiedObject.mRID>_363BFFC4-FA44-41BA-9A17-7BE62E82025C</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>subxfmr_PowerXfInfo</cim:IdentifiedObject.name>
+</cim:PowerTransformerInfo>
+<cim:TransformerTankInfo rdf:ID="_868242E8-5807-48D6-99B4-F2D1B8ED96EC">
+  <cim:IdentifiedObject.mRID>_868242E8-5807-48D6-99B4-F2D1B8ED96EC</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>subxfmr</cim:IdentifiedObject.name>
+  <cim:TransformerTankInfo.PowerTransformerInfo rdf:resource="#_363BFFC4-FA44-41BA-9A17-7BE62E82025C"/>
+</cim:TransformerTankInfo>
+<cim:TransformerEndInfo rdf:ID="_471DBB0A-58B5-42B5-BF44-9FA5BF9DF554">
+  <cim:IdentifiedObject.mRID>_471DBB0A-58B5-42B5-BF44-9FA5BF9DF554</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>subxfmr_1</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_868242E8-5807-48D6-99B4-F2D1B8ED96EC"/>
+  <cim:TransformerEndInfo.endNumber>1</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.D"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>115000</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>5000000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>5500000</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>7500000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.013225</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:TransformerEndInfo rdf:ID="_71F577B4-CBED-47FC-8932-D5F84605F4E2">
+  <cim:IdentifiedObject.mRID>_71F577B4-CBED-47FC-8932-D5F84605F4E2</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>subxfmr_2</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_868242E8-5807-48D6-99B4-F2D1B8ED96EC"/>
+  <cim:TransformerEndInfo.endNumber>2</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.Y"/>
+  <cim:TransformerEndInfo.phaseAngleClock>1</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>4160</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>5000000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>5500000</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>7500000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>1.73056E-005</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:NoLoadTest rdf:ID="_3C760E5C-C494-476E-BD33-AAF8E835BB6D">
+  <cim:IdentifiedObject.mRID>_3C760E5C-C494-476E-BD33-AAF8E835BB6D</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>subxfmr_1</cim:IdentifiedObject.name>
+  <cim:NoLoadTest.EnergisedEnd rdf:resource="#_471DBB0A-58B5-42B5-BF44-9FA5BF9DF554"/>
+  <cim:NoLoadTest.energisedEndVoltage>115000</cim:NoLoadTest.energisedEndVoltage>
+  <cim:NoLoadTest.excitingCurrent>0</cim:NoLoadTest.excitingCurrent>
+  <cim:NoLoadTest.excitingCurrentZero>0</cim:NoLoadTest.excitingCurrentZero>
+  <cim:NoLoadTest.loss>0</cim:NoLoadTest.loss>
+  <cim:NoLoadTest.lossZero>0</cim:NoLoadTest.lossZero>
+  <cim:TransformerTest.basePower>5000000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:NoLoadTest>
+<cim:ShortCircuitTest rdf:ID="_435FC69A-2968-4CF9-B53A-60496D5E83C6">
+  <cim:IdentifiedObject.mRID>_435FC69A-2968-4CF9-B53A-60496D5E83C6</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>subxfmr_1</cim:IdentifiedObject.name>
+  <cim:ShortCircuitTest.EnergisedEnd rdf:resource="#_471DBB0A-58B5-42B5-BF44-9FA5BF9DF554"/>
+  <cim:ShortCircuitTest.GroundedEnds rdf:resource="#_71F577B4-CBED-47FC-8932-D5F84605F4E2"/>
+  <cim:ShortCircuitTest.energisedEndStep>16</cim:ShortCircuitTest.energisedEndStep>
+  <cim:ShortCircuitTest.groundedEndStep>16</cim:ShortCircuitTest.groundedEndStep>
+  <cim:ShortCircuitTest.leakageImpedance>0.2116</cim:ShortCircuitTest.leakageImpedance>
+  <cim:ShortCircuitTest.leakageImpedanceZero>0.2116</cim:ShortCircuitTest.leakageImpedanceZero>
+  <cim:ShortCircuitTest.loss>0.05</cim:ShortCircuitTest.loss>
+  <cim:ShortCircuitTest.lossZero>0.05</cim:ShortCircuitTest.lossZero>
+  <cim:TransformerTest.basePower>5000000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:ShortCircuitTest>
+<cim:Asset rdf:ID="_8A0E3A1A-9634-45E8-9912-7F25E4767ECE">
+  <cim:IdentifiedObject.mRID>_8A0E3A1A-9634-45E8-9912-7F25E4767ECE</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TankAsset_subxfmr</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_868242E8-5807-48D6-99B4-F2D1B8ED96EC"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_73A1349D-7495-427E-8323-7B1E5940E999"/>
+</cim:Asset>
+<cim:PowerTransformerInfo rdf:ID="_7D6AB76C-9703-4A90-88CC-6AAC027D6C3F">
+  <cim:IdentifiedObject.mRID>_7D6AB76C-9703-4A90-88CC-6AAC027D6C3F</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>fdrxfmr_PowerXfInfo</cim:IdentifiedObject.name>
+</cim:PowerTransformerInfo>
+<cim:TransformerTankInfo rdf:ID="_0EEEA54A-17BF-4746-A71B-F020B035FB73">
+  <cim:IdentifiedObject.mRID>_0EEEA54A-17BF-4746-A71B-F020B035FB73</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>fdrxfmr</cim:IdentifiedObject.name>
+  <cim:TransformerTankInfo.PowerTransformerInfo rdf:resource="#_7D6AB76C-9703-4A90-88CC-6AAC027D6C3F"/>
+</cim:TransformerTankInfo>
+<cim:TransformerEndInfo rdf:ID="_75B5FE82-EF33-4BA9-92D6-421A7569408B">
+  <cim:IdentifiedObject.mRID>_75B5FE82-EF33-4BA9-92D6-421A7569408B</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>fdrxfmr_1</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_0EEEA54A-17BF-4746-A71B-F020B035FB73"/>
+  <cim:TransformerEndInfo.endNumber>1</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.Y"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>4160</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>500000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>550000</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>750000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.1903616</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:TransformerEndInfo rdf:ID="_635DC650-1F67-4162-8B81-0652AD13790A">
+  <cim:IdentifiedObject.mRID>_635DC650-1F67-4162-8B81-0652AD13790A</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>fdrxfmr_2</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_0EEEA54A-17BF-4746-A71B-F020B035FB73"/>
+  <cim:TransformerEndInfo.endNumber>2</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.Y"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>480</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>500000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>550000</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>750000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.0025344</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:NoLoadTest rdf:ID="_82AA6CBD-86AB-4F99-A6EB-5A3997B02EC4">
+  <cim:IdentifiedObject.mRID>_82AA6CBD-86AB-4F99-A6EB-5A3997B02EC4</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>fdrxfmr_1</cim:IdentifiedObject.name>
+  <cim:NoLoadTest.EnergisedEnd rdf:resource="#_75B5FE82-EF33-4BA9-92D6-421A7569408B"/>
+  <cim:NoLoadTest.energisedEndVoltage>4160</cim:NoLoadTest.energisedEndVoltage>
+  <cim:NoLoadTest.excitingCurrent>1.1</cim:NoLoadTest.excitingCurrent>
+  <cim:NoLoadTest.excitingCurrentZero>1.1</cim:NoLoadTest.excitingCurrentZero>
+  <cim:NoLoadTest.loss>3</cim:NoLoadTest.loss>
+  <cim:NoLoadTest.lossZero>3</cim:NoLoadTest.lossZero>
+  <cim:TransformerTest.basePower>500000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:NoLoadTest>
+<cim:ShortCircuitTest rdf:ID="_C73610F5-4C5C-482B-B7AF-6D2C50B78589">
+  <cim:IdentifiedObject.mRID>_C73610F5-4C5C-482B-B7AF-6D2C50B78589</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>fdrxfmr_1</cim:IdentifiedObject.name>
+  <cim:ShortCircuitTest.EnergisedEnd rdf:resource="#_75B5FE82-EF33-4BA9-92D6-421A7569408B"/>
+  <cim:ShortCircuitTest.GroundedEnds rdf:resource="#_635DC650-1F67-4162-8B81-0652AD13790A"/>
+  <cim:ShortCircuitTest.energisedEndStep>16</cim:ShortCircuitTest.energisedEndStep>
+  <cim:ShortCircuitTest.groundedEndStep>16</cim:ShortCircuitTest.groundedEndStep>
+  <cim:ShortCircuitTest.leakageImpedance>0.692224</cim:ShortCircuitTest.leakageImpedance>
+  <cim:ShortCircuitTest.leakageImpedanceZero>0.692224</cim:ShortCircuitTest.leakageImpedanceZero>
+  <cim:ShortCircuitTest.loss>5.5</cim:ShortCircuitTest.loss>
+  <cim:ShortCircuitTest.lossZero>5.5</cim:ShortCircuitTest.lossZero>
+  <cim:TransformerTest.basePower>500000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:ShortCircuitTest>
+<cim:Asset rdf:ID="_4EA3E0B6-7D9A-41B9-9166-9C3DD3FB41A0">
+  <cim:IdentifiedObject.mRID>_4EA3E0B6-7D9A-41B9-9166-9C3DD3FB41A0</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TankAsset_fdrxfmr</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_0EEEA54A-17BF-4746-A71B-F020B035FB73"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_BEC22926-78E4-4CA3-BC82-ACBD8932468B"/>
+</cim:Asset>
+<cim:PowerTransformerInfo rdf:ID="_B6366EF9-6074-4A3D-B40B-1D73D411960D">
+  <cim:IdentifiedObject.mRID>_B6366EF9-6074-4A3D-B40B-1D73D411960D</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>regleg_PowerXfInfo</cim:IdentifiedObject.name>
+</cim:PowerTransformerInfo>
+<cim:TransformerTankInfo rdf:ID="_82D1EC5A-048B-4E7D-BE11-64C5920B50BD">
+  <cim:IdentifiedObject.mRID>_82D1EC5A-048B-4E7D-BE11-64C5920B50BD</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>regleg</cim:IdentifiedObject.name>
+  <cim:TransformerTankInfo.PowerTransformerInfo rdf:resource="#_B6366EF9-6074-4A3D-B40B-1D73D411960D"/>
+</cim:TransformerTankInfo>
+<cim:TransformerEndInfo rdf:ID="_DF26E08C-6C54-43AC-B013-1B5374276F41">
+  <cim:IdentifiedObject.mRID>_DF26E08C-6C54-43AC-B013-1B5374276F41</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>regleg_1</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_82D1EC5A-048B-4E7D-BE11-64C5920B50BD"/>
+  <cim:TransformerEndInfo.endNumber>1</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.I"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>2400</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>1666000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>1832600</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>2499000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.00017286915</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:TransformerEndInfo rdf:ID="_AA2906C5-8205-4015-8164-D8916D976AFD">
+  <cim:IdentifiedObject.mRID>_AA2906C5-8205-4015-8164-D8916D976AFD</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>regleg_2</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_82D1EC5A-048B-4E7D-BE11-64C5920B50BD"/>
+  <cim:TransformerEndInfo.endNumber>2</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.I"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>2400</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>1666000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>1832600</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>2499000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.00017286915</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:NoLoadTest rdf:ID="_4B873D75-CB2B-45E1-8EA7-916005F00A90">
+  <cim:IdentifiedObject.mRID>_4B873D75-CB2B-45E1-8EA7-916005F00A90</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>regleg_1</cim:IdentifiedObject.name>
+  <cim:NoLoadTest.EnergisedEnd rdf:resource="#_DF26E08C-6C54-43AC-B013-1B5374276F41"/>
+  <cim:NoLoadTest.energisedEndVoltage>2400</cim:NoLoadTest.energisedEndVoltage>
+  <cim:NoLoadTest.excitingCurrent>0</cim:NoLoadTest.excitingCurrent>
+  <cim:NoLoadTest.excitingCurrentZero>0</cim:NoLoadTest.excitingCurrentZero>
+  <cim:NoLoadTest.loss>0</cim:NoLoadTest.loss>
+  <cim:NoLoadTest.lossZero>0</cim:NoLoadTest.lossZero>
+  <cim:TransformerTest.basePower>1666000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:NoLoadTest>
+<cim:ShortCircuitTest rdf:ID="_828B3BAD-C0B7-4F3A-9C2D-D6ABAE3563F9">
+  <cim:IdentifiedObject.mRID>_828B3BAD-C0B7-4F3A-9C2D-D6ABAE3563F9</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>regleg_1</cim:IdentifiedObject.name>
+  <cim:ShortCircuitTest.EnergisedEnd rdf:resource="#_DF26E08C-6C54-43AC-B013-1B5374276F41"/>
+  <cim:ShortCircuitTest.GroundedEnds rdf:resource="#_AA2906C5-8205-4015-8164-D8916D976AFD"/>
+  <cim:ShortCircuitTest.energisedEndStep>16</cim:ShortCircuitTest.energisedEndStep>
+  <cim:ShortCircuitTest.groundedEndStep>16</cim:ShortCircuitTest.groundedEndStep>
+  <cim:ShortCircuitTest.leakageImpedance>0.0003457383</cim:ShortCircuitTest.leakageImpedance>
+  <cim:ShortCircuitTest.leakageImpedanceZero>0.0003457383</cim:ShortCircuitTest.leakageImpedanceZero>
+  <cim:ShortCircuitTest.loss>0.1666</cim:ShortCircuitTest.loss>
+  <cim:ShortCircuitTest.lossZero>0.1666</cim:ShortCircuitTest.lossZero>
+  <cim:TransformerTest.basePower>1666000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:ShortCircuitTest>
+<cim:Asset rdf:ID="_BBF451CE-80D8-4CBB-A9AF-5313283CACEC">
+  <cim:IdentifiedObject.mRID>_BBF451CE-80D8-4CBB-A9AF-5313283CACEC</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TankAsset_regleg</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_82D1EC5A-048B-4E7D-BE11-64C5920B50BD"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_9723C203-BE3C-45F7-B362-0ED16D0C4CC4"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_E797FA56-DD0A-41A2-937F-E0F983124CBF"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_518BD36F-A994-4FD9-896E-A398949DDB5F"/>
+</cim:Asset>
+<cim:TapChangerInfo rdf:ID="_FF1E7D0C-EB9C-4837-82E4-0ABFB3DF97A9">
+  <cim:IdentifiedObject.mRID>_FF1E7D0C-EB9C-4837-82E4-0ABFB3DF97A9</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>reg1_Info</cim:IdentifiedObject.name>
+  <cim:TapChangerInfo.ptRatio>20</cim:TapChangerInfo.ptRatio>
+  <cim:TapChangerInfo.ctRatio>3500</cim:TapChangerInfo.ctRatio>
+  <cim:TapChangerInfo.ctRating>700</cim:TapChangerInfo.ctRating>
+</cim:TapChangerInfo>
+<cim:Asset rdf:ID="_02198D8A-97B5-4F29-833F-36E67F3F49E2">
+  <cim:IdentifiedObject.mRID>_02198D8A-97B5-4F29-833F-36E67F3F49E2</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TapChangerAsset_reg1</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_FF1E7D0C-EB9C-4837-82E4-0ABFB3DF97A9"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_681D5629-A8AB-4615-9EFC-04DCE23B122F"/>
+</cim:Asset>
+<cim:TapChangerInfo rdf:ID="_A52A94A8-1625-4946-8CA8-A111A1468E62">
+  <cim:IdentifiedObject.mRID>_A52A94A8-1625-4946-8CA8-A111A1468E62</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>reg2_Info</cim:IdentifiedObject.name>
+  <cim:TapChangerInfo.ptRatio>20</cim:TapChangerInfo.ptRatio>
+  <cim:TapChangerInfo.ctRatio>3500</cim:TapChangerInfo.ctRatio>
+  <cim:TapChangerInfo.ctRating>700</cim:TapChangerInfo.ctRating>
+</cim:TapChangerInfo>
+<cim:Asset rdf:ID="_F99639DB-91DF-4F89-BFB1-DEC122BA02A6">
+  <cim:IdentifiedObject.mRID>_F99639DB-91DF-4F89-BFB1-DEC122BA02A6</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TapChangerAsset_reg2</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_A52A94A8-1625-4946-8CA8-A111A1468E62"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_8334BFBA-9C18-4ED0-B8E4-99FF1E8B7076"/>
+</cim:Asset>
+<cim:TapChangerInfo rdf:ID="_16213A75-B125-4DF0-9B35-DF6F484DC584">
+  <cim:IdentifiedObject.mRID>_16213A75-B125-4DF0-9B35-DF6F484DC584</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>reg3_Info</cim:IdentifiedObject.name>
+  <cim:TapChangerInfo.ptRatio>20</cim:TapChangerInfo.ptRatio>
+  <cim:TapChangerInfo.ctRatio>3500</cim:TapChangerInfo.ctRatio>
+  <cim:TapChangerInfo.ctRating>700</cim:TapChangerInfo.ctRating>
+</cim:TapChangerInfo>
+<cim:Asset rdf:ID="_CABDDF6C-BA5C-48C2-9C3E-DB29383AA6EB">
+  <cim:IdentifiedObject.mRID>_CABDDF6C-BA5C-48C2-9C3E-DB29383AA6EB</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TapChangerAsset_reg3</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_16213A75-B125-4DF0-9B35-DF6F484DC584"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_E2F282D7-969D-4395-ABAA-28B1FA30C89B"/>
+</cim:Asset>
+<cim:ACLineSegment rdf:ID="_96070053-5CEA-49AA-99FA-14A43AA398D0">
+  <cim:ACLineSegment.WireSpacingInfo rdf:resource="#_8275794E-1804-4957-A7D2-9FA28ED87C6D"/>
+</cim:ACLineSegment>
+<cim:ACLineSegmentPhase rdf:ID="_9D158DF4-8786-4B04-938C-260FF244EF59">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_ED20E189-935B-40E4-B4E9-72E3B8839828">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_5C5577EE-A991-4862-882B-F250846C437D">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_ABE8A4CF-CEF7-4CC0-A72D-15552D29D077">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_C6B68770-7992-4066-BAA9-F0CF6E863BEE"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegment rdf:ID="_24C79946-4508-405A-9B25-A378E8E4D0CE">
+  <cim:ACLineSegment.WireSpacingInfo rdf:resource="#_8275794E-1804-4957-A7D2-9FA28ED87C6D"/>
+</cim:ACLineSegment>
+<cim:ACLineSegmentPhase rdf:ID="_183B1D39-67E8-4A1A-87E8-5D8354175A9B">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_76923FF0-5C22-46B7-AFF1-583F39A9AFFE">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_FBEB75C7-EEFE-45C2-94D3-E52C71853887">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_4D49AA61-6038-4FF4-B7B1-A2B4DEA3C471">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_C6B68770-7992-4066-BAA9-F0CF6E863BEE"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegment rdf:ID="_6AFD55FD-BBFA-4544-9913-642658CA365B">
+  <cim:ACLineSegment.WireSpacingInfo rdf:resource="#_8275794E-1804-4957-A7D2-9FA28ED87C6D"/>
+</cim:ACLineSegment>
+<cim:ACLineSegmentPhase rdf:ID="_09D7E6B6-8360-4807-B90E-1A765FDF99B0">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_70C49407-A166-4534-9C6E-43A581D47F1C">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_95A86515-B10A-4105-85EC-E159DDD92600">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_649FCE79-4A84-4D46-8187-906AD354AC20">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_C6B68770-7992-4066-BAA9-F0CF6E863BEE"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegment rdf:ID="_BC25EE64-0018-4A5F-87C4-C2883FD80B8D">
+  <cim:ACLineSegment.WireSpacingInfo rdf:resource="#_8275794E-1804-4957-A7D2-9FA28ED87C6D"/>
+</cim:ACLineSegment>
+<cim:ACLineSegmentPhase rdf:ID="_668D11E6-7900-4404-87AC-9E9AC83AA837">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_0F400AE6-3D8C-4DA1-8AF2-ED79480B600A">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_9496E343-521B-4FA4-9E3C-878AF50D1974">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_5193504A-CB43-4FA1-80B0-312D10F949ED">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_C6B68770-7992-4066-BAA9-F0CF6E863BEE"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegment rdf:ID="_51E4CB4D-E7A5-4D52-96DA-C7A1DF1B10CA">
+  <cim:ACLineSegment.WireSpacingInfo rdf:resource="#_4F51C727-20F8-4F9A-A13E-C55942BB4211"/>
+</cim:ACLineSegment>
+<cim:ACLineSegmentPhase rdf:ID="_A09333B2-BFE4-42E2-8C98-B534A56659B9">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_C6B68770-7992-4066-BAA9-F0CF6E863BEE"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_BF56DE35-0555-41A3-AED3-E05C8F7D8B5B">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_C6B68770-7992-4066-BAA9-F0CF6E863BEE"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_14684BC6-7443-4A3C-ADC6-2571B1347E3D">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_C6B68770-7992-4066-BAA9-F0CF6E863BEE"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_9A604DC9-A039-4FB1-B1D3-B74B5E814EBC">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_C6B68770-7992-4066-BAA9-F0CF6E863BEE"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegment rdf:ID="_F12A2AE1-D9AB-4103-8EDA-47B64279E150">
+  <cim:ACLineSegment.WireSpacingInfo rdf:resource="#_4109A381-5996-4C43-8714-FF1C9E698577"/>
+</cim:ACLineSegment>
+<cim:ACLineSegmentPhase rdf:ID="_FC77B57B-CF57-4D3C-8CD4-518B6727C0F8">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_AC96E7EF-053A-4E95-AE81-593A973173D8"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_10AE69A2-E459-4A17-8ECC-F15963457798">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_AC96E7EF-053A-4E95-AE81-593A973173D8"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_5F63A722-B7CE-4385-880E-A0DC419B510D">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_AC96E7EF-053A-4E95-AE81-593A973173D8"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegment rdf:ID="_CCA4F91D-ACA4-426D-9785-8EF63D89376B">
+  <cim:ACLineSegment.WireSpacingInfo rdf:resource="#_5919E0E0-B601-4ED1-898B-569C6E00DD63"/>
+</cim:ACLineSegment>
+<cim:ACLineSegmentPhase rdf:ID="_0709CFEC-D048-43C3-93F6-3A073A2AEEA0">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_F7F50090-11EA-4F07-8AC5-66258B035B82"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_833A8984-4861-4289-A0F9-4B71FFBEC956">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_F7F50090-11EA-4F07-8AC5-66258B035B82"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_14685568-8B78-4172-9183-036887AB7518">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_F7F50090-11EA-4F07-8AC5-66258B035B82"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegment rdf:ID="_B7B8BF83-010F-43BE-808A-25D135900FEB">
+  <cim:ACLineSegment.WireSpacingInfo rdf:resource="#_4A52D694-6601-4E9B-A9A2-F4F90E56F23F"/>
+</cim:ACLineSegment>
+<cim:ACLineSegmentPhase rdf:ID="_9A1747B1-AAF1-4C04-8ED5-A07D3FC3028F">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_AC96E7EF-053A-4E95-AE81-593A973173D8"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_C5EDFC38-3B50-4685-A6E6-39CE3AA2FC7C">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_AC96E7EF-053A-4E95-AE81-593A973173D8"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_A49C86CA-2D0B-4A72-9B37-8202E4ABA371">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_AC96E7EF-053A-4E95-AE81-593A973173D8"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegment rdf:ID="_6EE82935-47BB-4FB8-8871-DB00F75933B2">
+  <cim:ACLineSegment.WireSpacingInfo rdf:resource="#_8432F40F-586D-4F21-982D-B1A78CCD960D"/>
+</cim:ACLineSegment>
+<cim:ACLineSegmentPhase rdf:ID="_EF74769B-58A7-41B4-9841-F087A9E3C114">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_AC96E7EF-053A-4E95-AE81-593A973173D8"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_6657DBF3-6CEB-4754-913D-62D8DC91EBCB">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_AC96E7EF-053A-4E95-AE81-593A973173D8"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegment rdf:ID="_00EC1BE9-4E84-4C56-83A2-6FA06596AFB2">
+  <cim:ACLineSegment.WireSpacingInfo rdf:resource="#_10117359-CC94-4AA0-974F-9222C7D296FE"/>
+</cim:ACLineSegment>
+<cim:ACLineSegmentPhase rdf:ID="_6A123304-582A-4C20-ACB5-53E76A5DE30F">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_BCE94F35-B8FB-4D7D-8F94-83E886334593"/>
+</cim:ACLineSegmentPhase>
+<cim:ACLineSegmentPhase rdf:ID="_B0F47A09-E46B-44AE-8BBD-86F5166D95BF">
+  <cim:ACLineSegmentPhase.WireInfo rdf:resource="#_70018AE3-62EA-4600-A16E-D79DBB697F6E"/>
+</cim:ACLineSegmentPhase>
+<cim:OverheadWireInfo rdf:ID="_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B">
+  <cim:IdentifiedObject.mRID>_B4AB09AE-192A-4F3D-AEE9-38DB9DBFF94B</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>acsr_556_5</cim:IdentifiedObject.name>
+  <cim:WireInfo.sizeDescription>WireData_acsr_556_5</cim:WireInfo.sizeDescription>
+  <cim:WireInfo.gmr>0.00947928</cim:WireInfo.gmr>
+  <cim:WireInfo.radius>0.0117729</cim:WireInfo.radius>
+  <cim:WireInfo.rDC20>0.00011557504</cim:WireInfo.rDC20>
+  <cim:WireInfo.rAC25>0.00011788654</cim:WireInfo.rAC25>
+  <cim:WireInfo.rAC50>0.00011788654</cim:WireInfo.rAC50>
+  <cim:WireInfo.rAC75>0.00011788654</cim:WireInfo.rAC75>
+  <cim:WireInfo.ratedCurrent>730</cim:WireInfo.ratedCurrent>
+  <cim:WireInfo.strandCount>0</cim:WireInfo.strandCount>
+  <cim:WireInfo.coreStrandCount>0</cim:WireInfo.coreStrandCount>
+  <cim:WireInfo.coreRadius>0</cim:WireInfo.coreRadius>
+  <cim:WireInfo.insulated>false</cim:WireInfo.insulated>
+</cim:OverheadWireInfo>
+<cim:OverheadWireInfo rdf:ID="_C6B68770-7992-4066-BAA9-F0CF6E863BEE">
+  <cim:IdentifiedObject.mRID>_C6B68770-7992-4066-BAA9-F0CF6E863BEE</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>acsr_4/0</cim:IdentifiedObject.name>
+  <cim:WireInfo.sizeDescription>WireData_acsr_4/0</cim:WireInfo.sizeDescription>
+  <cim:WireInfo.gmr>0.002481072</cim:WireInfo.gmr>
+  <cim:WireInfo.radius>0.0071501</cim:WireInfo.radius>
+  <cim:WireInfo.rDC20>0.00036785175</cim:WireInfo.rDC20>
+  <cim:WireInfo.rAC25>0.00037520878</cim:WireInfo.rAC25>
+  <cim:WireInfo.rAC50>0.00037520878</cim:WireInfo.rAC50>
+  <cim:WireInfo.rAC75>0.00037520878</cim:WireInfo.rAC75>
+  <cim:WireInfo.ratedCurrent>340</cim:WireInfo.ratedCurrent>
+  <cim:WireInfo.strandCount>0</cim:WireInfo.strandCount>
+  <cim:WireInfo.coreStrandCount>0</cim:WireInfo.coreStrandCount>
+  <cim:WireInfo.coreRadius>0</cim:WireInfo.coreRadius>
+  <cim:WireInfo.insulated>false</cim:WireInfo.insulated>
+</cim:OverheadWireInfo>
+<cim:OverheadWireInfo rdf:ID="_AC96E7EF-053A-4E95-AE81-593A973173D8">
+  <cim:IdentifiedObject.mRID>_AC96E7EF-053A-4E95-AE81-593A973173D8</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>acsr_1/0</cim:IdentifiedObject.name>
+  <cim:WireInfo.sizeDescription>WireData_acsr_1/0</cim:WireInfo.sizeDescription>
+  <cim:WireInfo.gmr>0.001359408</cim:WireInfo.gmr>
+  <cim:WireInfo.radius>0.0050546</cim:WireInfo.radius>
+  <cim:WireInfo.rDC20>0.00069593573</cim:WireInfo.rDC20>
+  <cim:WireInfo.rAC25>0.00070985445</cim:WireInfo.rAC25>
+  <cim:WireInfo.rAC50>0.00070985445</cim:WireInfo.rAC50>
+  <cim:WireInfo.rAC75>0.00070985445</cim:WireInfo.rAC75>
+  <cim:WireInfo.ratedCurrent>230</cim:WireInfo.ratedCurrent>
+  <cim:WireInfo.strandCount>0</cim:WireInfo.strandCount>
+  <cim:WireInfo.coreStrandCount>0</cim:WireInfo.coreStrandCount>
+  <cim:WireInfo.coreRadius>0</cim:WireInfo.coreRadius>
+  <cim:WireInfo.insulated>false</cim:WireInfo.insulated>
+</cim:OverheadWireInfo>
+<cim:OverheadWireInfo rdf:ID="_70018AE3-62EA-4600-A16E-D79DBB697F6E">
+  <cim:IdentifiedObject.mRID>_70018AE3-62EA-4600-A16E-D79DBB697F6E</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cu_1/0</cim:IdentifiedObject.name>
+  <cim:WireInfo.sizeDescription>WireData_cu_1/0</cim:WireInfo.sizeDescription>
+  <cim:WireInfo.gmr>0.003392424</cim:WireInfo.gmr>
+  <cim:WireInfo.radius>0.0046736</cim:WireInfo.radius>
+  <cim:WireInfo.rDC20>0.00036978689</cim:WireInfo.rDC20>
+  <cim:WireInfo.rAC25>0.00037718263</cim:WireInfo.rAC25>
+  <cim:WireInfo.rAC50>0.00037718263</cim:WireInfo.rAC50>
+  <cim:WireInfo.rAC75>0.00037718263</cim:WireInfo.rAC75>
+  <cim:WireInfo.ratedCurrent>100</cim:WireInfo.ratedCurrent>
+  <cim:WireInfo.strandCount>0</cim:WireInfo.strandCount>
+  <cim:WireInfo.coreStrandCount>0</cim:WireInfo.coreStrandCount>
+  <cim:WireInfo.coreRadius>0</cim:WireInfo.coreRadius>
+  <cim:WireInfo.insulated>false</cim:WireInfo.insulated>
+</cim:OverheadWireInfo>
+<cim:TapeShieldCableInfo rdf:ID="_BCE94F35-B8FB-4D7D-8F94-83E886334593">
+  <cim:IdentifiedObject.mRID>_BCE94F35-B8FB-4D7D-8F94-83E886334593</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>ts_1/0</cim:IdentifiedObject.name>
+  <cim:WireInfo.sizeDescription>TSData_ts_1/0</cim:WireInfo.sizeDescription>
+  <cim:WireInfo.gmr>0.00338328</cim:WireInfo.gmr>
+  <cim:WireInfo.radius>0.0046736</cim:WireInfo.radius>
+  <cim:WireInfo.rDC20>0.00059092798</cim:WireInfo.rDC20>
+  <cim:WireInfo.rAC25>0.00060274654</cim:WireInfo.rAC25>
+  <cim:WireInfo.rAC50>0.00060274654</cim:WireInfo.rAC50>
+  <cim:WireInfo.rAC75>0.00060274654</cim:WireInfo.rAC75>
+  <cim:WireInfo.ratedCurrent>165</cim:WireInfo.ratedCurrent>
+  <cim:WireInfo.strandCount>0</cim:WireInfo.strandCount>
+  <cim:WireInfo.coreStrandCount>0</cim:WireInfo.coreStrandCount>
+  <cim:WireInfo.coreRadius>0</cim:WireInfo.coreRadius>
+  <cim:WireInfo.insulated>true</cim:WireInfo.insulated>
+  <cim:WireInfo.insulationThickness>0.005588</cim:WireInfo.insulationThickness>
+  <cim:WireInfo.insulationMaterial rdf:resource="http://iec.ch/TC57/CIM100#WireInsulationKind.crosslinkedPolyethylene"/>
+  <cim:CableInfo.isStrandFill>false</cim:CableInfo.isStrandFill>
+  <cim:CableInfo.diameterOverCore>0.009652</cim:CableInfo.diameterOverCore>
+  <cim:CableInfo.diameterOverInsulation>0.020828</cim:CableInfo.diameterOverInsulation>
+  <cim:CableInfo.diameterOverJacket>0.026924</cim:CableInfo.diameterOverJacket>
+  <cim:CableInfo.nominalTemperature>90</cim:CableInfo.nominalTemperature>
+  <cim:CableInfo.diameterOverScreen>0.022098</cim:CableInfo.diameterOverScreen>
+  <cim:TapeShieldCableInfo.tapeLap>20</cim:TapeShieldCableInfo.tapeLap>
+  <cim:TapeShieldCableInfo.tapeThickness>0.000127</cim:TapeShieldCableInfo.tapeThickness>
+  <cim:CableInfo.sheathAsNeutral>true</cim:CableInfo.sheathAsNeutral>
+</cim:TapeShieldCableInfo>
+<cim:ConcentricNeutralCableInfo rdf:ID="_F7F50090-11EA-4F07-8AC5-66258B035B82">
+  <cim:IdentifiedObject.mRID>_F7F50090-11EA-4F07-8AC5-66258B035B82</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cn_250</cim:IdentifiedObject.name>
+  <cim:WireInfo.sizeDescription>CNData_cn_250</cim:WireInfo.sizeDescription>
+  <cim:WireInfo.gmr>0.00521208</cim:WireInfo.gmr>
+  <cim:WireInfo.radius>0.0072009</cim:WireInfo.radius>
+  <cim:WireInfo.rDC20>0.00024977368</cim:WireInfo.rDC20>
+  <cim:WireInfo.rAC25>0.00025476915</cim:WireInfo.rAC25>
+  <cim:WireInfo.rAC50>0.00025476915</cim:WireInfo.rAC50>
+  <cim:WireInfo.rAC75>0.00025476915</cim:WireInfo.rAC75>
+  <cim:WireInfo.ratedCurrent>260</cim:WireInfo.ratedCurrent>
+  <cim:WireInfo.strandCount>0</cim:WireInfo.strandCount>
+  <cim:WireInfo.coreStrandCount>0</cim:WireInfo.coreStrandCount>
+  <cim:WireInfo.coreRadius>0</cim:WireInfo.coreRadius>
+  <cim:WireInfo.insulated>true</cim:WireInfo.insulated>
+  <cim:WireInfo.insulationThickness>0.005588</cim:WireInfo.insulationThickness>
+  <cim:WireInfo.insulationMaterial rdf:resource="http://iec.ch/TC57/CIM100#WireInsulationKind.crosslinkedPolyethylene"/>
+  <cim:CableInfo.isStrandFill>false</cim:CableInfo.isStrandFill>
+  <cim:CableInfo.diameterOverCore>0.015748</cim:CableInfo.diameterOverCore>
+  <cim:CableInfo.diameterOverInsulation>0.026924</cim:CableInfo.diameterOverInsulation>
+  <cim:CableInfo.diameterOverJacket>0.032766</cim:CableInfo.diameterOverJacket>
+  <cim:CableInfo.nominalTemperature>90</cim:CableInfo.nominalTemperature>
+  <cim:CableInfo.diameterOverScreen>0.02950972</cim:CableInfo.diameterOverScreen>
+  <cim:ConcentricNeutralCableInfo.diameterOverNeutral>0.032766</cim:ConcentricNeutralCableInfo.diameterOverNeutral>
+  <cim:ConcentricNeutralCableInfo.neutralStrandRadius>0.00081407</cim:ConcentricNeutralCableInfo.neutralStrandRadius>
+  <cim:ConcentricNeutralCableInfo.neutralStrandGmr>0.000633984</cim:ConcentricNeutralCableInfo.neutralStrandGmr>
+  <cim:ConcentricNeutralCableInfo.neutralStrandRDC20>0.0092414093</cim:ConcentricNeutralCableInfo.neutralStrandRDC20>
+  <cim:ConcentricNeutralCableInfo.neutralStrandCount>13</cim:ConcentricNeutralCableInfo.neutralStrandCount>
+  <cim:CableInfo.sheathAsNeutral>false</cim:CableInfo.sheathAsNeutral>
+</cim:ConcentricNeutralCableInfo>
+<cim:WireSpacingInfo rdf:ID="_8275794E-1804-4957-A7D2-9FA28ED87C6D">
+  <cim:IdentifiedObject.mRID>_8275794E-1804-4957-A7D2-9FA28ED87C6D</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>601</cim:IdentifiedObject.name>
+  <cim:WireSpacingInfo.usage rdf:resource="http://iec.ch/TC57/CIM100#WireUsageKind.distribution"/>
+  <cim:WireSpacingInfo.phaseWireCount>1</cim:WireSpacingInfo.phaseWireCount>
+  <cim:WireSpacingInfo.phaseWireSpacing>0</cim:WireSpacingInfo.phaseWireSpacing>
+  <cim:WireSpacingInfo.isCable>false</cim:WireSpacingInfo.isCable>
+</cim:WireSpacingInfo>
+<cim:WirePosition rdf:ID="_E7A52CEC-057A-4029-9AF9-B9C564AB36C3">
+  <cim:IdentifiedObject.mRID>_E7A52CEC-057A-4029-9AF9-B9C564AB36C3</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_601_1</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_8275794E-1804-4957-A7D2-9FA28ED87C6D"/>
+  <cim:WirePosition.sequenceNumber>1</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>-1.2192</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_FD69EF7E-E6BD-4971-9621-3BC4751446DA">
+  <cim:IdentifiedObject.mRID>_FD69EF7E-E6BD-4971-9621-3BC4751446DA</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_601_2</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_8275794E-1804-4957-A7D2-9FA28ED87C6D"/>
+  <cim:WirePosition.sequenceNumber>2</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>-0.3048</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_D3ACE4DB-068D-4A6B-B6A3-31F7C8E58E41">
+  <cim:IdentifiedObject.mRID>_D3ACE4DB-068D-4A6B-B6A3-31F7C8E58E41</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_601_3</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_8275794E-1804-4957-A7D2-9FA28ED87C6D"/>
+  <cim:WirePosition.sequenceNumber>3</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0.9144</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_6E6016FE-D13A-4E88-90DC-4D30E5F2A70F">
+  <cim:IdentifiedObject.mRID>_6E6016FE-D13A-4E88-90DC-4D30E5F2A70F</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_601_4</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_8275794E-1804-4957-A7D2-9FA28ED87C6D"/>
+  <cim:WirePosition.sequenceNumber>4</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>7.3152</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WireSpacingInfo rdf:ID="_4F51C727-20F8-4F9A-A13E-C55942BB4211">
+  <cim:IdentifiedObject.mRID>_4F51C727-20F8-4F9A-A13E-C55942BB4211</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>602</cim:IdentifiedObject.name>
+  <cim:WireSpacingInfo.usage rdf:resource="http://iec.ch/TC57/CIM100#WireUsageKind.distribution"/>
+  <cim:WireSpacingInfo.phaseWireCount>1</cim:WireSpacingInfo.phaseWireCount>
+  <cim:WireSpacingInfo.phaseWireSpacing>0</cim:WireSpacingInfo.phaseWireSpacing>
+  <cim:WireSpacingInfo.isCable>false</cim:WireSpacingInfo.isCable>
+</cim:WireSpacingInfo>
+<cim:WirePosition rdf:ID="_55C8E1F8-FD15-4FD4-9C31-51361C9CC2F1">
+  <cim:IdentifiedObject.mRID>_55C8E1F8-FD15-4FD4-9C31-51361C9CC2F1</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_602_1</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_4F51C727-20F8-4F9A-A13E-C55942BB4211"/>
+  <cim:WirePosition.sequenceNumber>1</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>-1.2192</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_B54A12B6-A1AF-4D01-8D41-33F662D2BCEE">
+  <cim:IdentifiedObject.mRID>_B54A12B6-A1AF-4D01-8D41-33F662D2BCEE</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_602_2</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_4F51C727-20F8-4F9A-A13E-C55942BB4211"/>
+  <cim:WirePosition.sequenceNumber>2</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>-0.3048</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_356CF734-927E-4817-BAE0-BCB39073FD44">
+  <cim:IdentifiedObject.mRID>_356CF734-927E-4817-BAE0-BCB39073FD44</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_602_3</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_4F51C727-20F8-4F9A-A13E-C55942BB4211"/>
+  <cim:WirePosition.sequenceNumber>3</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0.9144</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_0DF27F90-D860-43A9-8A6A-B3F96C24112B">
+  <cim:IdentifiedObject.mRID>_0DF27F90-D860-43A9-8A6A-B3F96C24112B</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_602_4</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_4F51C727-20F8-4F9A-A13E-C55942BB4211"/>
+  <cim:WirePosition.sequenceNumber>4</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>7.3152</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WireSpacingInfo rdf:ID="_4109A381-5996-4C43-8714-FF1C9E698577">
+  <cim:IdentifiedObject.mRID>_4109A381-5996-4C43-8714-FF1C9E698577</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>603</cim:IdentifiedObject.name>
+  <cim:WireSpacingInfo.usage rdf:resource="http://iec.ch/TC57/CIM100#WireUsageKind.distribution"/>
+  <cim:WireSpacingInfo.phaseWireCount>1</cim:WireSpacingInfo.phaseWireCount>
+  <cim:WireSpacingInfo.phaseWireSpacing>0</cim:WireSpacingInfo.phaseWireSpacing>
+  <cim:WireSpacingInfo.isCable>false</cim:WireSpacingInfo.isCable>
+</cim:WireSpacingInfo>
+<cim:WirePosition rdf:ID="_3681D9BA-45FA-42EF-A2F6-5E5578D5A398">
+  <cim:IdentifiedObject.mRID>_3681D9BA-45FA-42EF-A2F6-5E5578D5A398</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_603_1</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_4109A381-5996-4C43-8714-FF1C9E698577"/>
+  <cim:WirePosition.sequenceNumber>1</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>-1.2192</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_7175E372-0899-4FFB-86B0-136959C419E2">
+  <cim:IdentifiedObject.mRID>_7175E372-0899-4FFB-86B0-136959C419E2</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_603_2</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_4109A381-5996-4C43-8714-FF1C9E698577"/>
+  <cim:WirePosition.sequenceNumber>2</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0.9144</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_AB55A589-CD31-47D2-850D-762262234928">
+  <cim:IdentifiedObject.mRID>_AB55A589-CD31-47D2-850D-762262234928</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_603_3</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_4109A381-5996-4C43-8714-FF1C9E698577"/>
+  <cim:WirePosition.sequenceNumber>3</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>7.3152</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WireSpacingInfo rdf:ID="_4A52D694-6601-4E9B-A9A2-F4F90E56F23F">
+  <cim:IdentifiedObject.mRID>_4A52D694-6601-4E9B-A9A2-F4F90E56F23F</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>604</cim:IdentifiedObject.name>
+  <cim:WireSpacingInfo.usage rdf:resource="http://iec.ch/TC57/CIM100#WireUsageKind.distribution"/>
+  <cim:WireSpacingInfo.phaseWireCount>1</cim:WireSpacingInfo.phaseWireCount>
+  <cim:WireSpacingInfo.phaseWireSpacing>0</cim:WireSpacingInfo.phaseWireSpacing>
+  <cim:WireSpacingInfo.isCable>false</cim:WireSpacingInfo.isCable>
+</cim:WireSpacingInfo>
+<cim:WirePosition rdf:ID="_A138ACBF-2D20-462B-B841-08B6607EED79">
+  <cim:IdentifiedObject.mRID>_A138ACBF-2D20-462B-B841-08B6607EED79</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_604_1</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_4A52D694-6601-4E9B-A9A2-F4F90E56F23F"/>
+  <cim:WirePosition.sequenceNumber>1</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>-1.2192</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_1A2AA6A1-90E7-4CF6-80D0-216E12486F38">
+  <cim:IdentifiedObject.mRID>_1A2AA6A1-90E7-4CF6-80D0-216E12486F38</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_604_2</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_4A52D694-6601-4E9B-A9A2-F4F90E56F23F"/>
+  <cim:WirePosition.sequenceNumber>2</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0.9144</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_A1F45895-C871-4361-B4F5-A2B67164275B">
+  <cim:IdentifiedObject.mRID>_A1F45895-C871-4361-B4F5-A2B67164275B</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_604_3</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_4A52D694-6601-4E9B-A9A2-F4F90E56F23F"/>
+  <cim:WirePosition.sequenceNumber>3</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>7.3152</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WireSpacingInfo rdf:ID="_E8EF0A82-0D11-4697-9988-FBB4FB35628D">
+  <cim:IdentifiedObject.mRID>_E8EF0A82-0D11-4697-9988-FBB4FB35628D</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>605</cim:IdentifiedObject.name>
+  <cim:WireSpacingInfo.usage rdf:resource="http://iec.ch/TC57/CIM100#WireUsageKind.distribution"/>
+  <cim:WireSpacingInfo.phaseWireCount>1</cim:WireSpacingInfo.phaseWireCount>
+  <cim:WireSpacingInfo.phaseWireSpacing>0</cim:WireSpacingInfo.phaseWireSpacing>
+  <cim:WireSpacingInfo.isCable>false</cim:WireSpacingInfo.isCable>
+</cim:WireSpacingInfo>
+<cim:WirePosition rdf:ID="_36127BA3-1517-4EDC-9EF5-4BD32DAB8AB6">
+  <cim:IdentifiedObject.mRID>_36127BA3-1517-4EDC-9EF5-4BD32DAB8AB6</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_605_1</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_E8EF0A82-0D11-4697-9988-FBB4FB35628D"/>
+  <cim:WirePosition.sequenceNumber>1</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0.1524</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.8392</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_1F9C6B9C-8ED3-4BBF-ABB2-8503C48B9EE3">
+  <cim:IdentifiedObject.mRID>_1F9C6B9C-8ED3-4BBF-ABB2-8503C48B9EE3</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_605_2</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_E8EF0A82-0D11-4697-9988-FBB4FB35628D"/>
+  <cim:WirePosition.sequenceNumber>2</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>7.3152</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WireSpacingInfo rdf:ID="_5919E0E0-B601-4ED1-898B-569C6E00DD63">
+  <cim:IdentifiedObject.mRID>_5919E0E0-B601-4ED1-898B-569C6E00DD63</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>606</cim:IdentifiedObject.name>
+  <cim:WireSpacingInfo.usage rdf:resource="http://iec.ch/TC57/CIM100#WireUsageKind.distribution"/>
+  <cim:WireSpacingInfo.phaseWireCount>1</cim:WireSpacingInfo.phaseWireCount>
+  <cim:WireSpacingInfo.phaseWireSpacing>0</cim:WireSpacingInfo.phaseWireSpacing>
+  <cim:WireSpacingInfo.isCable>true</cim:WireSpacingInfo.isCable>
+</cim:WireSpacingInfo>
+<cim:WirePosition rdf:ID="_ED52E44E-31F6-48AD-8E77-F6C74A085C5A">
+  <cim:IdentifiedObject.mRID>_ED52E44E-31F6-48AD-8E77-F6C74A085C5A</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_606_1</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_5919E0E0-B601-4ED1-898B-569C6E00DD63"/>
+  <cim:WirePosition.sequenceNumber>1</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>-0.1524</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>-1.2192</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_1C4389B0-4426-4B19-915A-E63C01F01DBB">
+  <cim:IdentifiedObject.mRID>_1C4389B0-4426-4B19-915A-E63C01F01DBB</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_606_2</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_5919E0E0-B601-4ED1-898B-569C6E00DD63"/>
+  <cim:WirePosition.sequenceNumber>2</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>-1.2192</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_83B8A299-9335-417E-B566-FA6B7CC24963">
+  <cim:IdentifiedObject.mRID>_83B8A299-9335-417E-B566-FA6B7CC24963</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_606_3</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_5919E0E0-B601-4ED1-898B-569C6E00DD63"/>
+  <cim:WirePosition.sequenceNumber>3</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0.1524</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>-1.2192</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WireSpacingInfo rdf:ID="_10117359-CC94-4AA0-974F-9222C7D296FE">
+  <cim:IdentifiedObject.mRID>_10117359-CC94-4AA0-974F-9222C7D296FE</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>607</cim:IdentifiedObject.name>
+  <cim:WireSpacingInfo.usage rdf:resource="http://iec.ch/TC57/CIM100#WireUsageKind.distribution"/>
+  <cim:WireSpacingInfo.phaseWireCount>1</cim:WireSpacingInfo.phaseWireCount>
+  <cim:WireSpacingInfo.phaseWireSpacing>0</cim:WireSpacingInfo.phaseWireSpacing>
+  <cim:WireSpacingInfo.isCable>true</cim:WireSpacingInfo.isCable>
+</cim:WireSpacingInfo>
+<cim:WirePosition rdf:ID="_CA261EB1-A9FD-46D8-A269-9C8331470E3F">
+  <cim:IdentifiedObject.mRID>_CA261EB1-A9FD-46D8-A269-9C8331470E3F</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_607_1</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_10117359-CC94-4AA0-974F-9222C7D296FE"/>
+  <cim:WirePosition.sequenceNumber>1</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>-1.2192</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_CB8603FD-B884-42CE-88F8-0E7F24A9E248">
+  <cim:IdentifiedObject.mRID>_CB8603FD-B884-42CE-88F8-0E7F24A9E248</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_607_2</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_10117359-CC94-4AA0-974F-9222C7D296FE"/>
+  <cim:WirePosition.sequenceNumber>2</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0.0762</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>-1.2192</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WireSpacingInfo rdf:ID="_7F6233C7-26F0-4DBA-9701-6EB65FC6B4EE">
+  <cim:IdentifiedObject.mRID>_7F6233C7-26F0-4DBA-9701-6EB65FC6B4EE</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>500</cim:IdentifiedObject.name>
+  <cim:WireSpacingInfo.usage rdf:resource="http://iec.ch/TC57/CIM100#WireUsageKind.distribution"/>
+  <cim:WireSpacingInfo.phaseWireCount>1</cim:WireSpacingInfo.phaseWireCount>
+  <cim:WireSpacingInfo.phaseWireSpacing>0</cim:WireSpacingInfo.phaseWireSpacing>
+  <cim:WireSpacingInfo.isCable>false</cim:WireSpacingInfo.isCable>
+</cim:WireSpacingInfo>
+<cim:WirePosition rdf:ID="_03A84CE1-152A-4A86-8E96-DB66DD821627">
+  <cim:IdentifiedObject.mRID>_03A84CE1-152A-4A86-8E96-DB66DD821627</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_500_1</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_7F6233C7-26F0-4DBA-9701-6EB65FC6B4EE"/>
+  <cim:WirePosition.sequenceNumber>1</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>-1.2192</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_AC8652FC-B8CE-4A34-ACC3-9B9271A5A9BD">
+  <cim:IdentifiedObject.mRID>_AC8652FC-B8CE-4A34-ACC3-9B9271A5A9BD</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_500_2</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_7F6233C7-26F0-4DBA-9701-6EB65FC6B4EE"/>
+  <cim:WirePosition.sequenceNumber>2</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>-0.3048</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_44DA733D-3911-4D7D-BC5D-0BED0D36B196">
+  <cim:IdentifiedObject.mRID>_44DA733D-3911-4D7D-BC5D-0BED0D36B196</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_500_3</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_7F6233C7-26F0-4DBA-9701-6EB65FC6B4EE"/>
+  <cim:WirePosition.sequenceNumber>3</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0.9144</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_EF1DA50F-0FC2-4A0E-8269-F504A4510BD6">
+  <cim:IdentifiedObject.mRID>_EF1DA50F-0FC2-4A0E-8269-F504A4510BD6</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_500_4</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_7F6233C7-26F0-4DBA-9701-6EB65FC6B4EE"/>
+  <cim:WirePosition.sequenceNumber>4</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>7.3152</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WireSpacingInfo rdf:ID="_53757124-A9A3-49E9-BB95-45ECA83F1B1F">
+  <cim:IdentifiedObject.mRID>_53757124-A9A3-49E9-BB95-45ECA83F1B1F</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>505</cim:IdentifiedObject.name>
+  <cim:WireSpacingInfo.usage rdf:resource="http://iec.ch/TC57/CIM100#WireUsageKind.distribution"/>
+  <cim:WireSpacingInfo.phaseWireCount>1</cim:WireSpacingInfo.phaseWireCount>
+  <cim:WireSpacingInfo.phaseWireSpacing>0</cim:WireSpacingInfo.phaseWireSpacing>
+  <cim:WireSpacingInfo.isCable>false</cim:WireSpacingInfo.isCable>
+</cim:WireSpacingInfo>
+<cim:WirePosition rdf:ID="_73670316-36C5-4F77-A73B-8D944C459651">
+  <cim:IdentifiedObject.mRID>_73670316-36C5-4F77-A73B-8D944C459651</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_505_1</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_53757124-A9A3-49E9-BB95-45ECA83F1B1F"/>
+  <cim:WirePosition.sequenceNumber>1</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>-1.2192</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_AC9EB845-F535-44A4-A529-7E449117701F">
+  <cim:IdentifiedObject.mRID>_AC9EB845-F535-44A4-A529-7E449117701F</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_505_2</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_53757124-A9A3-49E9-BB95-45ECA83F1B1F"/>
+  <cim:WirePosition.sequenceNumber>2</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0.9144</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.5344</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_08CC28DD-5CF6-41F0-8DBA-30944F5A1B25">
+  <cim:IdentifiedObject.mRID>_08CC28DD-5CF6-41F0-8DBA-30944F5A1B25</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_505_3</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_53757124-A9A3-49E9-BB95-45ECA83F1B1F"/>
+  <cim:WirePosition.sequenceNumber>3</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>7.3152</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WireSpacingInfo rdf:ID="_8432F40F-586D-4F21-982D-B1A78CCD960D">
+  <cim:IdentifiedObject.mRID>_8432F40F-586D-4F21-982D-B1A78CCD960D</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>510</cim:IdentifiedObject.name>
+  <cim:WireSpacingInfo.usage rdf:resource="http://iec.ch/TC57/CIM100#WireUsageKind.distribution"/>
+  <cim:WireSpacingInfo.phaseWireCount>1</cim:WireSpacingInfo.phaseWireCount>
+  <cim:WireSpacingInfo.phaseWireSpacing>0</cim:WireSpacingInfo.phaseWireSpacing>
+  <cim:WireSpacingInfo.isCable>false</cim:WireSpacingInfo.isCable>
+</cim:WireSpacingInfo>
+<cim:WirePosition rdf:ID="_52CC58D0-D61A-41DC-99CE-A4DEAA86FCF9">
+  <cim:IdentifiedObject.mRID>_52CC58D0-D61A-41DC-99CE-A4DEAA86FCF9</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_510_1</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_8432F40F-586D-4F21-982D-B1A78CCD960D"/>
+  <cim:WirePosition.sequenceNumber>1</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0.1524</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>8.8392</cim:WirePosition.yCoord>
+</cim:WirePosition>
+<cim:WirePosition rdf:ID="_A9495E2D-FE8B-40CA-B6CF-A71117CA2CB5">
+  <cim:IdentifiedObject.mRID>_A9495E2D-FE8B-40CA-B6CF-A71117CA2CB5</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>WP_510_2</cim:IdentifiedObject.name>
+  <cim:WirePosition.WireSpacingInfo rdf:resource="#_8432F40F-586D-4F21-982D-B1A78CCD960D"/>
+  <cim:WirePosition.sequenceNumber>2</cim:WirePosition.sequenceNumber>
+  <cim:WirePosition.xCoord>0</cim:WirePosition.xCoord>
+  <cim:WirePosition.yCoord>7.3152</cim:WirePosition.yCoord>
+</cim:WirePosition>
+</rdf:RDF>

@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- un-comment this line to enable validation
+-->
+<rdf:RDF xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<!--
+-->
+<cim:IEC61970CIMVersion rdf:ID="_96A580E9-40C7-480D-A628-EB5BC0D1F233">
+  <cim:IEC61970CIMVersion.version>IEC61970CIM100</cim:IEC61970CIMVersion.version>
+  <cim:IEC61970CIMVersion.date>2019-04-01</cim:IEC61970CIMVersion.date>
+</cim:IEC61970CIMVersion>
+<cim:TopologicalNode rdf:ID="_BE82C5A6-80A5-4FFF-B797-2108F5D8B267">
+  <cim:IdentifiedObject.mRID>_BE82C5A6-80A5-4FFF-B797-2108F5D8B267</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>sourcebus</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_9E0B85BE-B868-4813-AA14-D61CEDA181B3">
+  <cim:IdentifiedObject.mRID>_9E0B85BE-B868-4813-AA14-D61CEDA181B3</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>sourcebus</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_BE82C5A6-80A5-4FFF-B797-2108F5D8B267"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_A2752FEB-C72D-4C7B-A9B3-204D43F5D43C"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_AADE6C60-996B-45A3-8C20-9B567BFDA215">
+  <cim:IdentifiedObject.mRID>_AADE6C60-996B-45A3-8C20-9B567BFDA215</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>650</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_BB143902-BEEE-493A-9CB5-71B3F9A2D3C3">
+  <cim:IdentifiedObject.mRID>_BB143902-BEEE-493A-9CB5-71B3F9A2D3C3</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>650</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_AADE6C60-996B-45A3-8C20-9B567BFDA215"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_46A3E1CC-29AF-4FED-9995-611CEDE38F46">
+  <cim:IdentifiedObject.mRID>_46A3E1CC-29AF-4FED-9995-611CEDE38F46</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>633</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_4F0314E5-9655-4AB9-999C-E92C7BEC915A">
+  <cim:IdentifiedObject.mRID>_4F0314E5-9655-4AB9-999C-E92C7BEC915A</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>633</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_46A3E1CC-29AF-4FED-9995-611CEDE38F46"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_B9233557-D997-437A-996B-18435F6B5125">
+  <cim:IdentifiedObject.mRID>_B9233557-D997-437A-996B-18435F6B5125</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>634</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_BA5DF269-0C51-4C1F-982F-EA4572460DFE">
+  <cim:IdentifiedObject.mRID>_BA5DF269-0C51-4C1F-982F-EA4572460DFE</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>634</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_B9233557-D997-437A-996B-18435F6B5125"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_1D0608E6-BA20-49F5-851F-1756DD33778A"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_0CD8BBA6-084E-44BE-B02A-BA023B542DB6">
+  <cim:IdentifiedObject.mRID>_0CD8BBA6-084E-44BE-B02A-BA023B542DB6</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>rg60</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_37EC14AF-4C8A-44A4-BBDB-72F4181346B1">
+  <cim:IdentifiedObject.mRID>_37EC14AF-4C8A-44A4-BBDB-72F4181346B1</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>rg60</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_0CD8BBA6-084E-44BE-B02A-BA023B542DB6"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_B9277BB0-CC80-469A-B0F1-84032D6F5D5B">
+  <cim:IdentifiedObject.mRID>_B9277BB0-CC80-469A-B0F1-84032D6F5D5B</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>671</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_5BE16084-9DEC-415F-A7D1-43414AC501BD">
+  <cim:IdentifiedObject.mRID>_5BE16084-9DEC-415F-A7D1-43414AC501BD</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>671</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_B9277BB0-CC80-469A-B0F1-84032D6F5D5B"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_8A8AE13E-FF95-4434-82A1-9B909376D404">
+  <cim:IdentifiedObject.mRID>_8A8AE13E-FF95-4434-82A1-9B909376D404</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>645</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_5ECD64B1-3E60-4A09-AD62-AA023BC99BE5">
+  <cim:IdentifiedObject.mRID>_5ECD64B1-3E60-4A09-AD62-AA023BC99BE5</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>645</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_8A8AE13E-FF95-4434-82A1-9B909376D404"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_E95E7EE5-A683-424B-BB7C-0C2D062C38A8">
+  <cim:IdentifiedObject.mRID>_E95E7EE5-A683-424B-BB7C-0C2D062C38A8</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>646</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_1C6CDE1B-094D-4358-9204-EA5F117811CE">
+  <cim:IdentifiedObject.mRID>_1C6CDE1B-094D-4358-9204-EA5F117811CE</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>646</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_E95E7EE5-A683-424B-BB7C-0C2D062C38A8"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_648BC033-EAE9-4B38-8EE8-16874368E4DA">
+  <cim:IdentifiedObject.mRID>_648BC033-EAE9-4B38-8EE8-16874368E4DA</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>692</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_84319F3E-09B8-4DBF-AF76-BEE6B9E1AF0E">
+  <cim:IdentifiedObject.mRID>_84319F3E-09B8-4DBF-AF76-BEE6B9E1AF0E</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>692</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_648BC033-EAE9-4B38-8EE8-16874368E4DA"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_8C94CD2C-1087-40B7-8649-FE31AC7067B3">
+  <cim:IdentifiedObject.mRID>_8C94CD2C-1087-40B7-8649-FE31AC7067B3</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>675</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_4E16BD04-73F7-4F4C-8BD4-15C134C1E881">
+  <cim:IdentifiedObject.mRID>_4E16BD04-73F7-4F4C-8BD4-15C134C1E881</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>675</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_8C94CD2C-1087-40B7-8649-FE31AC7067B3"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_C88290E4-2DE2-49A6-8EA3-583DE56E200C">
+  <cim:IdentifiedObject.mRID>_C88290E4-2DE2-49A6-8EA3-583DE56E200C</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>611</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_7B6A24B7-6E0C-48B0-B20F-EBDEB0E7C999">
+  <cim:IdentifiedObject.mRID>_7B6A24B7-6E0C-48B0-B20F-EBDEB0E7C999</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>611</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_C88290E4-2DE2-49A6-8EA3-583DE56E200C"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_2827532A-67CB-46FF-B651-2C64F7A30B63">
+  <cim:IdentifiedObject.mRID>_2827532A-67CB-46FF-B651-2C64F7A30B63</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>652</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_C5C48FEB-BC7B-4BD2-B2F3-C8C9268AEE6F">
+  <cim:IdentifiedObject.mRID>_C5C48FEB-BC7B-4BD2-B2F3-C8C9268AEE6F</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>652</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_2827532A-67CB-46FF-B651-2C64F7A30B63"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_8815EA50-2B04-4466-9803-925C44890BF0">
+  <cim:IdentifiedObject.mRID>_8815EA50-2B04-4466-9803-925C44890BF0</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>670</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_821879D6-295D-41D3-B56D-E3EDB8353AF2">
+  <cim:IdentifiedObject.mRID>_821879D6-295D-41D3-B56D-E3EDB8353AF2</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>670</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_8815EA50-2B04-4466-9803-925C44890BF0"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_72388B8F-E544-4ED6-AE8C-BA38922EBAC8">
+  <cim:IdentifiedObject.mRID>_72388B8F-E544-4ED6-AE8C-BA38922EBAC8</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>632</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_6945FA79-2B15-423D-AAB8-FB22D5DB31D5">
+  <cim:IdentifiedObject.mRID>_6945FA79-2B15-423D-AAB8-FB22D5DB31D5</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>632</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_72388B8F-E544-4ED6-AE8C-BA38922EBAC8"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_CDA37C0F-A2FE-4A33-A683-BDD46F297866">
+  <cim:IdentifiedObject.mRID>_CDA37C0F-A2FE-4A33-A683-BDD46F297866</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>680</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_711FF6BE-C084-433F-B527-1DD9E5EDF1FC">
+  <cim:IdentifiedObject.mRID>_711FF6BE-C084-433F-B527-1DD9E5EDF1FC</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>680</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_CDA37C0F-A2FE-4A33-A683-BDD46F297866"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalNode rdf:ID="_828F83DE-25A6-4D4E-83F7-338271CF3516">
+  <cim:IdentifiedObject.mRID>_828F83DE-25A6-4D4E-83F7-338271CF3516</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>684</cim:IdentifiedObject.name>
+  <cim:TopologicalNode.TopologicalIsland rdf:resource="#_26474878-11DB-480A-B2FF-4EFEBE467126"/>
+</cim:TopologicalNode>
+<cim:ConnectivityNode rdf:ID="_33477999-F568-48D2-9C4E-C0CD17FC1DC3">
+  <cim:IdentifiedObject.mRID>_33477999-F568-48D2-9C4E-C0CD17FC1DC3</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>684</cim:IdentifiedObject.name>
+  <cim:ConnectivityNode.TopologicalNode rdf:resource="#_828F83DE-25A6-4D4E-83F7-338271CF3516"/>
+  <cim:ConnectivityNode.OperationalLimitSet rdf:resource="#_8F4344BC-E30E-4491-8424-D4B5A4C01671"/>
+  <cim:ConnectivityNode.ConnectivityNodeContainer rdf:resource="#_DFBF372D-4291-49EF-ACCA-53DAFDE0338F"/>
+</cim:ConnectivityNode>
+<cim:TopologicalIsland rdf:ID="_26474878-11DB-480A-B2FF-4EFEBE467126">
+  <cim:IdentifiedObject.mRID>_26474878-11DB-480A-B2FF-4EFEBE467126</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>ieee13nodecktassets_Island</cim:IdentifiedObject.name>
+  <cim:TopologicalIsland.AngleRefTopologicalNode rdf:resource="#_BE82C5A6-80A5-4FFF-B797-2108F5D8B267"/>
+</cim:TopologicalIsland>
+<cim:Terminal rdf:ID="_B80BDF37-BD96-426C-BD49-AC059B605806">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_9E0B85BE-B868-4813-AA14-D61CEDA181B3"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_3F6C3780-0787-4B24-B940-F7FF61E57EA3">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_4E16BD04-73F7-4F4C-8BD4-15C134C1E881"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_EE398B6F-5965-4FA5-A1A3-A1B172739748">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_7B6A24B7-6E0C-48B0-B20F-EBDEB0E7C999"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_6F75011B-A73D-4A57-94E7-72C4DBA75036">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_9E0B85BE-B868-4813-AA14-D61CEDA181B3"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_6ED0B34F-A9E1-464F-BD05-F88F6C9F4E50">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_BB143902-BEEE-493A-9CB5-71B3F9A2D3C3"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_41026926-F18F-455B-B169-8DCAD8CBCD1D">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_4F0314E5-9655-4AB9-999C-E92C7BEC915A"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_BCE9F7E3-9172-402B-8647-622CF36011A9">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_BA5DF269-0C51-4C1F-982F-EA4572460DFE"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_FF8BAF2A-B208-485D-A894-555491EC1E6D">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_BB143902-BEEE-493A-9CB5-71B3F9A2D3C3"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_0CF1D922-CB5A-4066-91FC-5E9DDD9B4C67">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_37EC14AF-4C8A-44A4-BBDB-72F4181346B1"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_281EC467-8B89-4919-AD75-718BE507D8B6">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_BB143902-BEEE-493A-9CB5-71B3F9A2D3C3"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_FE5904FC-3F78-4317-87CB-B2532623E7A8">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_37EC14AF-4C8A-44A4-BBDB-72F4181346B1"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_57191613-9745-4E7E-842C-0FFC0A1114B1">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_BB143902-BEEE-493A-9CB5-71B3F9A2D3C3"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_AAB32801-8FA3-416F-B88D-42466B76FBD0">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_37EC14AF-4C8A-44A4-BBDB-72F4181346B1"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_A1CA6877-BBF4-483F-9984-B0F758833E42">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_37EC14AF-4C8A-44A4-BBDB-72F4181346B1"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_CC6E31FA-26C0-4CE5-B80A-E49AD0DE9616">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_6945FA79-2B15-423D-AAB8-FB22D5DB31D5"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_743D43C8-7F3F-45BE-BF97-61128D5D3546">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_6945FA79-2B15-423D-AAB8-FB22D5DB31D5"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_A0ACFABA-8DE1-408D-9FB1-D5D093F40594">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_821879D6-295D-41D3-B56D-E3EDB8353AF2"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_324324FA-49AD-4EE4-9165-CD9457E93DB7">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_821879D6-295D-41D3-B56D-E3EDB8353AF2"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_2633C225-74D4-4B6A-AF80-866D8989BC14">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_5BE16084-9DEC-415F-A7D1-43414AC501BD"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_FC5DEED7-791B-44D5-A1E4-A52BD5DD4E64">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_5BE16084-9DEC-415F-A7D1-43414AC501BD"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_8FB35393-DC20-4A48-B333-D3C53A189F30">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_711FF6BE-C084-433F-B527-1DD9E5EDF1FC"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_9B475C73-6942-4C1E-AD23-65A25B0D7824">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_6945FA79-2B15-423D-AAB8-FB22D5DB31D5"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_C6A0B6EF-776C-413C-805C-1E900531EE99">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_4F0314E5-9655-4AB9-999C-E92C7BEC915A"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_348A4209-0554-4F8C-9D91-551F8B04DA9E">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_6945FA79-2B15-423D-AAB8-FB22D5DB31D5"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_DC0C6E0D-2428-498D-8C6D-FCF88F171BE1">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_5ECD64B1-3E60-4A09-AD62-AA023BC99BE5"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_69B01003-1404-4C3C-9192-DDEACF3E5EB7">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_5ECD64B1-3E60-4A09-AD62-AA023BC99BE5"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_8943D71C-1C7B-4E96-8C0E-9109B83565FE">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_1C6CDE1B-094D-4358-9204-EA5F117811CE"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_269E3E9D-FAEF-4B64-A761-F367EF424064">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_84319F3E-09B8-4DBF-AF76-BEE6B9E1AF0E"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_CB12360B-250C-4081-912B-4BEA285EDF3B">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_4E16BD04-73F7-4F4C-8BD4-15C134C1E881"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_5D920C09-5C24-490B-898E-0181BB3D1D8F">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_5BE16084-9DEC-415F-A7D1-43414AC501BD"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_AF87BE3D-EEEF-4488-BD1F-EF25386218DC">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_33477999-F568-48D2-9C4E-C0CD17FC1DC3"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_5981DD6F-2B06-4703-AC09-7C32073E6D7A">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_33477999-F568-48D2-9C4E-C0CD17FC1DC3"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_C23012F1-0CBA-44ED-AABB-CDED8A9108B8">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_7B6A24B7-6E0C-48B0-B20F-EBDEB0E7C999"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_34E05923-05B0-4974-B5DC-43D5BA620819">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_33477999-F568-48D2-9C4E-C0CD17FC1DC3"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_084099D9-8C1E-4153-85E3-D34988172D8B">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_C5C48FEB-BC7B-4BD2-B2F3-C8C9268AEE6F"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_475FE8A2-A876-4588-A251-D1AE6CCE2BF7">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_5BE16084-9DEC-415F-A7D1-43414AC501BD"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_C9AC999D-5F72-45A5-9EA7-9A83D5AC32CF">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_84319F3E-09B8-4DBF-AF76-BEE6B9E1AF0E"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_EDB3E90F-D28E-489C-BFB9-16B092A7BC69">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_5BE16084-9DEC-415F-A7D1-43414AC501BD"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_257C6A92-253F-4491-8F7D-7CAF55B89271">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_BA5DF269-0C51-4C1F-982F-EA4572460DFE"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_18E4CECF-F0BA-4BC2-ADC1-DB5834DBC3D7">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_BA5DF269-0C51-4C1F-982F-EA4572460DFE"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_E32A1FF6-4461-4E97-8ECB-0C72E3820B38">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_BA5DF269-0C51-4C1F-982F-EA4572460DFE"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_32501F7F-963E-45B2-8299-458538ED8FE6">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_5ECD64B1-3E60-4A09-AD62-AA023BC99BE5"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_D2F85C44-2594-4493-A498-040DCEE9E458">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_1C6CDE1B-094D-4358-9204-EA5F117811CE"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_714989A6-59A4-4A15-A9D5-CBC7677010AE">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_84319F3E-09B8-4DBF-AF76-BEE6B9E1AF0E"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_122C90B5-93AA-4B2F-AC32-0C8485E1B5E7">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_4E16BD04-73F7-4F4C-8BD4-15C134C1E881"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_E7E13F93-CA29-4700-AD04-9409DA7A3825">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_4E16BD04-73F7-4F4C-8BD4-15C134C1E881"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_A5029BEA-668F-4F98-BC9E-B3A9DD93069A">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_4E16BD04-73F7-4F4C-8BD4-15C134C1E881"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_4517B99B-87C7-42D3-90C1-92AF99694724">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_7B6A24B7-6E0C-48B0-B20F-EBDEB0E7C999"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_CF44A575-BFA3-4F93-8EFF-17D6CECABB1E">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_C5C48FEB-BC7B-4BD2-B2F3-C8C9268AEE6F"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_9BC632B2-993A-461D-B8D2-C852004CBEB4">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_821879D6-295D-41D3-B56D-E3EDB8353AF2"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_41356F5C-458A-4826-971D-AA8C9CEB3BF4">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_821879D6-295D-41D3-B56D-E3EDB8353AF2"/>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_56DAE837-10C6-4CB4-A08E-E417B5CC893B">
+  <cim:Terminal.ConnectivityNode rdf:resource="#_821879D6-295D-41D3-B56D-E3EDB8353AF2"/>
+</cim:Terminal>
+</rdf:RDF>

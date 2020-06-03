@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- un-comment this line to enable validation
+-->
+<rdf:RDF xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<!--
+-->
+<cim:IEC61970CIMVersion rdf:ID="_609E2191-C964-4C98-9B38-41B6AF4AE473">
+  <cim:IEC61970CIMVersion.version>IEC61970CIM100</cim:IEC61970CIMVersion.version>
+  <cim:IEC61970CIMVersion.date>2019-04-01</cim:IEC61970CIMVersion.date>
+</cim:IEC61970CIMVersion>
+<cim:PowerTransformerInfo rdf:ID="_B624D31B-6363-43B9-B936-9A0D76F37E19">
+  <cim:IdentifiedObject.mRID>_B624D31B-6363-43B9-B936-9A0D76F37E19</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>ct5_PowerXfInfo</cim:IdentifiedObject.name>
+</cim:PowerTransformerInfo>
+<cim:TransformerTankInfo rdf:ID="_F1874091-250E-4F13-8189-9E0B593D2733">
+  <cim:IdentifiedObject.mRID>_F1874091-250E-4F13-8189-9E0B593D2733</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>ct5</cim:IdentifiedObject.name>
+  <cim:TransformerTankInfo.PowerTransformerInfo rdf:resource="#_B624D31B-6363-43B9-B936-9A0D76F37E19"/>
+</cim:TransformerTankInfo>
+<cim:TransformerEndInfo rdf:ID="_E32EA57B-B51F-4D24-BEEE-1959A95A3D09">
+  <cim:IdentifiedObject.mRID>_E32EA57B-B51F-4D24-BEEE-1959A95A3D09</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>ct5_1</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_F1874091-250E-4F13-8189-9E0B593D2733"/>
+  <cim:TransformerEndInfo.endNumber>1</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.I"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>2400</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>5000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>5500</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>7500</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>6.912</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:TransformerEndInfo rdf:ID="_360F45AA-461B-404A-AC1C-82E0C85BEC1E">
+  <cim:IdentifiedObject.mRID>_360F45AA-461B-404A-AC1C-82E0C85BEC1E</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>ct5_2</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_F1874091-250E-4F13-8189-9E0B593D2733"/>
+  <cim:TransformerEndInfo.endNumber>2</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.I"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>120</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>5000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>5500</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>7500</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.03456</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:TransformerEndInfo rdf:ID="_BB805FEE-C79D-4246-A8B0-B8C3CF6A8937">
+  <cim:IdentifiedObject.mRID>_BB805FEE-C79D-4246-A8B0-B8C3CF6A8937</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>ct5_3</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_F1874091-250E-4F13-8189-9E0B593D2733"/>
+  <cim:TransformerEndInfo.endNumber>3</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.I"/>
+  <cim:TransformerEndInfo.phaseAngleClock>6</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>120</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>5000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>5500</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>7500</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.03456</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:NoLoadTest rdf:ID="_C75EDBB6-F90C-4890-B5B2-F14118048E96">
+  <cim:IdentifiedObject.mRID>_C75EDBB6-F90C-4890-B5B2-F14118048E96</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>ct5_1</cim:IdentifiedObject.name>
+  <cim:NoLoadTest.EnergisedEnd rdf:resource="#_E32EA57B-B51F-4D24-BEEE-1959A95A3D09"/>
+  <cim:NoLoadTest.energisedEndVoltage>2400</cim:NoLoadTest.energisedEndVoltage>
+  <cim:NoLoadTest.excitingCurrent>0.5</cim:NoLoadTest.excitingCurrent>
+  <cim:NoLoadTest.excitingCurrentZero>0.5</cim:NoLoadTest.excitingCurrentZero>
+  <cim:NoLoadTest.loss>0.01</cim:NoLoadTest.loss>
+  <cim:NoLoadTest.lossZero>0.01</cim:NoLoadTest.lossZero>
+  <cim:TransformerTest.basePower>5000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:NoLoadTest>
+<cim:ShortCircuitTest rdf:ID="_2EF713FA-15A0-48D1-B5B4-7FD15560DE9D">
+  <cim:IdentifiedObject.mRID>_2EF713FA-15A0-48D1-B5B4-7FD15560DE9D</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>ct5_1</cim:IdentifiedObject.name>
+  <cim:ShortCircuitTest.EnergisedEnd rdf:resource="#_E32EA57B-B51F-4D24-BEEE-1959A95A3D09"/>
+  <cim:ShortCircuitTest.GroundedEnds rdf:resource="#_360F45AA-461B-404A-AC1C-82E0C85BEC1E"/>
+  <cim:ShortCircuitTest.energisedEndStep>16</cim:ShortCircuitTest.energisedEndStep>
+  <cim:ShortCircuitTest.groundedEndStep>16</cim:ShortCircuitTest.groundedEndStep>
+  <cim:ShortCircuitTest.leakageImpedance>23.5008</cim:ShortCircuitTest.leakageImpedance>
+  <cim:ShortCircuitTest.leakageImpedanceZero>23.5008</cim:ShortCircuitTest.leakageImpedanceZero>
+  <cim:ShortCircuitTest.loss>0.09</cim:ShortCircuitTest.loss>
+  <cim:ShortCircuitTest.lossZero>0.09</cim:ShortCircuitTest.lossZero>
+  <cim:TransformerTest.basePower>5000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:ShortCircuitTest>
+<cim:ShortCircuitTest rdf:ID="_0D51E09F-8FC2-4FE4-8029-29C154C354D0">
+  <cim:IdentifiedObject.mRID>_0D51E09F-8FC2-4FE4-8029-29C154C354D0</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>ct5_2</cim:IdentifiedObject.name>
+  <cim:ShortCircuitTest.EnergisedEnd rdf:resource="#_E32EA57B-B51F-4D24-BEEE-1959A95A3D09"/>
+  <cim:ShortCircuitTest.GroundedEnds rdf:resource="#_BB805FEE-C79D-4246-A8B0-B8C3CF6A8937"/>
+  <cim:ShortCircuitTest.energisedEndStep>16</cim:ShortCircuitTest.energisedEndStep>
+  <cim:ShortCircuitTest.groundedEndStep>16</cim:ShortCircuitTest.groundedEndStep>
+  <cim:ShortCircuitTest.leakageImpedance>23.5008</cim:ShortCircuitTest.leakageImpedance>
+  <cim:ShortCircuitTest.leakageImpedanceZero>23.5008</cim:ShortCircuitTest.leakageImpedanceZero>
+  <cim:ShortCircuitTest.loss>0</cim:ShortCircuitTest.loss>
+  <cim:ShortCircuitTest.lossZero>0</cim:ShortCircuitTest.lossZero>
+  <cim:TransformerTest.basePower>5000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:ShortCircuitTest>
+<cim:ShortCircuitTest rdf:ID="_014CE6AD-EBB8-4B9B-A2AF-2FE067C79693">
+  <cim:IdentifiedObject.mRID>_014CE6AD-EBB8-4B9B-A2AF-2FE067C79693</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>ct5_3</cim:IdentifiedObject.name>
+  <cim:ShortCircuitTest.EnergisedEnd rdf:resource="#_360F45AA-461B-404A-AC1C-82E0C85BEC1E"/>
+  <cim:ShortCircuitTest.GroundedEnds rdf:resource="#_BB805FEE-C79D-4246-A8B0-B8C3CF6A8937"/>
+  <cim:ShortCircuitTest.energisedEndStep>16</cim:ShortCircuitTest.energisedEndStep>
+  <cim:ShortCircuitTest.groundedEndStep>16</cim:ShortCircuitTest.groundedEndStep>
+  <cim:ShortCircuitTest.leakageImpedance>0.039168</cim:ShortCircuitTest.leakageImpedance>
+  <cim:ShortCircuitTest.leakageImpedanceZero>0.039168</cim:ShortCircuitTest.leakageImpedanceZero>
+  <cim:ShortCircuitTest.loss>0</cim:ShortCircuitTest.loss>
+  <cim:ShortCircuitTest.lossZero>0</cim:ShortCircuitTest.lossZero>
+  <cim:TransformerTest.basePower>5000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:ShortCircuitTest>
+<cim:Asset rdf:ID="_3EA81C0A-F463-41B1-A757-C403BE599A12">
+  <cim:IdentifiedObject.mRID>_3EA81C0A-F463-41B1-A757-C403BE599A12</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TankAsset_ct5</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_F1874091-250E-4F13-8189-9E0B593D2733"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_E0C99939-99E4-4EC2-9084-71B1FFBE0FD3"/>
+</cim:Asset>
+<cim:PowerTransformerInfo rdf:ID="_A35CE30A-0FBA-419C-A4A3-6F9B077C42EC">
+  <cim:IdentifiedObject.mRID>_A35CE30A-0FBA-419C-A4A3-6F9B077C42EC</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg1_PowerXfInfo</cim:IdentifiedObject.name>
+</cim:PowerTransformerInfo>
+<cim:TransformerTankInfo rdf:ID="_4EA5C60B-3643-4DE9-9DC6-64393A8CAD1F">
+  <cim:IdentifiedObject.mRID>_4EA5C60B-3643-4DE9-9DC6-64393A8CAD1F</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg1</cim:IdentifiedObject.name>
+  <cim:TransformerTankInfo.PowerTransformerInfo rdf:resource="#_A35CE30A-0FBA-419C-A4A3-6F9B077C42EC"/>
+</cim:TransformerTankInfo>
+<cim:TransformerEndInfo rdf:ID="_14C99A6D-E339-4C12-8A96-0F35BF07AED9">
+  <cim:IdentifiedObject.mRID>_14C99A6D-E339-4C12-8A96-0F35BF07AED9</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg1_1</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_4EA5C60B-3643-4DE9-9DC6-64393A8CAD1F"/>
+  <cim:TransformerEndInfo.endNumber>1</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.I"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>2400</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>1666000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>1832600</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>2499000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.00017286915</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:TransformerEndInfo rdf:ID="_4A644419-3020-4FEB-9946-B42FB3A8D014">
+  <cim:IdentifiedObject.mRID>_4A644419-3020-4FEB-9946-B42FB3A8D014</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg1_2</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_4EA5C60B-3643-4DE9-9DC6-64393A8CAD1F"/>
+  <cim:TransformerEndInfo.endNumber>2</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.I"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>2400</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>1666000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>1832600</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>2499000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.00017286915</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:NoLoadTest rdf:ID="_82362EF1-C8A2-4641-857B-33DBDDD7C905">
+  <cim:IdentifiedObject.mRID>_82362EF1-C8A2-4641-857B-33DBDDD7C905</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg1_1</cim:IdentifiedObject.name>
+  <cim:NoLoadTest.EnergisedEnd rdf:resource="#_14C99A6D-E339-4C12-8A96-0F35BF07AED9"/>
+  <cim:NoLoadTest.energisedEndVoltage>2400</cim:NoLoadTest.energisedEndVoltage>
+  <cim:NoLoadTest.excitingCurrent>0</cim:NoLoadTest.excitingCurrent>
+  <cim:NoLoadTest.excitingCurrentZero>0</cim:NoLoadTest.excitingCurrentZero>
+  <cim:NoLoadTest.loss>0</cim:NoLoadTest.loss>
+  <cim:NoLoadTest.lossZero>0</cim:NoLoadTest.lossZero>
+  <cim:TransformerTest.basePower>1666000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:NoLoadTest>
+<cim:ShortCircuitTest rdf:ID="_22F9DC6D-2339-46D3-93F7-B2634206C4C8">
+  <cim:IdentifiedObject.mRID>_22F9DC6D-2339-46D3-93F7-B2634206C4C8</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg1_1</cim:IdentifiedObject.name>
+  <cim:ShortCircuitTest.EnergisedEnd rdf:resource="#_14C99A6D-E339-4C12-8A96-0F35BF07AED9"/>
+  <cim:ShortCircuitTest.GroundedEnds rdf:resource="#_4A644419-3020-4FEB-9946-B42FB3A8D014"/>
+  <cim:ShortCircuitTest.energisedEndStep>16</cim:ShortCircuitTest.energisedEndStep>
+  <cim:ShortCircuitTest.groundedEndStep>16</cim:ShortCircuitTest.groundedEndStep>
+  <cim:ShortCircuitTest.leakageImpedance>0.0003457383</cim:ShortCircuitTest.leakageImpedance>
+  <cim:ShortCircuitTest.leakageImpedanceZero>0.0003457383</cim:ShortCircuitTest.leakageImpedanceZero>
+  <cim:ShortCircuitTest.loss>0.1666</cim:ShortCircuitTest.loss>
+  <cim:ShortCircuitTest.lossZero>0.1666</cim:ShortCircuitTest.lossZero>
+  <cim:TransformerTest.basePower>1666000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:ShortCircuitTest>
+<cim:Asset rdf:ID="_3118FE4A-7B58-40BE-BB24-08A68FB9B3F6">
+  <cim:IdentifiedObject.mRID>_3118FE4A-7B58-40BE-BB24-08A68FB9B3F6</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TankAsset_cimxfmrcode_reg1</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_4EA5C60B-3643-4DE9-9DC6-64393A8CAD1F"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_C3E922FC-5B2D-494C-9CA2-8DCF7819380F"/>
+</cim:Asset>
+<cim:PowerTransformerInfo rdf:ID="_08D5C651-0133-43DC-863C-89B1C6F024CC">
+  <cim:IdentifiedObject.mRID>_08D5C651-0133-43DC-863C-89B1C6F024CC</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg2_PowerXfInfo</cim:IdentifiedObject.name>
+</cim:PowerTransformerInfo>
+<cim:TransformerTankInfo rdf:ID="_53A752D9-70B7-4325-A7D1-DAD1C4DAFD65">
+  <cim:IdentifiedObject.mRID>_53A752D9-70B7-4325-A7D1-DAD1C4DAFD65</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg2</cim:IdentifiedObject.name>
+  <cim:TransformerTankInfo.PowerTransformerInfo rdf:resource="#_08D5C651-0133-43DC-863C-89B1C6F024CC"/>
+</cim:TransformerTankInfo>
+<cim:TransformerEndInfo rdf:ID="_2443BF6D-A5A0-494C-AE69-A8025349BDAA">
+  <cim:IdentifiedObject.mRID>_2443BF6D-A5A0-494C-AE69-A8025349BDAA</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg2_1</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_53A752D9-70B7-4325-A7D1-DAD1C4DAFD65"/>
+  <cim:TransformerEndInfo.endNumber>1</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.I"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>2400</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>1666000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>1832600</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>2499000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.00017286915</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:TransformerEndInfo rdf:ID="_8AA60DA9-07A2-4AB7-8E33-FAB0A2115838">
+  <cim:IdentifiedObject.mRID>_8AA60DA9-07A2-4AB7-8E33-FAB0A2115838</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg2_2</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_53A752D9-70B7-4325-A7D1-DAD1C4DAFD65"/>
+  <cim:TransformerEndInfo.endNumber>2</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.I"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>2400</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>1666000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>1832600</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>2499000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.00017286915</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:NoLoadTest rdf:ID="_1584AF70-CB9E-4A99-A346-E14C62F05C9A">
+  <cim:IdentifiedObject.mRID>_1584AF70-CB9E-4A99-A346-E14C62F05C9A</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg2_1</cim:IdentifiedObject.name>
+  <cim:NoLoadTest.EnergisedEnd rdf:resource="#_2443BF6D-A5A0-494C-AE69-A8025349BDAA"/>
+  <cim:NoLoadTest.energisedEndVoltage>2400</cim:NoLoadTest.energisedEndVoltage>
+  <cim:NoLoadTest.excitingCurrent>0</cim:NoLoadTest.excitingCurrent>
+  <cim:NoLoadTest.excitingCurrentZero>0</cim:NoLoadTest.excitingCurrentZero>
+  <cim:NoLoadTest.loss>0</cim:NoLoadTest.loss>
+  <cim:NoLoadTest.lossZero>0</cim:NoLoadTest.lossZero>
+  <cim:TransformerTest.basePower>1666000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:NoLoadTest>
+<cim:ShortCircuitTest rdf:ID="_1CD0BBE2-BC58-45FD-8C15-DB17D93304FE">
+  <cim:IdentifiedObject.mRID>_1CD0BBE2-BC58-45FD-8C15-DB17D93304FE</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg2_1</cim:IdentifiedObject.name>
+  <cim:ShortCircuitTest.EnergisedEnd rdf:resource="#_2443BF6D-A5A0-494C-AE69-A8025349BDAA"/>
+  <cim:ShortCircuitTest.GroundedEnds rdf:resource="#_8AA60DA9-07A2-4AB7-8E33-FAB0A2115838"/>
+  <cim:ShortCircuitTest.energisedEndStep>16</cim:ShortCircuitTest.energisedEndStep>
+  <cim:ShortCircuitTest.groundedEndStep>16</cim:ShortCircuitTest.groundedEndStep>
+  <cim:ShortCircuitTest.leakageImpedance>0.0003457383</cim:ShortCircuitTest.leakageImpedance>
+  <cim:ShortCircuitTest.leakageImpedanceZero>0.0003457383</cim:ShortCircuitTest.leakageImpedanceZero>
+  <cim:ShortCircuitTest.loss>0.1666</cim:ShortCircuitTest.loss>
+  <cim:ShortCircuitTest.lossZero>0.1666</cim:ShortCircuitTest.lossZero>
+  <cim:TransformerTest.basePower>1666000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:ShortCircuitTest>
+<cim:Asset rdf:ID="_1C0CB7F7-5F33-4BF8-873F-08EFB759BC13">
+  <cim:IdentifiedObject.mRID>_1C0CB7F7-5F33-4BF8-873F-08EFB759BC13</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TankAsset_cimxfmrcode_reg2</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_53A752D9-70B7-4325-A7D1-DAD1C4DAFD65"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_7DE073CF-C34D-4A14-BD5E-0D62198AB965"/>
+</cim:Asset>
+<cim:PowerTransformerInfo rdf:ID="_0B25665E-B76A-4473-8FEC-70CEF6215152">
+  <cim:IdentifiedObject.mRID>_0B25665E-B76A-4473-8FEC-70CEF6215152</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg3_PowerXfInfo</cim:IdentifiedObject.name>
+</cim:PowerTransformerInfo>
+<cim:TransformerTankInfo rdf:ID="_872A270E-6130-451A-AA8B-3D6C49E97373">
+  <cim:IdentifiedObject.mRID>_872A270E-6130-451A-AA8B-3D6C49E97373</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg3</cim:IdentifiedObject.name>
+  <cim:TransformerTankInfo.PowerTransformerInfo rdf:resource="#_0B25665E-B76A-4473-8FEC-70CEF6215152"/>
+</cim:TransformerTankInfo>
+<cim:TransformerEndInfo rdf:ID="_315E3DE8-413E-47A2-87A3-AF7868F877B0">
+  <cim:IdentifiedObject.mRID>_315E3DE8-413E-47A2-87A3-AF7868F877B0</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg3_1</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_872A270E-6130-451A-AA8B-3D6C49E97373"/>
+  <cim:TransformerEndInfo.endNumber>1</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.I"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>2400</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>1666000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>1832600</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>2499000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.00017286915</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:TransformerEndInfo rdf:ID="_FF6D75C8-DD79-4916-A48E-8C54BFC2B46E">
+  <cim:IdentifiedObject.mRID>_FF6D75C8-DD79-4916-A48E-8C54BFC2B46E</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg3_2</cim:IdentifiedObject.name>
+  <cim:TransformerEndInfo.TransformerTankInfo rdf:resource="#_872A270E-6130-451A-AA8B-3D6C49E97373"/>
+  <cim:TransformerEndInfo.endNumber>2</cim:TransformerEndInfo.endNumber>
+  <cim:TransformerEndInfo.connectionKind rdf:resource="http://iec.ch/TC57/CIM100#WindingConnection.I"/>
+  <cim:TransformerEndInfo.phaseAngleClock>0</cim:TransformerEndInfo.phaseAngleClock>
+  <cim:TransformerEndInfo.ratedU>2400</cim:TransformerEndInfo.ratedU>
+  <cim:TransformerEndInfo.ratedS>1666000</cim:TransformerEndInfo.ratedS>
+  <cim:TransformerEndInfo.shortTermS>1832600</cim:TransformerEndInfo.shortTermS>
+  <cim:TransformerEndInfo.emergencyS>2499000</cim:TransformerEndInfo.emergencyS>
+  <cim:TransformerEndInfo.r>0.00017286915</cim:TransformerEndInfo.r>
+  <cim:TransformerEndInfo.insulationU>0</cim:TransformerEndInfo.insulationU>
+</cim:TransformerEndInfo>
+<cim:NoLoadTest rdf:ID="_042F3E0C-3656-4E24-B607-678D0097CAA0">
+  <cim:IdentifiedObject.mRID>_042F3E0C-3656-4E24-B607-678D0097CAA0</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg3_1</cim:IdentifiedObject.name>
+  <cim:NoLoadTest.EnergisedEnd rdf:resource="#_315E3DE8-413E-47A2-87A3-AF7868F877B0"/>
+  <cim:NoLoadTest.energisedEndVoltage>2400</cim:NoLoadTest.energisedEndVoltage>
+  <cim:NoLoadTest.excitingCurrent>0</cim:NoLoadTest.excitingCurrent>
+  <cim:NoLoadTest.excitingCurrentZero>0</cim:NoLoadTest.excitingCurrentZero>
+  <cim:NoLoadTest.loss>0</cim:NoLoadTest.loss>
+  <cim:NoLoadTest.lossZero>0</cim:NoLoadTest.lossZero>
+  <cim:TransformerTest.basePower>1666000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:NoLoadTest>
+<cim:ShortCircuitTest rdf:ID="_7AE083AB-3FFB-4494-8248-D37E730120E3">
+  <cim:IdentifiedObject.mRID>_7AE083AB-3FFB-4494-8248-D37E730120E3</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>cimxfmrcode_reg3_1</cim:IdentifiedObject.name>
+  <cim:ShortCircuitTest.EnergisedEnd rdf:resource="#_315E3DE8-413E-47A2-87A3-AF7868F877B0"/>
+  <cim:ShortCircuitTest.GroundedEnds rdf:resource="#_FF6D75C8-DD79-4916-A48E-8C54BFC2B46E"/>
+  <cim:ShortCircuitTest.energisedEndStep>16</cim:ShortCircuitTest.energisedEndStep>
+  <cim:ShortCircuitTest.groundedEndStep>16</cim:ShortCircuitTest.groundedEndStep>
+  <cim:ShortCircuitTest.leakageImpedance>0.0003457383</cim:ShortCircuitTest.leakageImpedance>
+  <cim:ShortCircuitTest.leakageImpedanceZero>0.0003457383</cim:ShortCircuitTest.leakageImpedanceZero>
+  <cim:ShortCircuitTest.loss>0.1666</cim:ShortCircuitTest.loss>
+  <cim:ShortCircuitTest.lossZero>0.1666</cim:ShortCircuitTest.lossZero>
+  <cim:TransformerTest.basePower>1666000</cim:TransformerTest.basePower>
+  <cim:TransformerTest.temperature>50</cim:TransformerTest.temperature>
+</cim:ShortCircuitTest>
+<cim:Asset rdf:ID="_D7E63219-568C-458D-9474-488BFC090D08">
+  <cim:IdentifiedObject.mRID>_D7E63219-568C-458D-9474-488BFC090D08</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TankAsset_cimxfmrcode_reg3</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_872A270E-6130-451A-AA8B-3D6C49E97373"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_716DD177-408D-4D29-B9FE-0BDD72A29BE5"/>
+</cim:Asset>
+<cim:TapChangerInfo rdf:ID="_6DEDD18D-B902-43A1-9939-8FA92EF15E30">
+  <cim:IdentifiedObject.mRID>_6DEDD18D-B902-43A1-9939-8FA92EF15E30</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>reg1_Info</cim:IdentifiedObject.name>
+  <cim:TapChangerInfo.ptRatio>20</cim:TapChangerInfo.ptRatio>
+  <cim:TapChangerInfo.ctRatio>3500</cim:TapChangerInfo.ctRatio>
+  <cim:TapChangerInfo.ctRating>700</cim:TapChangerInfo.ctRating>
+</cim:TapChangerInfo>
+<cim:Asset rdf:ID="_929C2D3B-4058-458F-BF68-7A1B6E8BE619">
+  <cim:IdentifiedObject.mRID>_929C2D3B-4058-458F-BF68-7A1B6E8BE619</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TapChangerAsset_reg1</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_6DEDD18D-B902-43A1-9939-8FA92EF15E30"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_099A63A6-9296-4E16-8DFF-94E2DD022AFC"/>
+</cim:Asset>
+<cim:TapChangerInfo rdf:ID="_68E4C7FC-C897-4EDF-B7AC-15649535E3A6">
+  <cim:IdentifiedObject.mRID>_68E4C7FC-C897-4EDF-B7AC-15649535E3A6</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>reg2_Info</cim:IdentifiedObject.name>
+  <cim:TapChangerInfo.ptRatio>20</cim:TapChangerInfo.ptRatio>
+  <cim:TapChangerInfo.ctRatio>3500</cim:TapChangerInfo.ctRatio>
+  <cim:TapChangerInfo.ctRating>700</cim:TapChangerInfo.ctRating>
+</cim:TapChangerInfo>
+<cim:Asset rdf:ID="_992ED1C9-7862-433B-B5EC-A902E8834076">
+  <cim:IdentifiedObject.mRID>_992ED1C9-7862-433B-B5EC-A902E8834076</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TapChangerAsset_reg2</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_68E4C7FC-C897-4EDF-B7AC-15649535E3A6"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_9B45CEE7-03C2-42C6-B009-558DD27E60BA"/>
+</cim:Asset>
+<cim:TapChangerInfo rdf:ID="_4B944A0B-11C5-4EAA-8168-69EB35EBF7CB">
+  <cim:IdentifiedObject.mRID>_4B944A0B-11C5-4EAA-8168-69EB35EBF7CB</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>reg3_Info</cim:IdentifiedObject.name>
+  <cim:TapChangerInfo.ptRatio>20</cim:TapChangerInfo.ptRatio>
+  <cim:TapChangerInfo.ctRatio>3500</cim:TapChangerInfo.ctRatio>
+  <cim:TapChangerInfo.ctRating>700</cim:TapChangerInfo.ctRating>
+</cim:TapChangerInfo>
+<cim:Asset rdf:ID="_1D089EDC-7997-43D3-A82E-682AEB10C593">
+  <cim:IdentifiedObject.mRID>_1D089EDC-7997-43D3-A82E-682AEB10C593</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>TapChangerAsset_reg3</cim:IdentifiedObject.name>
+  <cim:Asset.AssetInfo rdf:resource="#_4B944A0B-11C5-4EAA-8168-69EB35EBF7CB"/>
+  <cim:Asset.PowerSystemResources rdf:resource="#_E808F49C-3B60-4D14-A77C-CF985A1F7736"/>
+</cim:Asset>
+</rdf:RDF>

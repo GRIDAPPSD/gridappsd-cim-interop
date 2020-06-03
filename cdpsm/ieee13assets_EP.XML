@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- un-comment this line to enable validation
+-->
+<rdf:RDF xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<!--
+-->
+<cim:IEC61970CIMVersion rdf:ID="_96A580E9-40C7-480D-A628-EB5BC0D1F233">
+  <cim:IEC61970CIMVersion.version>IEC61970CIM100</cim:IEC61970CIMVersion.version>
+  <cim:IEC61970CIMVersion.date>2019-04-01</cim:IEC61970CIMVersion.date>
+</cim:IEC61970CIMVersion>
+<cim:EnergySource rdf:ID="_89C11D19-197E-4CF1-8ED0-2134C5502E94">
+  <cim:EnergySource.nominalVoltage>115000</cim:EnergySource.nominalVoltage>
+  <cim:EnergySource.r>0.16037668</cim:EnergySource.r>
+  <cim:EnergySource.x>0.64150673</cim:EnergySource.x>
+  <cim:EnergySource.r0>0.17960358</cim:EnergySource.r0>
+  <cim:EnergySource.x0>0.53881075</cim:EnergySource.x0>
+</cim:EnergySource>
+<cim:LinearShuntCompensator rdf:ID="_0B118B31-6B58-49C7-ACAD-06D63ACB9FFF">
+  <cim:ShuntCompensator.nomU>4160</cim:ShuntCompensator.nomU>
+  <cim:LinearShuntCompensator.bPerSection>0.034670858</cim:LinearShuntCompensator.bPerSection>
+  <cim:LinearShuntCompensator.gPerSection>0</cim:LinearShuntCompensator.gPerSection>
+  <cim:ShuntCompensator.aVRDelay>15</cim:ShuntCompensator.aVRDelay>
+  <cim:LinearShuntCompensator.b0PerSection>15</cim:LinearShuntCompensator.b0PerSection>
+  <cim:LinearShuntCompensator.g0PerSection>0</cim:LinearShuntCompensator.g0PerSection>
+  <cim:ShuntCompensator.normalSections>1</cim:ShuntCompensator.normalSections>
+  <cim:ShuntCompensator.maximumSections>1</cim:ShuntCompensator.maximumSections>
+</cim:LinearShuntCompensator>
+<cim:LinearShuntCompensator rdf:ID="_B289252A-AD53-4A53-B203-7811ED3E0E96">
+  <cim:ShuntCompensator.nomU>2400</cim:ShuntCompensator.nomU>
+  <cim:LinearShuntCompensator.bPerSection>0.017361111</cim:LinearShuntCompensator.bPerSection>
+  <cim:LinearShuntCompensator.gPerSection>0</cim:LinearShuntCompensator.gPerSection>
+  <cim:ShuntCompensator.aVRDelay>15</cim:ShuntCompensator.aVRDelay>
+  <cim:LinearShuntCompensator.b0PerSection>15</cim:LinearShuntCompensator.b0PerSection>
+  <cim:LinearShuntCompensator.g0PerSection>0</cim:LinearShuntCompensator.g0PerSection>
+  <cim:ShuntCompensator.normalSections>1</cim:ShuntCompensator.normalSections>
+  <cim:ShuntCompensator.maximumSections>1</cim:ShuntCompensator.maximumSections>
+</cim:LinearShuntCompensator>
+<cim:LinearShuntCompensatorPhase rdf:ID="_4BE76496-C54D-4FC8-92AD-4E7FB30D8E63">
+  <cim:LinearShuntCompensatorPhase.bPerSection>0.017361111</cim:LinearShuntCompensatorPhase.bPerSection>
+  <cim:LinearShuntCompensatorPhase.gPerSection>0</cim:LinearShuntCompensatorPhase.gPerSection>
+  <cim:ShuntCompensatorPhase.normalSections>1</cim:ShuntCompensatorPhase.normalSections>
+  <cim:ShuntCompensatorPhase.maximumSections>1</cim:ShuntCompensatorPhase.maximumSections>
+</cim:LinearShuntCompensatorPhase>
+<cim:RegulatingControl rdf:ID="_B40E164D-298E-4EC2-882F-24B18CFAF186">
+  <cim:RegulatingControl.mode rdf:resource="http://iec.ch/TC57/CIM100#RegulatingControlModeKind.timeScheduled"/>
+  <cim:RegulatingControl.discrete>true</cim:RegulatingControl.discrete>
+  <cim:RegulatingControl.enabled>true</cim:RegulatingControl.enabled>
+  <cim:RegulatingControl.targetValue>13.5</cim:RegulatingControl.targetValue>
+  <cim:RegulatingControl.targetDeadband>11</cim:RegulatingControl.targetDeadband>
+</cim:RegulatingControl>
+<cim:RegulatingControl rdf:ID="_0DE8AE78-4972-4FBF-89D9-961B1CD8AEBB">
+  <cim:RegulatingControl.mode rdf:resource="http://iec.ch/TC57/CIM100#RegulatingControlModeKind.voltage"/>
+  <cim:RegulatingControl.discrete>true</cim:RegulatingControl.discrete>
+  <cim:RegulatingControl.enabled>true</cim:RegulatingControl.enabled>
+  <cim:RegulatingControl.targetValue>2400</cim:RegulatingControl.targetValue>
+  <cim:RegulatingControl.targetDeadband>200</cim:RegulatingControl.targetDeadband>
+</cim:RegulatingControl>
+<cim:TransformerTankEnd rdf:ID="_92EE8F66-496D-4F80-A33C-568FEDE516C1">
+  <cim:TransformerEnd.rground>0</cim:TransformerEnd.rground>
+  <cim:TransformerEnd.xground>0</cim:TransformerEnd.xground>
+</cim:TransformerTankEnd>
+<cim:TransformerTankEnd rdf:ID="_3698AC88-F5BE-4354-87BB-463AEE5E66CC">
+  <cim:TransformerEnd.rground>0</cim:TransformerEnd.rground>
+  <cim:TransformerEnd.xground>0</cim:TransformerEnd.xground>
+</cim:TransformerTankEnd>
+<cim:TransformerTankEnd rdf:ID="_1F81C81B-26C4-4B74-96F8-32966EDA2585">
+  <cim:TransformerEnd.rground>0</cim:TransformerEnd.rground>
+  <cim:TransformerEnd.xground>0</cim:TransformerEnd.xground>
+</cim:TransformerTankEnd>
+<cim:TransformerTankEnd rdf:ID="_CAE6D363-1FD2-4090-9E09-3FBC2ACDEF58">
+  <cim:TransformerEnd.rground>0</cim:TransformerEnd.rground>
+  <cim:TransformerEnd.xground>0</cim:TransformerEnd.xground>
+</cim:TransformerTankEnd>
+<cim:TransformerTankEnd rdf:ID="_731A6950-D59D-4662-A826-8E8330008C22">
+  <cim:TransformerEnd.rground>0</cim:TransformerEnd.rground>
+  <cim:TransformerEnd.xground>0</cim:TransformerEnd.xground>
+</cim:TransformerTankEnd>
+<cim:TransformerTankEnd rdf:ID="_1304D250-B986-47DD-A502-AD40BD3B989C">
+  <cim:TransformerEnd.rground>0</cim:TransformerEnd.rground>
+  <cim:TransformerEnd.xground>0</cim:TransformerEnd.xground>
+</cim:TransformerTankEnd>
+<cim:TransformerTankEnd rdf:ID="_EC1030D9-D92C-4EEF-8AC6-FA9F4EA88819">
+  <cim:TransformerEnd.rground>0</cim:TransformerEnd.rground>
+  <cim:TransformerEnd.xground>0</cim:TransformerEnd.xground>
+</cim:TransformerTankEnd>
+<cim:TransformerTankEnd rdf:ID="_61133D96-9485-4435-881D-37855A49F591">
+  <cim:TransformerEnd.rground>0</cim:TransformerEnd.rground>
+  <cim:TransformerEnd.xground>0</cim:TransformerEnd.xground>
+</cim:TransformerTankEnd>
+<cim:TransformerTankEnd rdf:ID="_69B1F119-D893-4154-960E-1C11F0A04092">
+  <cim:TransformerEnd.rground>0</cim:TransformerEnd.rground>
+  <cim:TransformerEnd.xground>0</cim:TransformerEnd.xground>
+</cim:TransformerTankEnd>
+<cim:TapChangerControl rdf:ID="_0C85FACA-4232-4ABB-AE2D-DFCA1C22F807">
+  <cim:RegulatingControl.discrete>true</cim:RegulatingControl.discrete>
+  <cim:RegulatingControl.targetValue>122</cim:RegulatingControl.targetValue>
+  <cim:RegulatingControl.targetDeadband>2</cim:RegulatingControl.targetDeadband>
+  <cim:TapChangerControl.lineDropCompensation>true</cim:TapChangerControl.lineDropCompensation>
+  <cim:TapChangerControl.lineDropR>3</cim:TapChangerControl.lineDropR>
+  <cim:TapChangerControl.lineDropX>9</cim:TapChangerControl.lineDropX>
+  <cim:TapChangerControl.reverseLineDropR>0</cim:TapChangerControl.reverseLineDropR>
+  <cim:TapChangerControl.reverseLineDropX>0</cim:TapChangerControl.reverseLineDropX>
+  <cim:TapChangerControl.limitVoltage>0</cim:TapChangerControl.limitVoltage>
+</cim:TapChangerControl>
+<cim:RatioTapChanger rdf:ID="_681D5629-A8AB-4615-9EFC-04DCE23B122F">
+  <cim:RatioTapChanger.stepVoltageIncrement>0.625</cim:RatioTapChanger.stepVoltageIncrement>
+  <cim:TapChanger.highStep>16</cim:TapChanger.highStep>
+  <cim:TapChanger.lowStep>-16</cim:TapChanger.lowStep>
+  <cim:TapChanger.neutralStep>0</cim:TapChanger.neutralStep>
+  <cim:TapChanger.normalStep>0</cim:TapChanger.normalStep>
+  <cim:TapChanger.neutralU>2400</cim:TapChanger.neutralU>
+  <cim:TapChanger.initialDelay>15</cim:TapChanger.initialDelay>
+  <cim:TapChanger.subsequentDelay>2</cim:TapChanger.subsequentDelay>
+  <cim:TapChanger.ltcFlag>true</cim:TapChanger.ltcFlag>
+</cim:RatioTapChanger>
+<cim:TapChangerControl rdf:ID="_74B8B47A-262D-481A-A8B4-3EE3939E63B1">
+  <cim:RegulatingControl.discrete>true</cim:RegulatingControl.discrete>
+  <cim:RegulatingControl.targetValue>122</cim:RegulatingControl.targetValue>
+  <cim:RegulatingControl.targetDeadband>2</cim:RegulatingControl.targetDeadband>
+  <cim:TapChangerControl.lineDropCompensation>true</cim:TapChangerControl.lineDropCompensation>
+  <cim:TapChangerControl.lineDropR>3</cim:TapChangerControl.lineDropR>
+  <cim:TapChangerControl.lineDropX>9</cim:TapChangerControl.lineDropX>
+  <cim:TapChangerControl.reverseLineDropR>0</cim:TapChangerControl.reverseLineDropR>
+  <cim:TapChangerControl.reverseLineDropX>0</cim:TapChangerControl.reverseLineDropX>
+  <cim:TapChangerControl.limitVoltage>0</cim:TapChangerControl.limitVoltage>
+</cim:TapChangerControl>
+<cim:RatioTapChanger rdf:ID="_8334BFBA-9C18-4ED0-B8E4-99FF1E8B7076">
+  <cim:RatioTapChanger.stepVoltageIncrement>0.625</cim:RatioTapChanger.stepVoltageIncrement>
+  <cim:TapChanger.highStep>16</cim:TapChanger.highStep>
+  <cim:TapChanger.lowStep>-16</cim:TapChanger.lowStep>
+  <cim:TapChanger.neutralStep>0</cim:TapChanger.neutralStep>
+  <cim:TapChanger.normalStep>0</cim:TapChanger.normalStep>
+  <cim:TapChanger.neutralU>2400</cim:TapChanger.neutralU>
+  <cim:TapChanger.initialDelay>15</cim:TapChanger.initialDelay>
+  <cim:TapChanger.subsequentDelay>2</cim:TapChanger.subsequentDelay>
+  <cim:TapChanger.ltcFlag>true</cim:TapChanger.ltcFlag>
+</cim:RatioTapChanger>
+<cim:TapChangerControl rdf:ID="_39C3F5C5-E064-4728-BF15-DBE42D4C2C94">
+  <cim:RegulatingControl.discrete>true</cim:RegulatingControl.discrete>
+  <cim:RegulatingControl.targetValue>122</cim:RegulatingControl.targetValue>
+  <cim:RegulatingControl.targetDeadband>2</cim:RegulatingControl.targetDeadband>
+  <cim:TapChangerControl.lineDropCompensation>true</cim:TapChangerControl.lineDropCompensation>
+  <cim:TapChangerControl.lineDropR>3</cim:TapChangerControl.lineDropR>
+  <cim:TapChangerControl.lineDropX>9</cim:TapChangerControl.lineDropX>
+  <cim:TapChangerControl.reverseLineDropR>0</cim:TapChangerControl.reverseLineDropR>
+  <cim:TapChangerControl.reverseLineDropX>0</cim:TapChangerControl.reverseLineDropX>
+  <cim:TapChangerControl.limitVoltage>0</cim:TapChangerControl.limitVoltage>
+</cim:TapChangerControl>
+<cim:RatioTapChanger rdf:ID="_E2F282D7-969D-4395-ABAA-28B1FA30C89B">
+  <cim:RatioTapChanger.stepVoltageIncrement>0.625</cim:RatioTapChanger.stepVoltageIncrement>
+  <cim:TapChanger.highStep>16</cim:TapChanger.highStep>
+  <cim:TapChanger.lowStep>-16</cim:TapChanger.lowStep>
+  <cim:TapChanger.neutralStep>0</cim:TapChanger.neutralStep>
+  <cim:TapChanger.normalStep>0</cim:TapChanger.normalStep>
+  <cim:TapChanger.neutralU>2400</cim:TapChanger.neutralU>
+  <cim:TapChanger.initialDelay>15</cim:TapChanger.initialDelay>
+  <cim:TapChanger.subsequentDelay>2</cim:TapChanger.subsequentDelay>
+  <cim:TapChanger.ltcFlag>true</cim:TapChanger.ltcFlag>
+</cim:RatioTapChanger>
+<cim:ACLineSegment rdf:ID="_6813248F-61E3-4825-A61C-BAC5A37D11D7">
+  <cim:ACLineSegment.PerLengthImpedance rdf:resource="#_F36C9FA6-6EE5-4D0D-B8E1-B80765244210"/>
+</cim:ACLineSegment>
+<cim:PerLengthPhaseImpedance rdf:ID="_F36C9FA6-6EE5-4D0D-B8E1-B80765244210">
+  <cim:IdentifiedObject.mRID>_F36C9FA6-6EE5-4D0D-B8E1-B80765244210</cim:IdentifiedObject.mRID>
+  <cim:IdentifiedObject.name>645646_PUZ</cim:IdentifiedObject.name>
+  <cim:PerLengthPhaseImpedance.conductorCount>2</cim:PerLengthPhaseImpedance.conductorCount>
+</cim:PerLengthPhaseImpedance>
+<cim:PhaseImpedanceData rdf:ID="_A612D0A8-2CCF-43E0-8F24-8F115BAB78DF">
+  <cim:PhaseImpedanceData.PhaseImpedance rdf:resource="#_F36C9FA6-6EE5-4D0D-B8E1-B80765244210"/>
+  <cim:PhaseImpedanceData.row>1</cim:PhaseImpedanceData.row>
+  <cim:PhaseImpedanceData.column>1</cim:PhaseImpedanceData.column>
+  <cim:PhaseImpedanceData.r>0.00082257323</cim:PhaseImpedanceData.r>
+  <cim:PhaseImpedanceData.x>0.00084314067</cim:PhaseImpedanceData.x>
+  <cim:PhaseImpedanceData.b>6.5590561E-010</cim:PhaseImpedanceData.b>
+</cim:PhaseImpedanceData>
+<cim:PhaseImpedanceData rdf:ID="_FDFC8469-0116-4979-B63F-D7A2CB985324">
+  <cim:PhaseImpedanceData.PhaseImpedance rdf:resource="#_F36C9FA6-6EE5-4D0D-B8E1-B80765244210"/>
+  <cim:PhaseImpedanceData.row>2</cim:PhaseImpedanceData.row>
+  <cim:PhaseImpedanceData.column>1</cim:PhaseImpedanceData.column>
+  <cim:PhaseImpedanceData.r>0.00012837561</cim:PhaseImpedanceData.r>
+  <cim:PhaseImpedanceData.x>0.00028527222</cim:PhaseImpedanceData.x>
+  <cim:PhaseImpedanceData.b>-1.405512E-010</cim:PhaseImpedanceData.b>
+</cim:PhaseImpedanceData>
+<cim:PhaseImpedanceData rdf:ID="_DBC45A00-5DED-4AE4-A3B1-0308FB8C2BFD">
+  <cim:PhaseImpedanceData.PhaseImpedance rdf:resource="#_F36C9FA6-6EE5-4D0D-B8E1-B80765244210"/>
+  <cim:PhaseImpedanceData.row>2</cim:PhaseImpedanceData.row>
+  <cim:PhaseImpedanceData.column>2</cim:PhaseImpedanceData.column>
+  <cim:PhaseImpedanceData.r>0.00082605292</cim:PhaseImpedanceData.r>
+  <cim:PhaseImpedanceData.x>0.00083705121</cim:PhaseImpedanceData.x>
+  <cim:PhaseImpedanceData.b>6.5590561E-010</cim:PhaseImpedanceData.b>
+</cim:PhaseImpedanceData>
+<cim:LoadBreakSwitch rdf:ID="_40A3F8D9-236B-4C61-90CD-5DED97F8B56D">
+  <cim:ProtectedSwitch.breakingCapacity>400</cim:ProtectedSwitch.breakingCapacity>
+  <cim:Switch.ratedCurrent>400</cim:Switch.ratedCurrent>
+</cim:LoadBreakSwitch>
+</rdf:RDF>
