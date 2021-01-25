@@ -13,7 +13,7 @@ from derms_app.equipment import Equipment, SynchronousMachine, Solar, Battery
 _log = logging.getLogger(__name__)
 
 
-def __build_endpoint_header(verb, message_id=None, correlation_id=None):
+def __build_endpoint_header(verb, noun, message_id=None, correlation_id=None):
     '''
     create message header
     :param verb: string. create, change, delete execute, get , reply, etc.
@@ -26,7 +26,7 @@ def __build_endpoint_header(verb, message_id=None, correlation_id=None):
 
     return {
         "Verb": verb,
-        "Noun": "DERGroups",
+        "Noun": noun,
         "Timestamp": datetime.datetime.now(),
         "MessageID": message_id,
         "CorrelationID": correlation_id
@@ -193,6 +193,21 @@ def __build_query_request_bymRIDs(mrids):
     return request
 
 
+def __build_query_dergourp_status_body(status):
+    groups = []
+    for s in status:
+        groups.append({'Names': {'name': s}})
+    request = {
+        # 'ID': uuid.uuid4(),
+        # 'StartTime': datetime.datetime.now(),
+        # 'EndTime': datetime.datetime.now(),
+        'DERGroupStatusQueries': {
+            'EndDeviceGroup': groups
+        }
+    }
+    return request
+
+
 def get_devices():
     history = HistoryPlugin()
     client = Client(c.GET_DEVICE_ENDPOINT, plugins=[history])
@@ -200,7 +215,10 @@ def get_devices():
     #     r = client.service.GetDevices()
     # print(client.wsdl.bindings)
     r = client.service.GetDevices()
-    deviceList = r
+    if r:
+        deviceList = r
+    else:
+        deviceList = []
     # for d in r.synchronousMachines.SynchronousMachine:
     #     deviceList.append(d)
     # for d in r.solars.Solar:
@@ -317,7 +335,7 @@ def create_groups(group_list):
     '''
     history = HistoryPlugin()
     client = Client(c.CREATE_DERGROUP_ENDPOINT, plugins=[history])
-    headers = __build_endpoint_header("CREATE")
+    headers = __build_endpoint_header("CREATE", "DERGroups")
     body = __get_create_body_groups(group_list)
     from pprint import pprint
     print("HEADERS")
@@ -344,6 +362,18 @@ def get_service(client, verb):
     return service
 
 
+def get_statuses_service(client, verb):
+    '''
+    create service
+    :param client:
+    :param verb: string. create, delete, get, etc.
+    :return: the ServiceProxy object that is created in the Client object
+    '''
+    bindings = c.STATUS_SOAP_BINDINGS[verb]
+    service = client.create_service(*bindings) # here * is for unpacking
+    return service
+
+
 def create_multiple_group(mrid_list, name_list, device_mrid_list_list):
     '''
     create multiple groups
@@ -354,7 +384,7 @@ def create_multiple_group(mrid_list, name_list, device_mrid_list_list):
     '''
     assert len(mrid_list) == len(name_list) == len(device_mrid_list_list), "Passed lists must be the same length"
 
-    headers = __build_endpoint_header("create")
+    headers = __build_endpoint_header("create", "DERGroups")
     body = None
 
     for i in range(len(mrid_list)):
@@ -388,7 +418,7 @@ def create_multiple_group(mrid_list, name_list, device_mrid_list_list):
 
 
 def query_groups_byName(names):
-    headers = __build_endpoint_header("GET")
+    headers = __build_endpoint_header("GET", "DERGroups")
     request = __build_query_request_byNames(names)
     print(request)
     history = HistoryPlugin()
@@ -407,7 +437,7 @@ def query_groups_byName(names):
 
 
 def query_groups_bymRID(mrids):
-    headers = __build_endpoint_header("GET")
+    headers = __build_endpoint_header("GET", "DERGroups")
     request = __build_query_request_bymRIDs(mrids)
     history = HistoryPlugin()
     client = Client(c.QUERY_DERGROUP_ENDPOINT, plugins=[history])
@@ -419,7 +449,7 @@ def query_groups_bymRID(mrids):
 
 
 def query_all_groups():
-    headers = __build_endpoint_header("GET")
+    headers = __build_endpoint_header("GET", "DERGroups")
     print(headers)
     request = {
         'DERGroupQueries': {
@@ -444,7 +474,7 @@ def modify_a_group(originalgroup, modifiedgroup):
     # do the above and delete the missing device
     # however, since the epri test harness cannot distinguish the payload, I will just put everything in
     # _compare_der_functions(originalgroup, modifiedgroup)
-    headers = __build_endpoint_header("CHANGE")
+    headers = __build_endpoint_header("CHANGE", "DERGroups")
     payload = __get_create_body_group(modifiedgroup)
     from pprint import pprint
     print("HEADERS")
@@ -458,7 +488,7 @@ def modify_a_group(originalgroup, modifiedgroup):
 
 
 def change_group(mrid, name, device_mrid_list):
-    headers = __build_endpoint_header("create")
+    headers = __build_endpoint_header("create", "DERGroups")
     body = None
 
     history = HistoryPlugin()
@@ -475,7 +505,7 @@ def change_group(mrid, name, device_mrid_list):
 def delete_group(name=None, mrid=None):
     assert name or mrid, "Must have either name or mrid specified"
     assert not (name and mrid), "Must have either name or mrid specified"
-    headers = __build_endpoint_header("DELETE")
+    headers = __build_endpoint_header("DELETE", "DERGroups")
     if name:
         body = {
             "DERGroups": [
@@ -498,6 +528,23 @@ def delete_group(name=None, mrid=None):
     response = get_service(client, "DELETE").DeleteDERGroups(Header=headers, Payload=body)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
     # _log.debug("ZEEP Respons:\n{}".format(response))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
+
+    return response
+
+
+def query_group_status(status):
+    history = HistoryPlugin()
+    client = Client(c.QUERY_DERGROUP_STATUS_ENDPOINT, plugins=[history])
+    headers = __build_endpoint_header("GET", "DERGroupStatuses")
+    body = __build_query_dergourp_status_body(status)
+    from pprint import pprint
+    print("HEADERS")
+    pprint(headers)
+    print("BODY")
+    pprint(body)
+    response = get_statuses_service(client, "GET").QueryDERGroupStatuses(Header=headers, Request=body)
+    _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
 
     return response

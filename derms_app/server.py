@@ -38,19 +38,29 @@ def target_chosen():
             # derms_client.c.re_import()
             from epri_simulator import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
                                           CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT,
-                                          QUERY_DERGROUP_ENDPOINT, QUERY_NAMESPACE_SOAP_BINDING)
+                                          QUERY_DERGROUP_ENDPOINT, QUERY_NAMESPACE_SOAP_BINDING,
+                                        QUERY_NAMESPACE_STATUS_SOAP_BINDING, QUERY_DERGROUP_STATUS_ENDPOINT)
             derms_client.c.CHANGE_NAMESPACE_SOAP_BINDING = CHANGE_NAMESPACE_SOAP_BINDING
             derms_client.c.CREATE_NAMESPACE_SOAP_BINDING = CREATE_NAMESPACE_SOAP_BINDING
             derms_client.c.CREATE_DERGROUP_ENDPOINT = CREATE_DERGROUP_ENDPOINT
             derms_client.c.CHANGE_DERGROUP_ENDPOINT = CHANGE_DERGROUP_ENDPOINT
             derms_client.c.QUERY_DERGROUP_ENDPOINT = QUERY_DERGROUP_ENDPOINT
             derms_client.c.QUERY_NAMESPACE_SOAP_BINDING = QUERY_NAMESPACE_SOAP_BINDING
+            derms_client.c.QUERY_NAMESPACE_STATUS_SOAP_BINDING = QUERY_NAMESPACE_STATUS_SOAP_BINDING
+            derms_client.c.QUERY_DERGROUP_STATUS_ENDPOINT = QUERY_DERGROUP_STATUS_ENDPOINT
             derms_client.c.SOAP_BINDINGS = dict(
                 CREATE=CREATE_NAMESPACE_SOAP_BINDING,
                 # Both delete and change use the same binding
                 DELETE=CHANGE_NAMESPACE_SOAP_BINDING,
                 CHANGE=CHANGE_NAMESPACE_SOAP_BINDING,
                 GET=QUERY_NAMESPACE_SOAP_BINDING
+            )
+            derms_client.c.STATUS_SOAP_BINDINGS = dict(
+                CREATE=CREATE_NAMESPACE_SOAP_BINDING,
+                # Both delete and change use the same binding
+                DELETE=CHANGE_NAMESPACE_SOAP_BINDING,
+                CHANGE=CHANGE_NAMESPACE_SOAP_BINDING,
+                GET=QUERY_NAMESPACE_STATUS_SOAP_BINDING
             )
         else:
             derms_client.c.USE_SIMULATOR_FOR_SOAP = False
@@ -324,19 +334,22 @@ def list_group_html():
 
 @app.route("/list_devices")
 def list_devices():
-    try:
-        global deviceList
-        if len(deviceList) == 0:
-            try:
-                deviceList = derms_client.get_devices()
-            except Exception as e:
-                deviceList = get_devices()
-            # with open("devices_list.json", "w") as fp:
-            #     a = json.dumps([d.__json__() for d in deviceList])
-            #     fp.write(a)
+    # try:
+    global deviceList
+    if deviceList is None or len(deviceList) == 0:
+        try:
+            deviceList = derms_client.get_devices()
+        except Exception as e:
+            deviceList = get_devices()
+        # with open("devices_list.json", "w") as fp:
+        #     a = json.dumps([d.__json__() for d in deviceList])
+        #     fp.write(a)
+    if deviceList:
         return render_template("list-device-template.html", devices=deviceList)
-    except Exception as ex:
-        return f'Error Getting Devices.<br />{str(ex)}'
+    else:
+        return f'Error Getting Devices.<br />'
+    # except Exception as ex:
+    #     return f'Error Getting Devices.<br />{str(ex)}'
         # return 'Error Getting Devices.\n{}'.format(str(ex))
     # s = response[0]
     # so = response[1]
@@ -351,8 +364,11 @@ def list_devices():
 @app.route("/edit_group")
 def edit_group():
     if not groupList:
-        response = derms_client.query_all_groups()
-        _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
+        try:
+            response = derms_client.query_all_groups()
+            _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
+        except Exception as e:
+            pass
         # derGroups = derms_client.get_end_device_groups()
         # _sortGroups(derGroups)
     global deviceList
@@ -500,6 +516,46 @@ def editGroup():
 #     message = request.form['message']
 #     print('message: ' + message)
 #     return "meesage sent."
+@app.route('/get_group_status', methods=['GET', 'POST'])
+def getGroupStatus():
+    if request.method == 'POST':
+        status = []
+        select1 = request.form.get('group1')
+        if select1:
+            status.append(select1)
+        select2 = request.form.get('group2')
+        if select2:
+            status.append(select2)
+        if status:
+            response = derms_client.query_group_status(status)
+            return render_template("group-status-returned.html", status=status)
+        else:
+            return "please select at least one group to query."
+        # if select1 and select2:
+        #     status.append(select1)
+        #     status.append(select2)
+        #     response = derms_client.create_groups(status)
+        #     return render_template("query-group-status.html", groups=groupList)
+        # elif select1:
+        #     status.append(select1)
+        #     response = derms_client.create_groups(status)
+        #     return "select1 to query."
+        # elif select2:
+        #     status.append(select2)
+        #     response = derms_client.create_groups(status)
+        #     return "select2 to query."
+        # else:
+        #     return "please select at least one group to query."
+    else:
+        if not groupList:
+            # response = derms_client.query_all_groups()
+            # _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
+            try:
+                response = derms_client.query_all_groups()
+                _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
+            except Exception as ex:
+                pass
+        return render_template("query-group-status.html", groups=groupList)
 
 
 def deleteGroup(group):
