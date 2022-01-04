@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Run simulation</title>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script>
+    $(document).ready(function() {
+    });
+    </script>
+</head>
+<body>
+    <a href="/menu">Home</a>&nbsp;&nbsp;
+    <br>
+    <br>
+
+    <form id="configuration" action="/configuration" method="post">
+
+        <label>Configuration file path: &#09</label><br>
+        <input type="text" id="path" name="path" value="./configurations/Run123PVNodeFileSimAPI.json"><br>
+        <br>
+        <input type="submit" value="Submit Configuration">
+
+    </form>
+
+</body>
+</html>

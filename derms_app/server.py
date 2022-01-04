@@ -3,13 +3,15 @@ from threading import Lock
 from time import sleep
 from urllib.error import URLError
 
-from flask import Flask, send_from_directory, request, render_template, make_response, redirect, url_for
+from flask import Flask, send_from_directory, request, render_template, make_response, redirect, url_for, Response
 
 # from derms_app import createDeviceJsonConf
 from derms_app import group, derms_client
 # from derms_app.devices import get_devices_json, get_devices
 from derms_app.device import Device, get_devices
 import json, jsons
+from jinja2 import Environment
+from jinja2.loaders import FileSystemLoader
 
 
 # set the project root directory as the static folder, you can set others.
@@ -21,7 +23,15 @@ groupList = []
 groupListByName = {}
 groupListBymRID = {}
 
-#groups =
+simulation_id = 0
+model_namelist = ['acep_psil', 'final9500node', 'ieee123pv', 'ieee13nodeckt', 'j1', 'test9500new', 'ieee123']
+model_mridlist = ['_77966920-E1EC-EE8A-23EE-4EFD23B205BD', '_EE71F6C9-56F0-4167-A14E-7F4C71F10EAA',
+                  '_E407CBB6-8C8D-9BC9-589C-AB83FBF0826D', '_49AD8E07-3BF9-A4E2-CB8F-C3722F837B62',
+                  '_67AB291F-DCCD-31B7-B499-338206B9828F', '_AAE94E4A-2465-6F5E-37B1-3E72183A4E44',
+                  '_C1C3E687-6FFD-C753-582B-632A27E28507', ]
+model_name = None
+model_mrid = None
+
 
 @app.route('/')
 def root():
@@ -181,7 +191,7 @@ def create_group_html():
             #                        status=response.Reply.Error)
             global deviceList
             if len(deviceList) == 0:
-                deviceList = derms_client.get_devices()
+                deviceList = derms_client.get_devices(model_mrid)
                 devices = deviceList
             else:
                 devices = deviceList
@@ -191,7 +201,7 @@ def create_group_html():
     try:
         if len(deviceList) == 0:
             try:
-                deviceList = derms_client.get_devices()
+                deviceList = derms_client.get_devices(model_mrid)
             except Exception as e:
                 deviceList = get_devices()
             devices = deviceList
@@ -208,8 +218,8 @@ def retrieve_groups_html():
     if not groupList:
         response = derms_client.query_all_groups()
         _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
-    # return send_from_directory('static', 'retrieve_groups_template.html')
-    return render_template('retrieve_groups_template.html', names=groupListByName, mRIDs=groupListBymRID)
+    # return send_from_directory('static', 'retrieve-groups-template.html')
+    return render_template('retrieve-groups-template.html', names=groupListByName, mRIDs=groupListBymRID)
 
 
 @app.route("/query_group", methods=["POST"])
@@ -332,15 +342,29 @@ def list_group_html():
         return f'Error Query all DER Groups. <br />{str(ex)}'
 
 
+@app.route("/load_model", methods=['POST', 'GET'])
+def load_model():
+    if request.method == 'POST':
+        global model_name
+        global model_mrid
+        model_name = request.form.get('mymodel')
+        if model_name in model_namelist:
+            index = model_namelist.index(model_name)
+            model_mrid = model_mridlist[index]
+        else:
+            model_mrid = None
+    return render_template('load-model.html', exist_name=model_name, exist_mrid=model_mrid)
+
+
 @app.route("/list_devices")
 def list_devices():
     # try:
     global deviceList
-    if deviceList is None or len(deviceList) == 0:
-        try:
-            deviceList = derms_client.get_devices()
-        except Exception as e:
-            deviceList = get_devices()
+    # if deviceList is None or len(deviceList) == 0:
+    try:
+        deviceList = derms_client.get_devices(model_mrid)
+    except Exception as e:
+        deviceList = get_devices()
         # with open("devices_list.json", "w") as fp:
         #     a = json.dumps([d.__json__() for d in deviceList])
         #     fp.write(a)
@@ -374,10 +398,64 @@ def edit_group():
     global deviceList
     if len(deviceList) == 0:
         try:
-            deviceList = derms_client.get_devices()
+            deviceList = derms_client.get_devices(model_mrid)
         except Exception as e:
             deviceList = get_devices()
     return render_template("modify-groups-template.html", names=groupListByName, mRIDs=groupListBymRID, groups=groupList, devices=deviceList)
+
+
+@app.route("/run_simulation", methods=['GET', 'POST'])
+def run_simulation():
+    return render_template('run-simulation.html')
+
+
+@app.route("/configuration", methods=['POST'])
+def configuration():
+    if request.method == 'POST':
+
+        path = request.form.get('path')
+        global simulation_id
+
+        simulation_id, list_process_status = derms_client.run_simulation(path)
+        return simulation_status()
+        # return render_template("simulation-status.html", simu_id=str(simulation_id))
+
+
+@app.route("/simulation_status", methods=['GET', 'POST'])
+def simulation_status():
+    def inner():
+            length_old = 0
+            while True:
+                sleep(2)
+
+                with open('message.log') as f:
+                    lines = f.readlines()
+                length = len(lines)
+                message = lines[length_old:length]
+
+                if length == length_old:
+                    sleep(5)
+                    with open('message.log') as f:
+                        lines = f.readlines()
+                    if len(lines) == length:
+                        break
+                else:
+                    length_old = length
+                    yield message
+
+    env = Environment(loader=FileSystemLoader('templates'))
+    tmpl = env.get_template('simulation-status.html')
+
+    return Response(tmpl.generate(simu_id=str(simulation_id), messages=inner()))
+
+
+# @app.route("/dispatch", methods=['GET', 'POST'])
+# def dispath():
+    #querry measurement ID
+    #select one or multiple measuremnts
+        #dispatch them
+        #PNV_obj, VA_obj
+            #querry p, q
 
 
 # @app.route('/create')
@@ -420,6 +498,7 @@ def send_js(path):
 #         return render_template('groupDetail-template.html', group=newGroup, message='created')
 #     else:
 #         return render_template('failedGroup-template.html', group=newGroup, message='create')
+
 
 @app.route('/modify', methods=['POST'])
 def modifyAGroup():
@@ -516,6 +595,8 @@ def editGroup():
 #     message = request.form['message']
 #     print('message: ' + message)
 #     return "meesage sent."
+
+
 @app.route('/get_group_status', methods=['GET', 'POST'])
 def getGroupStatus():
     if request.method == 'POST':

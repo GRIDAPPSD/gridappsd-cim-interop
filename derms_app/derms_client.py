@@ -10,6 +10,16 @@ from zeep.plugins import HistoryPlugin
 from derms_app import constants as c
 from derms_app.equipment import Equipment, SynchronousMachine, Solar, Battery
 
+from gridappsd import GridAPPSD, utils, DifferenceBuilder
+from gridappsd import topics as t
+from gridappsd.simulation import Simulation
+import json, jsons
+from gridappsd.topics import simulation_input_topic, \
+    simulation_output_topic, simulation_log_topic
+import time
+import sys
+
+
 _log = logging.getLogger(__name__)
 
 
@@ -208,13 +218,13 @@ def __build_query_dergourp_status_body(status):
     return request
 
 
-def get_devices():
+def get_devices(mrid = None):
     history = HistoryPlugin()
     client = Client(c.GET_DEVICE_ENDPOINT, plugins=[history])
     # with client.settings(raw_response=True):
     #     r = client.service.GetDevices()
     # print(client.wsdl.bindings)
-    r = client.service.GetDevices()
+    r = client.service.GetDevices(mrid)
     if r:
         deviceList = r
     else:
@@ -548,6 +558,53 @@ def query_group_status(status):
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
 
     return response
+
+
+def run_simulation(path):
+    # print('simulation configuration (in derms_client):', path)
+
+    # run_config load from the path
+    run_config = json.load(open(path))
+    gapps_sim = GridAPPSD("('localhost', 61613)",
+                          username='system', password='manager')
+    simulation_obj = Simulation(gapps_sim, run_config)
+    simulation_obj.start_simulation()
+    simulation_id = simulation_obj.simulation_id
+
+    # subscribe to logging API
+    log_topic = simulation_log_topic(simulation_id)
+
+    log_file_0 = open("message.log", 'w')
+    log_file_0.close()
+    list_process_status = []
+
+    def demoLogFunction(header, message):
+
+        process_status = message["processStatus"] #'STARTING', 'STARTED', 'RUNNING', 'COMPLETE'
+        log_message = message["logMessage"]
+
+        list_process_status.append(process_status)
+
+        old_stdout = sys.stdout
+        log_file = open("message.log", 'a')
+        sys.stdout = log_file
+
+        print(".......... Log message ..........")
+        print(process_status)
+        print(log_message)
+
+        sys.stdout = old_stdout
+        log_file.close()
+
+    gapps_sim.subscribe(log_topic, demoLogFunction)
+
+    # # print simulation status every 5 seconds
+    # while True:
+    #     time.sleep(5)
+    #     if 'COMPLETE' in list_process_status:
+    #         break
+
+    return simulation_id, list_process_status
 
 
 if __name__ == '__main__':
