@@ -25,6 +25,7 @@ USE_SIMULATOR_FOR_SOAP = None
 # else:
 from .epri_opendss import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
                            CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT, GET_DEVICE_ENDPOINT,
+                           GET_MODEL_ENDPOINT, CHANGE_SIMULATION_ENDPOINT,
                            GET_DERGROUPS_ENDPOINT, QUERY_DERGROUP_ENDPOINT, QUERY_NAMESPACE_SOAP_BINDING,
                            QUERY_DERGROUP_STATUS_ENDPOINT, QUERY_NAMESPACE_STATUS_SOAP_BINDING)
 
@@ -46,7 +47,7 @@ def re_import():
 # blazegraph_url = "http://blazegraph:8080/bigdata/sparql"
 
 # URL from outside the docker container:
-blazegraph_url = "http://localhost:8889/bigdata/sparql"
+blazegraph_url = "http://localhost:8889/bigdata/namespace/kb/sparql"
 #
 # # ******************************************************************************
 # # URL for derms test instance

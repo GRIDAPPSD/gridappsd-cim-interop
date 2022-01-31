@@ -24,22 +24,24 @@
     <form id="model_container" action="/load_model" method="post">
         <label>Select a model from this list: &#09</label><br>&nbsp;&nbsp;
         <select name = "mymodel" id = "models">
-            <option value = "acep_psil">acep_psil</option>
-            <option value = "final9500node">final9500node</option>
-            <option value = "ieee123pv">ieee123pv</option>
-            <option value = "ieee13nodeckt">ieee13nodeckt</option>
-            <option value = "j1">j1</option>
-            <option value = "test9500new">test9500new</option>
+            {% for m in models %}
+            <option value = {{m.name}}>{{m.name}}</option>
+            {% endfor %}
         </select>
-        <!--
-        <input type = "search" list="models" name = "mymodel" /></label>
-        <datalist id = "models">
-            option value="IEEE_123"
-            option value="IEEE_123_PV"
-        </datalist>
-        -->
         <br><br>
         <input type="submit" value="Submit">
     </form>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

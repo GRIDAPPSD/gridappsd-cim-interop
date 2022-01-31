@@ -8,7 +8,8 @@ from flask import Flask, send_from_directory, request, render_template, make_res
 # from derms_app import createDeviceJsonConf
 from derms_app import group, derms_client
 # from derms_app.devices import get_devices_json, get_devices
-from derms_app.device import Device, get_devices
+from derms_app.device import Device#, get_devices
+from derms_app.model import Model
 import json, jsons
 from jinja2 import Environment
 from jinja2.loaders import FileSystemLoader
@@ -23,12 +24,8 @@ groupList = []
 groupListByName = {}
 groupListBymRID = {}
 
-simulation_id = 0
-model_namelist = ['acep_psil', 'final9500node', 'ieee123pv', 'ieee13nodeckt', 'j1', 'test9500new', 'ieee123']
-model_mridlist = ['_77966920-E1EC-EE8A-23EE-4EFD23B205BD', '_EE71F6C9-56F0-4167-A14E-7F4C71F10EAA',
-                  '_E407CBB6-8C8D-9BC9-589C-AB83FBF0826D', '_49AD8E07-3BF9-A4E2-CB8F-C3722F837B62',
-                  '_67AB291F-DCCD-31B7-B499-338206B9828F', '_AAE94E4A-2465-6F5E-37B1-3E72183A4E44',
-                  '_C1C3E687-6FFD-C753-582B-632A27E28507', ]
+simulation_id = None
+modelList = []
 model_name = None
 model_mrid = None
 
@@ -200,10 +197,10 @@ def create_group_html():
             return render_template("create-group.html", devices=devices, status=response.Reply.Error)
     try:
         if len(deviceList) == 0:
-            try:
-                deviceList = derms_client.get_devices(model_mrid)
-            except Exception as e:
-                deviceList = get_devices()
+            # try:
+            deviceList = derms_client.get_devices(model_mrid)
+            # except Exception as e:
+            #     deviceList = get_devices()
             devices = deviceList
         else:
             devices = deviceList
@@ -344,16 +341,20 @@ def list_group_html():
 
 @app.route("/load_model", methods=['POST', 'GET'])
 def load_model():
-    if request.method == 'POST':
-        global model_name
-        global model_mrid
-        model_name = request.form.get('mymodel')
-        if model_name in model_namelist:
-            index = model_namelist.index(model_name)
-            model_mrid = model_mridlist[index]
-        else:
-            model_mrid = None
-    return render_template('load-model.html', exist_name=model_name, exist_mrid=model_mrid)
+
+    global model_name
+    global model_mrid
+    global modelList
+    modelList = derms_client.get_models()
+
+    if modelList:
+        if request.method == 'POST':
+            model_name = request.form.get('mymodel')
+            for model in modelList:
+                model_mrid = model.mRID
+        return render_template('load-model.html', exist_name=model_name, exist_mrid=model_mrid, models=modelList)
+    else:
+        return f'Error Getting Devices.<br />'
 
 
 @app.route("/list_devices")
@@ -361,10 +362,10 @@ def list_devices():
     # try:
     global deviceList
     # if deviceList is None or len(deviceList) == 0:
-    try:
-        deviceList = derms_client.get_devices(model_mrid)
-    except Exception as e:
-        deviceList = get_devices()
+    # try:
+    deviceList = derms_client.get_devices(model_mrid)
+    # except Exception as e:
+    #     deviceList = get_devices()
         # with open("devices_list.json", "w") as fp:
         #     a = json.dumps([d.__json__() for d in deviceList])
         #     fp.write(a)
@@ -397,10 +398,10 @@ def edit_group():
         # _sortGroups(derGroups)
     global deviceList
     if len(deviceList) == 0:
-        try:
-            deviceList = derms_client.get_devices(model_mrid)
-        except Exception as e:
-            deviceList = get_devices()
+        # try:
+        deviceList = derms_client.get_devices(model_mrid)
+        # except Exception as e:
+        #     deviceList = get_devices()
     return render_template("modify-groups-template.html", names=groupListByName, mRIDs=groupListBymRID, groups=groupList, devices=deviceList)
 
 
@@ -418,7 +419,7 @@ def configuration():
 
         simulation_id, list_process_status = derms_client.run_simulation(path)
         return simulation_status()
-        # return render_template("simulation-status.html", simu_id=str(simulation_id))
+        # return render_template("simulation-status.html", simu_id=simulation_id)
 
 
 @app.route("/simulation_status", methods=['GET', 'POST'])

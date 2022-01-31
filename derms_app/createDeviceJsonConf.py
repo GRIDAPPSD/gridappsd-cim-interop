@@ -3,7 +3,6 @@ import json
 
 from SPARQLWrapper import SPARQLWrapper2
 from derms_app import constants
-from .devices import Device
 from derms_app import derms_group as grp
 
 sparql = SPARQLWrapper2(constants.blazegraph_url)

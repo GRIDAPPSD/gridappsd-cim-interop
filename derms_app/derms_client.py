@@ -218,6 +218,21 @@ def __build_query_dergourp_status_body(status):
     return request
 
 
+def get_models():
+    history = HistoryPlugin()
+    client = Client(c.GET_MODEL_ENDPOINT, plugins=[history])
+
+    r = client.service.GetModels()
+    if r:
+        modelList = r
+    else:
+        modelList = []
+
+    _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
+    return modelList
+
+
 def get_devices(mrid = None):
     history = HistoryPlugin()
     client = Client(c.GET_DEVICE_ENDPOINT, plugins=[history])
@@ -570,6 +585,11 @@ def run_simulation(path):
     simulation_obj = Simulation(gapps_sim, run_config)
     simulation_obj.start_simulation()
     simulation_id = simulation_obj.simulation_id
+
+    # pass simulation_id to soap server
+    history = HistoryPlugin()
+    client = Client(c.CHANGE_SIMULATION_ENDPOINT, plugins=[history])
+    client.service.sendSimuID(simulation_id)
 
     # subscribe to logging API
     log_topic = simulation_log_topic(simulation_id)

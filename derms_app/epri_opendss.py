@@ -14,6 +14,19 @@
 # test my soap server binding
 BASE_URL = "http://127.0.0.1:8008"
 Namespace_URL = 'der.pnnl.gov'
+
+CHANGE_SIMULATION_ENDPOINT = f"{BASE_URL}/change/executeSimulation?wsdl"
+CHANGE_SIMULATION_SOAP_BINDING = (
+        f'{{{Namespace_URL}}}ExecuteSimulationService',
+        f"{BASE_URL}/change/executeSimulation"
+)
+
+GET_MODEL_ENDPOINT = f"{BASE_URL}/get/getModels?wsdl"
+GET_MODEL_SOAP_BINDING = (
+        f'{{{Namespace_URL}}}GetModelsService',
+        f"{BASE_URL}/get/getModels"
+)
+
 GET_DEVICE_ENDPOINT = f"{BASE_URL}/get/getDevices?wsdl"
 GET_DEVICE_SOAP_BINDING = (
         f'{{{Namespace_URL}}}GetDevicesService',
