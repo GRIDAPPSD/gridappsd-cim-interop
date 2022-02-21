@@ -167,6 +167,59 @@ def __get_create_body_groups(group_list):
     return body
 
 
+def __get_create_body_group_dispatches(dispatch_list):
+    '''
+    create the body of the message using the list of the dispatches that need to be created
+    :param group_list: list of dispatches
+    :return: json string of DERGroupDispatches
+    '''
+    # create dictionary of lists of EndDeviceGroupDispatches
+    DER_group_dispatch_list = []
+    for dis in dispatch_list:
+        dispatch_schedule_list = []
+        for sch in dis.EndDeviceGroup.DERMonitorableParameter.DispatchSchedule:
+            dispatch_curvedata_list = []
+            for curve in sch.DERCurveData:
+                dispatch_curvedata = {
+                    "intervalNumber": curve.intervalNumber,
+                    "nominalYValue": curve.nominalYValue
+                }
+                dispatch_curvedata_list.append(dispatch_curvedata)
+            dispatch_schedule = {
+                "curveStyleKind": sch.curveStyleKind,
+                "startTime": sch.startTime,
+                "timeIntervalDuration": sch.timeIntervalDuration,
+                "timeIntervalUnit": sch.timeIntervalUnit,
+                "DERCurveData": dispatch_curvedata_list
+            }
+            dispatch_schedule_list.append(dispatch_schedule)
+        dispatch_parameter = {
+            "DERParameter": dis.EndDeviceGroup.DERMonitorableParameter.DERParameter,
+            "flowDirection": dis.EndDeviceGroup.DERMonitorableParameter.flowDirection,
+            "yMultiplier": dis.EndDeviceGroup.DERMonitorableParameter.yMultiplier,
+            "yUnit": dis.EndDeviceGroup.DERMonitorableParameter.yUnit,
+            "DispatchSchedule": dispatch_schedule_list
+        }
+        dispatch_group = {
+            "mRID": dis.EndDeviceGroup.mRID,
+            "DERMonitorableParameter": dispatch_parameter,
+            "Names": __build_names(dis.EndDeviceGroup.Names)
+        }
+        DER_group_dispatch = {
+            "mRID": dis.mRID,
+            "EndDeviceGroup": dispatch_group,
+            "Names": __build_names(dis.Names)
+        }
+        DER_group_dispatch_list.append(DER_group_dispatch)
+    body = {
+        "DERGroupDispatches": {
+            "DERGroupDispatch": DER_group_dispatch_list
+        }
+    }
+
+    return body
+
+
 def __build_query_request_byNames(names):
     groups = []
     for name in names:
@@ -352,6 +405,28 @@ def get_devices(mrid = None):
 #     return response
 
 
+def dispatch_groups(dispatch_list):
+    '''
+        create multiple group dispatches
+        :param dispatch_list: List of dispatches
+        :return: response from the server
+        '''
+    history = HistoryPlugin()
+    client = Client(c.CREATE_DISPATCH_ENDPOINT, plugins=[history])
+    headers = __build_endpoint_header("CREATE", "DERGroupDispatches")
+    body = __get_create_body_group_dispatches(dispatch_list)
+    from pprint import pprint
+    print("HEADERS")
+    pprint(headers)
+    print("BODY")
+    pprint(body)
+    response = get_service_dispatch(client, "CREATE").CreateDERGroupDispatches(Header=headers, Payload=body)
+    _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
+    # _log.debug("ZEEP Respons:\n{}".format(response))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
+
+    return response
+
 def create_groups(group_list):
     '''
     create multiple group
@@ -373,6 +448,18 @@ def create_groups(group_list):
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
 
     return response
+
+
+def get_service_dispatch(client, verb):
+    '''
+    create service
+    :param client:
+    :param verb: string. create, delete, get, etc.
+    :return: the ServiceProxy object that is created in the Client object
+    '''
+    bindings = c.SOAP_BINDINGS_DISPATCH[verb]
+    service = client.create_service(*bindings) # here * is for unpacking
+    return service
 
 
 def get_service(client, verb):

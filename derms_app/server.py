@@ -6,13 +6,14 @@ from urllib.error import URLError
 from flask import Flask, send_from_directory, request, render_template, make_response, redirect, url_for, Response
 
 # from derms_app import createDeviceJsonConf
-from derms_app import group, derms_client
+from derms_app import group, derms_client, dispatch
 # from derms_app.devices import get_devices_json, get_devices
 from derms_app.device import Device#, get_devices
 from derms_app.model import Model
 import json, jsons
 from jinja2 import Environment
 from jinja2.loaders import FileSystemLoader
+import time
 
 
 # set the project root directory as the static folder, you can set others.
@@ -29,6 +30,7 @@ modelList = []
 model_name = None
 model_mrid = None
 
+dispatch_list_global = []
 
 @app.route('/')
 def root():
@@ -450,13 +452,95 @@ def simulation_status():
     return Response(tmpl.generate(simu_id=str(simulation_id), messages=inner()))
 
 
-# @app.route("/dispatch", methods=['GET', 'POST'])
-# def dispath():
-    #querry measurement ID
-    #select one or multiple measuremnts
-        #dispatch them
-        #PNV_obj, VA_obj
-            #querry p, q
+@app.route("/dispatch_group", methods=['GET', 'POST'])
+def dispath_group_html():
+    # querry measurement ID
+    # select one or multiple measuremnts
+    #     dispatch them
+    #     PNV_obj, VA_obj
+    #         querry p, q
+    '''
+    if form does not exist yet, show the dispatch-group.html page
+    if form exists, pull user input from the forms and dispatch groups by calling function in derms_client
+    :return:
+    '''
+    global dispatch_list_global
+
+    if request.method == 'POST':
+        number_of_dispatches = int(request.form.get('number_of_dispatches'))
+        dispatch_list = []
+        for g_count in range(number_of_dispatches):
+            dispatch_mrid = request.form.get('dispatch_mrid_' + str(g_count + 1))
+            dispatch_name = request.form.get('dispatch_name_' + str(g_count + 1))
+            selected_groups = request.form.get('selected_groups_' + str(g_count + 1))
+            dispatch_group_mrid, dispatch_group_name = selected_groups.split(",")
+            dispatch_group_para_DERParameter = request.form.get('dispatch_group_para_DERParameter_' + str(g_count + 1))
+            dispatch_group_para_flowDirection = request.form.get('dispatch_group_para_flowDirection_' + str(g_count + 1))
+            dispatch_group_para_yMultiplier = request.form.get('dispatch_group_para_yMultiplier_' + str(g_count + 1))
+            dispatch_group_para_yUnit = request.form.get('dispatch_group_para_yUnit_' + str(g_count + 1))
+            dispatch_group_para_sch_curveStyleKind = request.form.get('dispatch_group_para_sch_curveStyleKind_' + str(g_count + 1))
+
+            year = int(request.form.get('Year_' + str(g_count + 1)))
+            month = int(request.form.get('Month_' + str(g_count + 1)))
+            day = int(request.form.get('Day_' + str(g_count + 1)))
+            hour = int(request.form.get('Hour_' + str(g_count + 1)))
+            minute = int(request.form.get('Min_' + str(g_count + 1)))
+            second = int(request.form.get('Sec_' + str(g_count + 1)))
+            dispatch_group_para_sch_startTime = f'{year:02}-{month:02}-{day:02}' + 'T' + f'{hour:02}:{minute:02}:{second:02}' + '-00:00'
+
+            # tn = time.localtime() # by default, pacific time zone
+            # dispatch_group_para_sch_startTime = f'{tn.tm_year:02}-{tn.tm_mon:02}-{tn.tm_mday:02}'+'T'+f'{tn.tm_hour:02}:{tn.tm_min:02}:{tn.tm_sec:02}'+'-08:00'
+
+            dispatch_group_para_sch_timeIntervalDuration = request.form.get('dispatch_group_para_sch_timeIntervalDuration_' + str(g_count + 1))
+            dispatch_group_para_sch_timeIntervalUnit = request.form.get('dispatch_group_para_sch_timeIntervalUnit_' + str(g_count + 1))
+            dispatch_group_para_sch_DERCurveData = []
+            for c_count in range(5): # allow up to 5 curve data setting for each dispatch
+                intervalNumber = request.form.get('dispatch_group_para_sch_intervalNumber_' + str(g_count + 1) + '_' + str(c_count + 1))
+                nominalYValue = request.form.get('dispatch_group_para_sch_nominalYValue_' + str(g_count + 1) + '_' + str(c_count + 1))
+                if intervalNumber and nominalYValue:
+                    dispatch_group_para_sch_DERCurveData.append(dispatch.Dispatch_curvedata(intervalNumber, nominalYValue))
+
+            # here assuming only one dispatch schedule in the list, there can be more than one dispatch schedules
+            Dispatch_schedule_tmp = []
+            Dispatch_schedule_tmp.append(dispatch.Dispatch_schedule(dispatch_group_para_sch_curveStyleKind,
+                                                               dispatch_group_para_sch_startTime,
+                                                               dispatch_group_para_sch_timeIntervalDuration,
+                                                               dispatch_group_para_sch_timeIntervalUnit,
+                                                               dispatch_group_para_sch_DERCurveData))
+            Dispatch_parameter_tmp = dispatch.Dispatch_parameter(dispatch_group_para_DERParameter,
+                                                                 dispatch_group_para_flowDirection,
+                                                                 dispatch_group_para_yMultiplier,
+                                                                 dispatch_group_para_yUnit,
+                                                                 Dispatch_schedule_tmp)
+            Dispatch_group_tmp = dispatch.Dispatch_group(dispatch_group_mrid,
+                                                         Dispatch_parameter_tmp,
+                                                         dispatch_group_name)
+            dispatch_list.append(dispatch.Dispatch(dispatch_mrid, Dispatch_group_tmp, dispatch_name))
+
+        response = derms_client.dispatch_groups(dispatch_list)
+
+        if response.Reply.Result == "OK":
+            # store dispatches globally
+            dispatch_list_global.append(dispatch_list)
+            return render_template("dispatch-group.html", status="Dispatch groups job submitted!", groups=groupList)
+        else:
+            reply_error_code = "Dispatch groups error: " + response.Reply.Result + "."
+            return render_template("dispatch-group.html", status=reply_error_code)
+
+        return render_template("dispatch-group.html", status="No response.", groups=groupList)
+
+    if not groupList:
+        try:
+            response = derms_client.query_all_groups()
+            _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
+        except Exception as e:
+            return render_template("dispatch-group.html", status="DER Groups could not be found.", groups=groupList)
+
+    # if simulation_id == None:
+    #     # detect if there is a simulation running
+    #     return render_template("dispatch-group.html", status="No simulation running.")
+
+    return render_template("dispatch-group.html", groups=groupList)
 
 
 # @app.route('/create')
