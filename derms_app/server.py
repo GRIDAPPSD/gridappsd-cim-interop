@@ -610,7 +610,7 @@ def getGroupStatus():
             status.append(select2)
         if status:
             response = derms_client.query_group_status(status)
-            return render_template("group-status-returned.html", status=status)
+            return render_template("group-status-returned.html", gstatus=response.Payload.DERGroupStatuses.EndDeviceGroup)
         else:
             return "please select at least one group to query."
         # if select1 and select2:
@@ -663,7 +663,7 @@ def start_server_proc():
 def __start_app__():
     import logging
     logging.basicConfig(level=logging.DEBUG)
-    app.run(port=8442, debug=True)
+    app.run(port=8442, debug=True, use_reloader=False)
 
 
 if __name__ == '__main__':
