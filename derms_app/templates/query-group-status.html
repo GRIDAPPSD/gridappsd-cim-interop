@@ -60,13 +60,13 @@
         <select id="group1" name="group1" style="width:100px">
         <option id="group1empty" name="group1empty" value=""></option>
         {% for group in groups %}
-            <option id="group1option" name="{{group.name}}" value="{{group.name}}">{{group.name}}</option>
+            <option id="group1option" name="{{group.name}}" value="{{group.name}}">{{group.name}}, {{group.mrid}}</option>
         {% endfor %}
         </select><br><br>
         <select id="group2" name="group2" style="width:100px">
         <option id="group2empty" name="group2empty" value=""></option>
         {% for group in groups %}
-            <option id="group2option" name="{{group.name}}" value="{{group.name}}">{{group.name}}</option>
+            <option id="group2option" name="{{group.name}}" value="{{group.name}}">{{group.name}}, {{group.mrid}}</option>
         {% endfor %}
         </select><br><br>
         <input type="submit" value="Query Status">

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Query Group Forecasts</title>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+
+<a href="/menu">Home</a>
+
+{% if status %}
+<br>
+<br>
+<p id="status" style="color:red">Query Forecasts Status: {{status}}.</p>
+<br>
+{% endif %}
+
+<h2>Query DER group(s) Forecasts</h2>
+<br>
+{% if not groups%}
+<h1>No Groups Found</h1>
+{% endif %}
+{% if groups%}
+<p>Choose one or two group(s) to query forecast:</p>
+<form id="query" action="/get_group_forecasts" method="post">
+    <select id="group1" name="group1" style="width:100px;">
+    <option id="group1empty" name="group1empty" value=""></option>
+    {% for group in groups %}
+        <option id="group1option" name="{{group.name}}" value="{{group.name}}">{{group.name}}, {{group.mrid}}</option>
+    {% endfor %}
+    </select><br><br>
+    <select id="group2" name="group2" style="width:100px">
+    <option id="group2empty" name="group2empty" value=""></option>
+    {% for group in groups %}
+        <option id="group2option" name="{{group.name}}" value="{{group.name}}">{{group.name}}, {{group.mrid}}</option>
+    {% endfor %}
+    </select><br><br>
+    <p>
+    <label style="display:inline-block;width:400px;">Parameter for Forecast Query:</label>
+    <select id="selectParameter" name="selectParameter" style="width:300px;">
+        <option value="activePowerOption" id="activePowerOption" name="activePowerOption">active Power</option>
+        <option value="apparentPowerOption" id="apparentPowerOption" name="apparentPowerOption">apparent Power</option>
+        <option value="decreasingRampRateOption" id="decreasingRampRateOption" name="decreasingRampRateOption">decreasing Ramp Rate</option>
+        <option value="highFilterBiDirectionalRegulationOption" id="highFilterBiDirectionalRegulationOption" name="highFilterBiDirectionalRegulationOption">high Filter BiDirectional Regulation</option>
+        <option value="highFilterDownRegulationOption" id="highFilterDownRegulationOption" name="highFilterDownRegulationOption">high Filter Down Regulation</option>
+        <option value="highFilterUpRegulationOption" id="highFilterUpRegulationOption" name="highFilterUpRegulationOption">high Filter Up Regulation</option>
+        <option value="increasingRampRateOption" id="increasingRampRateOption" name="increasingRampRateOption">increasing Ramp Rate</option>
+        <option value="lowFilterBiDirectionalRegulationOption" id="lowFilterBiDirectionalRegulationOption" name="lowFilterBiDirectionalRegulationOption">low Filter BiDirectional Regulation</option>
+        <option value="lowFilterDownRegulationOption" id="lowFilterDownRegulationOption" name="lowFilterDownRegulationOption">low Filter Down Regulation</option>
+        <option value="lowFilterUpRegulationOption" id="lowFilterUpRegulationOption" name="lowFilterUpRegulationOption">low Filter Up Regulation</option>
+        <option value="reactivePowerOption" id="reactivePowerOption" name="reactivePowerOption">reactive Power</option>
+        <option value="voltageOption" id="voltageOption" name="voltageOption">voltage</option>
+    </select>
+    </p>
+    <p>
+    <label style="display:inline-block;width:400px;">Select Curve Style for Forecast Query:</label>
+    <select id="curveStyle" name="curveStyle" style="width:300px;">
+        <option value="constantYValueOption" id="constantYValueOption" name="constantYValueOption">constant YValue</option>
+        <option value="straightLineYValuesOption" id="straightLineYValuesOption" name="straightLineYValuesOption">straight Line YValues</option>
+    </select>
+    </p>
+    <p>
+    <label style="display:inline-block;width:400px;">Start Time for Forecast Query:</label>
+        <label>Year</label>
+        <input type="number" style="width:80px;" min="1970">
+        <label>Month</label>
+        <input type="number" style="width:50px;" max="12" min="1">
+        <label>Day</label>
+        <input type="number" style="width:50px;" max="31" min="1">
+        <label>Time</label>
+        <input type="number" style="width:50px;" max="23" min="0">
+        <label>:</label>
+        <input type="number" style="width:50px;" max="59" min="0">
+        <label>:</label>
+        <input type="number" style="width:50px;" max="59" min="0">
+    </p>
+    <p>
+    <label style="display:inline-block;width:400px;">Number of Time Intervals for Forecast Query:</label>
+    <input type="number" style="width:300px;"><br>
+    </p>
+    <p>
+    <label style="display:inline-block;width:400px;">Duration of Time Intervals for Forecast Query:</label>
+    <input type="number" style="width:300px;"><br>
+    </p>
+    <p>
+        <label style="display:inline-block;width:400px;">Unit of Time Intervals for Forecast Query:</label>
+        <select id="timeIntervalKind" name="timeIntervalKind" style="width:300px;">
+            <option value="dayOption" id="dayOption" name="constantYValueOption">D</option>
+            <option value="monthOption" id="monthOption" name="monthOption">M</option>
+            <option value="yearOption" id="yearOption" name="yearOption">Y</option>
+            <option value="hourOption" id="hourOption" name="hourOption">h</option>
+            <option value="minuteOption" id="minuteOption" name="minuteOption">m</option>
+            <option value="secondOption" id="secondOption" name="secondOption">s</option>
+        </select>
+    </p>
+
+
+    <input type="submit" value="Query Forecasts">
+
+</form>
+{% endif %}
+</body>
+</html>

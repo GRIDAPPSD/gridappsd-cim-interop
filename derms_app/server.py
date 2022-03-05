@@ -724,6 +724,48 @@ def getGroupStatus():
         return render_template("query-group-status.html", groups=groupList)
 
 
+@app.route('/get_group_forecasts', methods=['GET', 'POST'])
+def getGroupForecasts():
+    if request.method == 'POST':
+        status = []
+        select1 = request.form.get('group1')
+        if select1:
+            status.append(select1)
+        select2 = request.form.get('group2')
+        if select2:
+            status.append(select2)
+        if status:
+            response = derms_client.query_group_status(status)
+            return render_template("group-status-returned.html", gstatus=response.Payload.DERGroupStatuses.EndDeviceGroup)
+        else:
+            return "please select at least one group to query."
+        # if select1 and select2:
+        #     status.append(select1)
+        #     status.append(select2)
+        #     response = derms_client.create_groups(status)
+        #     return render_template("query-group-status.html", groups=groupList)
+        # elif select1:
+        #     status.append(select1)
+        #     response = derms_client.create_groups(status)
+        #     return "select1 to query."
+        # elif select2:
+        #     status.append(select2)
+        #     response = derms_client.create_groups(status)
+        #     return "select2 to query."
+        # else:
+        #     return "please select at least one group to query."
+    else:
+        if not groupList:
+            # response = derms_client.query_all_groups()
+            # _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
+            try:
+                response = derms_client.query_all_groups()
+                _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
+            except Exception as ex:
+                pass
+        return render_template("query-group-forecasts.html", groups=groupList)
+
+
 def deleteGroup(group):
     # success = zeep.deleteGroupCall()
     if True:
