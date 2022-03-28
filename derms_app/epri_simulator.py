@@ -21,3 +21,8 @@ QUERY_NAMESPACE_STATUS_SOAP_BINDING = (
         '{http://get.ws.server.sixthc.com/}QueryDERGroupStatusesServiceSoapBinding',
         f'{BASE_URL}/61968-5/get/queryDERGroupStatuses'
 )
+QUERY_DERGROUP_FORECAST_ENDPOINT = f"{BASE_URL}/61968-5/get/queryDERGroupForecasts?wsdl"
+QUERY_NAMESPACE_FORECAST_SOAP_BINDING = (
+        '{http://get.ws.server.sixthc.com/}QueryDERGroupForecastsServiceSoapBinding',
+        f'{BASE_URL}/61968-5/get/queryDERGroupForecasts'
+)

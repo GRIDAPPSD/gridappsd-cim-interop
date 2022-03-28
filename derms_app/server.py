@@ -1,3 +1,4 @@
+import datetime
 from multiprocessing import Process
 from threading import Lock
 from time import sleep
@@ -14,6 +15,8 @@ import json, jsons
 from jinja2 import Environment
 from jinja2.loaders import FileSystemLoader
 import time
+from forecastQueries import DispatchSchedule, DERGroupForecastQueries
+import enums
 
 
 # set the project root directory as the static folder, you can set others.
@@ -727,16 +730,28 @@ def getGroupStatus():
 @app.route('/get_group_forecasts', methods=['GET', 'POST'])
 def getGroupForecasts():
     if request.method == 'POST':
-        status = []
-        select1 = request.form.get('group1')
-        if select1:
-            status.append(select1)
-        select2 = request.form.get('group2')
-        if select2:
-            status.append(select2)
-        if status:
-            response = derms_client.query_group_status(status)
-            return render_template("group-status-returned.html", gstatus=response.Payload.DERGroupStatuses.EndDeviceGroup)
+        selectd_groups = request.form.getlist('group')
+        selected_parameters = request.form.getlist('selectParameter')
+        nschedules = int(request.form.get('nSchedule'))
+        schedules = []
+        for i in range(nschedules):
+            curveStyle = request.form.get('curveStyle' + str(i + 1))
+            nIntervals = request.form.get('nIntervals' + str(i + 1))
+            intervalDuration = request.form.get('intervalDuration' + str(i + 1))
+            timeIntervalKind = request.form.get('timeIntervalKind' + str(i + 1))
+            year = int(request.form.get('year' + str(i + 1)))
+            month = int(request.form.get('month' + str(i + 1)))
+            day = int(request.form.get('day' + str(i + 1)))
+            hour = int(request.form.get('hour' + str(i + 1)))
+            minute = int(request.form.get('minute' + str(i + 1)))
+            second = int(request.form.get('second' + str(i + 1)))
+            startTime = datetime.datetime(year=year, month=month, day=day, hour=hour, minute=minute, second=second)
+            schedule = DispatchSchedule(curveStyleKind=curveStyle, numberOfIntervals=nIntervals, startTime=startTime, timeIntervalDuration=intervalDuration, timeIntervalUnit=timeIntervalKind)
+            schedules.append(schedule)
+        qforecast = DERGroupForecastQueries(DERMonitorableParameter=selected_parameters, DispatchSchedule=schedules, EndDeviceGroup=selectd_groups)
+        if selectd_groups:
+            response = derms_client.query_group_forecast(qforecast)
+            return render_template("forecast-status-returned.html", gforecasts=response.Payload.DERGroupForecasts)
         else:
             return "please select at least one group to query."
         # if select1 and select2:

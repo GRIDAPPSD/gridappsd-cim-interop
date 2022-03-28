@@ -60,3 +60,8 @@ QUERY_NAMESPACE_STATUS_SOAP_BINDING = (
         f'{{{Namespace_URL}}}QueryDERGroupStatusesService',
         f'{BASE_URL}/get/queryDERGroupStatuses'
 )
+QUERY_DERGROUP_FORECAST_ENDPOINT = f"{BASE_URL}/get/queryDERGroupForecasts?wsdl"
+QUERY_NAMESPACE_FORECAST_SOAP_BINDING = (
+        f'{{{Namespace_URL}}}QueryDERGroupForecastsService',
+        f'{BASE_URL}/get/queryDERGroupForecasts'
+)
