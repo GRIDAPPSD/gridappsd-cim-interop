@@ -51,7 +51,8 @@ def target_chosen():
             from epri_simulator import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
                                           CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT,
                                           QUERY_DERGROUP_ENDPOINT, QUERY_NAMESPACE_SOAP_BINDING,
-                                        QUERY_NAMESPACE_STATUS_SOAP_BINDING, QUERY_DERGROUP_STATUS_ENDPOINT)
+                                        QUERY_NAMESPACE_STATUS_SOAP_BINDING, QUERY_DERGROUP_STATUS_ENDPOINT,
+                                        QUERY_NAMESPACE_FORECAST_SOAP_BINDING, QUERY_DERGROUP_FORECAST_ENDPOINT)
             derms_client.c.CHANGE_NAMESPACE_SOAP_BINDING = CHANGE_NAMESPACE_SOAP_BINDING
             derms_client.c.CREATE_NAMESPACE_SOAP_BINDING = CREATE_NAMESPACE_SOAP_BINDING
             derms_client.c.CREATE_DERGROUP_ENDPOINT = CREATE_DERGROUP_ENDPOINT
@@ -60,6 +61,8 @@ def target_chosen():
             derms_client.c.QUERY_NAMESPACE_SOAP_BINDING = QUERY_NAMESPACE_SOAP_BINDING
             derms_client.c.QUERY_NAMESPACE_STATUS_SOAP_BINDING = QUERY_NAMESPACE_STATUS_SOAP_BINDING
             derms_client.c.QUERY_DERGROUP_STATUS_ENDPOINT = QUERY_DERGROUP_STATUS_ENDPOINT
+            derms_client.c.QUERY_NAMESPACE_FORECAST_SOAP_BINDING = QUERY_NAMESPACE_FORECAST_SOAP_BINDING
+            derms_client.c.QUERY_DERGROUP_FORECAST_ENDPOINT = QUERY_DERGROUP_FORECAST_ENDPOINT
             derms_client.c.SOAP_BINDINGS = dict(
                 CREATE=CREATE_NAMESPACE_SOAP_BINDING,
                 # Both delete and change use the same binding
@@ -73,6 +76,13 @@ def target_chosen():
                 DELETE=CHANGE_NAMESPACE_SOAP_BINDING,
                 CHANGE=CHANGE_NAMESPACE_SOAP_BINDING,
                 GET=QUERY_NAMESPACE_STATUS_SOAP_BINDING
+            )
+            derms_client.c.FORECASTS_SOAP_BINDINGS = dict(
+                CREATE=CREATE_NAMESPACE_SOAP_BINDING,
+                # Both delete and change use the same binding
+                DELETE=CHANGE_NAMESPACE_SOAP_BINDING,
+                CHANGE=CHANGE_NAMESPACE_SOAP_BINDING,
+                GET=QUERY_NAMESPACE_FORECAST_SOAP_BINDING
             )
         else:
             derms_client.c.USE_SIMULATOR_FOR_SOAP = False
