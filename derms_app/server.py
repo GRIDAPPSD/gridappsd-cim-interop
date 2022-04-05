@@ -1,3 +1,4 @@
+import datetime
 from multiprocessing import Process
 from threading import Lock
 from time import sleep
@@ -15,6 +16,8 @@ from jinja2 import Environment
 from jinja2.loaders import FileSystemLoader
 import time
 import datetime
+from forecastQueries import DispatchSchedule, DERGroupForecastQueries
+import enums
 
 
 # set the project root directory as the static folder, you can set others.
@@ -50,7 +53,8 @@ def target_chosen():
                                           CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT,
                                           QUERY_DERGROUP_ENDPOINT, QUERY_NAMESPACE_SOAP_BINDING,
                                         QUERY_NAMESPACE_STATUS_SOAP_BINDING, QUERY_DERGROUP_STATUS_ENDPOINT,
-                                        CREATE_DISPATCH_ENDPOINT, CREATE_DISPATCH_NAMESPACE_SOAP_BINDING)
+                                        CREATE_DISPATCH_ENDPOINT, CREATE_DISPATCH_NAMESPACE_SOAP_BINDING,
+                                        QUERY_NAMESPACE_FORECAST_SOAP_BINDING, QUERY_DERGROUP_FORECAST_ENDPOINT)
             derms_client.c.CHANGE_NAMESPACE_SOAP_BINDING = CHANGE_NAMESPACE_SOAP_BINDING
             derms_client.c.CREATE_NAMESPACE_SOAP_BINDING = CREATE_NAMESPACE_SOAP_BINDING
             derms_client.c.CREATE_DERGROUP_ENDPOINT = CREATE_DERGROUP_ENDPOINT
@@ -61,6 +65,8 @@ def target_chosen():
             derms_client.c.QUERY_DERGROUP_STATUS_ENDPOINT = QUERY_DERGROUP_STATUS_ENDPOINT
             derms_client.c.CREATE_DISPATCH_ENDPOINT = CREATE_DISPATCH_ENDPOINT
             derms_client.c.CREATE_DISPATCH_NAMESPACE_SOAP_BINDING = CREATE_DISPATCH_NAMESPACE_SOAP_BINDING
+            derms_client.c.QUERY_NAMESPACE_FORECAST_SOAP_BINDING = QUERY_NAMESPACE_FORECAST_SOAP_BINDING
+            derms_client.c.QUERY_DERGROUP_FORECAST_ENDPOINT = QUERY_DERGROUP_FORECAST_ENDPOINT
             derms_client.c.SOAP_BINDINGS = dict(
                 CREATE=CREATE_NAMESPACE_SOAP_BINDING,
                 # Both delete and change use the same binding
@@ -77,6 +83,13 @@ def target_chosen():
             )
             derms_client.c.SOAP_BINDINGS_DISPATCH = dict(
                 CREATE=CREATE_DISPATCH_NAMESPACE_SOAP_BINDING
+            )
+            derms_client.c.FORECASTS_SOAP_BINDINGS = dict(
+                CREATE=CREATE_NAMESPACE_SOAP_BINDING,
+                # Both delete and change use the same binding
+                DELETE=CHANGE_NAMESPACE_SOAP_BINDING,
+                CHANGE=CHANGE_NAMESPACE_SOAP_BINDING,
+                GET=QUERY_NAMESPACE_FORECAST_SOAP_BINDING
             )
         else:
             derms_client.c.USE_SIMULATOR_FOR_SOAP = False
@@ -759,16 +772,28 @@ def getGroupStatus():
 @app.route('/get_group_forecasts', methods=['GET', 'POST'])
 def getGroupForecasts():
     if request.method == 'POST':
-        status = []
-        select1 = request.form.get('group1')
-        if select1:
-            status.append(select1)
-        select2 = request.form.get('group2')
-        if select2:
-            status.append(select2)
-        if status:
-            response = derms_client.query_group_status(status)
-            return render_template("group-status-returned.html", gstatus=response.Payload.DERGroupStatuses.EndDeviceGroup)
+        selectd_groups = request.form.getlist('group')
+        selected_parameters = request.form.getlist('selectParameter')
+        nschedules = int(request.form.get('nSchedule'))
+        schedules = []
+        for i in range(nschedules):
+            curveStyle = request.form.get('curveStyle' + str(i + 1))
+            nIntervals = request.form.get('nIntervals' + str(i + 1))
+            intervalDuration = request.form.get('intervalDuration' + str(i + 1))
+            timeIntervalKind = request.form.get('timeIntervalKind' + str(i + 1))
+            year = int(request.form.get('year' + str(i + 1)))
+            month = int(request.form.get('month' + str(i + 1)))
+            day = int(request.form.get('day' + str(i + 1)))
+            hour = int(request.form.get('hour' + str(i + 1)))
+            minute = int(request.form.get('minute' + str(i + 1)))
+            second = int(request.form.get('second' + str(i + 1)))
+            startTime = datetime.datetime(year=year, month=month, day=day, hour=hour, minute=minute, second=second)
+            schedule = DispatchSchedule(curveStyleKind=curveStyle, numberOfIntervals=nIntervals, startTime=startTime, timeIntervalDuration=intervalDuration, timeIntervalUnit=timeIntervalKind)
+            schedules.append(schedule)
+        qforecast = DERGroupForecastQueries(DERMonitorableParameter=selected_parameters, DispatchSchedule=schedules, EndDeviceGroup=selectd_groups)
+        if selectd_groups:
+            response = derms_client.query_group_forecast(qforecast)
+            return render_template("forecast-status-returned.html", gforecasts=response.Payload.DERGroupForecasts)
         else:
             return "please select at least one group to query."
         # if select1 and select2:

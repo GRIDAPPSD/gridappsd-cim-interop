@@ -272,6 +272,30 @@ def __build_query_dergourp_status_body(status):
     return request
 
 
+def __build_query_dergourp_forecast_body(status):
+    groups = []
+    schedules = []
+    for s in status.EndDeviceGroup:
+        groups.append({'Names': {'name': s}})
+    for s in status.DispatchSchedule:
+        schedule = {
+            'curveStyleKind': s.curveStyleKind,
+            'numberOfIntervals': s.numberOfIntervals,
+            'startTime': s.startTime,
+            'timeIntervalDuration': s.timeIntervalDuration,
+            'timeIntervalUnit': s.timeIntervalUnit,
+        }
+        schedules.append(schedule)
+    request = {
+        'DERGroupForecastQueries': {
+            'DERMonitorableParameter': status.DERMonitorableParameter,
+            'DispatchSchedule': schedules,
+            'EndDeviceGroup': groups
+        }
+    }
+    return request
+
+
 def get_models():
     history = HistoryPlugin()
     client = Client(c.GET_MODEL_ENDPOINT, plugins=[history])
@@ -428,6 +452,7 @@ def dispatch_groups(dispatch_list):
 
     return response
 
+
 def create_groups(group_list):
     '''
     create multiple group
@@ -483,6 +508,18 @@ def get_statuses_service(client, verb):
     :return: the ServiceProxy object that is created in the Client object
     '''
     bindings = c.STATUS_SOAP_BINDINGS[verb]
+    service = client.create_service(*bindings) # here * is for unpacking
+    return service
+
+
+def get_forecasts_service(client, verb):
+    '''
+    create service
+    :param client:
+    :param verb: string. create, delete, get, etc.
+    :return: the ServiceProxy object that is created in the Client object
+    '''
+    bindings = c.FORECASTS_SOAP_BINDINGS[verb]
     service = client.create_service(*bindings) # here * is for unpacking
     return service
 
@@ -657,6 +694,23 @@ def query_group_status(status):
     print("BODY")
     pprint(body)
     response = get_statuses_service(client, "GET").QueryDERGroupStatuses(Header=headers, Request=body)
+    _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
+    _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
+
+    return response
+
+
+def query_group_forecast(parameters):
+    history = HistoryPlugin()
+    client = Client(c.QUERY_DERGROUP_FORECAST_ENDPOINT, plugins=[history])
+    headers = __build_endpoint_header("GET", "DERGroupForecasts")
+    body = __build_query_dergourp_forecast_body(parameters)
+    from pprint import pprint
+    print("HEADERS")
+    pprint(headers)
+    print("BODY")
+    pprint(body)
+    response = get_forecasts_service(client, "GET").QueryDERGroupForecasts(Header=headers, Request=body)
     _log.debug("Data Sent:\n{}".format(etree.tounicode(history.last_sent['envelope'], pretty_print=True)))
     _log.debug("Data Response:\n{}".format(etree.tounicode(history.last_received['envelope'], pretty_print=True)))
 
