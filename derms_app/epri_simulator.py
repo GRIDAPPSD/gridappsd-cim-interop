@@ -21,3 +21,8 @@ QUERY_NAMESPACE_STATUS_SOAP_BINDING = (
         '{http://get.ws.server.sixthc.com/}QueryDERGroupStatusesServiceSoapBinding',
         f'{BASE_URL}/61968-5/get/queryDERGroupStatuses'
 )
+CREATE_DISPATCH_ENDPOINT = f"{BASE_URL}/61968-5/create/executeDERGroupDispatches?wsdl"
+CREATE_DISPATCH_NAMESPACE_SOAP_BINDING = (
+        '{http://create.ws.server.sixthc.com/}ExecuteDERGroupDispatchesServiceSoapBinding',
+        f'{BASE_URL}/61968-5/create/executeDERGroupDispatches'
+)

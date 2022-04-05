@@ -36,7 +36,7 @@ GET_DERGROUPS_ENDPOINT = f"{BASE_URL}/get/getDERGroups?wsdl"
 
 CREATE_DISPATCH_ENDPOINT = f"{BASE_URL}/create/executeDERGroupDispatches?wsdl"
 CREATE_DISPATCH_NAMESPACE_SOAP_BINDING = (
-        f'{{{Namespace_URL}}}CreateDERGroupDispatchesService',
+        f'{{{Namespace_URL}}}ExecuteDERGroupDispatchesService',
         f"{BASE_URL}/create/executeDERGroupDispatches"
 )
 

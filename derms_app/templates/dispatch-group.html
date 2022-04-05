@@ -86,7 +86,11 @@
             select_DERParameter.required = true;
             select_DERParameter.size = 1;
             container.appendChild(select_DERParameter);
-            const DERParameter_list = ["activePower", "apparentPower", "decreasingRampRate", "highFilterBiDirectionalRegulation", "highFilterDownRegulation", "highFilterUpRegulation", "increasingRampRate", "lowFilterBiDirectionalRegulation", "lowFilterDownRegulation", "lowFilterUpRegulation", "reactivePower", "voltage", "stateOfCharge"];
+            const DERParameter_list = ["activePower", "reactivePower"];
+            //["activePower", "apparentPower", "decreasingRampRate", "highFilterBiDirectionalRegulation",
+            //"highFilterDownRegulation", "highFilterUpRegulation", "increasingRampRate",
+            //"lowFilterBiDirectionalRegulation", "lowFilterDownRegulation", "lowFilterUpRegulation",
+            //"reactivePower", "voltage", "stateOfCharge"];
             var option, option_text, item;
             let funcLen_1 = DERParameter_list.length;
             for(let idx = 0; idx < funcLen_1; idx++){
@@ -111,7 +115,10 @@
             select_flowDirection.required = false;
             select_flowDirection.size = 1;
             container.appendChild(select_flowDirection);
-            const flowDirection_list = ["", "forward", "lagging", "leading", "net", "none", "q1minusQ4", "q1plusQ2", "q1plusQ3", "q1plusQ4", "q2minusQ3", "q2plusQ3", "q2plusQ4", "q3minusQ2", "q3plusQ4", "quadrant1", "quadrant2", "quadrant3", "quadrant4", "reverse", "total", "totalByPhase"];
+            const flowDirection_list = ["", "forward", "reverse"];
+            //["", "forward", "lagging", "leading", "net", "none", "q1minusQ4", "q1plusQ2",
+            //"q1plusQ3", "q1plusQ4", "q2minusQ3", "q2plusQ3", "q2plusQ4", "q3minusQ2", "q3plusQ4", "quadrant1",
+            //"quadrant2", "quadrant3", "quadrant4", "reverse", "total", "totalByPhase"];
             var option, option_text, item;
             let funcLen_2 = flowDirection_list.length;
             for(let idx = 0; idx < funcLen_2; idx++){
@@ -136,7 +143,8 @@
             select_yMultiplier.required = true;
             select_yMultiplier.size = 1;
             container.appendChild(select_yMultiplier);
-            const yMultiplier_list = ["k", "E", "G", "M", "P", "T", "Y", "Z", "a", "c", "d", "da", "f", "h", "m", "micro", "n", "none", "p", "y", "z"];
+            const yMultiplier_list = ["k", ""];
+            //["k", "E", "G", "M", "P", "T", "Y", "Z", "a", "c", "d", "da", "f", "h", "m", "micro", "n", "none", "p", "y", "z"];
             var option, option_text, item;
             let funcLen_3 = yMultiplier_list.length;
             for(let idx = 0; idx < funcLen_3; idx++){
@@ -161,7 +169,8 @@
             select_yUnit.required = true;
             select_yUnit.size = 1;
             container.appendChild(select_yUnit);
-            const yUnit_list = ["W", "Ah", "As", "Btu", "Hz", "Q", "Qh", "V", "VA", "VAh", "VAr", "VArh", "VPerVA", "VPerVAr", "Vh", "Vs", "A", "WPerA", "WPers", "Wh", "deg", "degC", "h", "min", "ohm", "ohmPerm", "ohmm", "onePerHz", "s", "therm"];
+            const yUnit_list = ["W", "VAr"];
+            //["W", "Ah", "As", "Btu", "Hz", "Q", "Qh", "V", "VA", "VAh", "VAr", "VArh", "VPerVA", "VPerVAr", "Vh", "Vs", "A", "WPerA", "WPers", "Wh", "deg", "degC", "h", "min", "ohm", "ohmPerm", "ohmm", "onePerHz", "s", "therm"];
             var option, option_text, item;
             let funcLen_4 = yUnit_list.length;
             for(let idx = 0; idx < funcLen_4; idx++){
@@ -196,31 +205,6 @@
                 option_text = document.createTextNode(item);
                 option.appendChild(option_text);
                 select_curveStyleKind.appendChild(option);
-            }
-            container.appendChild(document.createElement("br"));
-
-            // select dispatch_group_para_sch_timeIntervalUnit
-            let ptimeIntervalUnit = document.createElement("p");
-            let timeIntervalUnitnode = document.createTextNode("Select dispatch timeIntervalUnit: ");
-            ptimeIntervalUnit.appendChild(timeIntervalUnitnode);
-            container.appendChild(ptimeIntervalUnit);
-            let select_timeIntervalUnit =  document.createElement("select");
-            let select_id_6 = 'dispatch_group_para_sch_timeIntervalUnit_'+index;
-            select_timeIntervalUnit.name = select_id_6;
-            select_timeIntervalUnit.id = select_id_6;
-            select_timeIntervalUnit.required = true;
-            select_timeIntervalUnit.size = 1;
-            container.appendChild(select_timeIntervalUnit);
-            const timeIntervalUnit_list = ["D", "M", "Y", "h", "m", "s"];
-            var option, option_text, item;
-            let funcLen_6 = timeIntervalUnit_list.length;
-            for(let idx = 0; idx < funcLen_6; idx++){
-                item = timeIntervalUnit_list[idx]
-                option = document.createElement("option");
-                option.value = item;
-                option_text = document.createTextNode(item);
-                option.appendChild(option_text);
-                select_timeIntervalUnit.appendChild(option);
             }
             container.appendChild(document.createElement("br"));
 
@@ -313,6 +297,24 @@
             input_temp.size = "3";
             input_temp.value = "0"
             container.appendChild(input_temp);
+            container.appendChild(document.createElement("br"));
+            container.appendChild(document.createElement("br"));
+
+            // add textbox for dispatch_group_para_sch_startTime (in epoch time format)
+            var temp_str = 'Epoch_'+index;
+            var label_temp = document.createElement("label");
+            label_temp.htmlFor = temp_str;
+            label_temp.innerHTML = 'Alternative input as Epoch Time  ';
+            container.appendChild(label_temp);
+            var input_temp = document.createElement("input");
+            input_temp.type = "number";
+            input_temp.id = temp_str
+            input_temp.name = temp_str
+            input_temp.required = false;
+            input_temp.size = "32";
+            //input_temp.value = "1648594802"
+            container.appendChild(input_temp);
+            container.appendChild(document.createElement("br"));
 
             // add numberbox for dispatch_group_para_sch_timeIntervalDuration
             let pnum_Duration = document.createElement("p");
@@ -328,6 +330,33 @@
             inputDuration.min = "1"
             inputDuration.size = "32";
             container.appendChild(inputDuration);
+            container.appendChild(document.createElement("br"));
+
+            // select dispatch_group_para_sch_timeIntervalUnit
+            let ptimeIntervalUnit = document.createElement("p");
+            let timeIntervalUnitnode = document.createTextNode("Dispatch time Interval Unit: ");
+            ptimeIntervalUnit.appendChild(timeIntervalUnitnode);
+            container.appendChild(ptimeIntervalUnit);
+            let select_timeIntervalUnit =  document.createElement("select");
+            let select_id_6 = 'dispatch_group_para_sch_timeIntervalUnit_'+index;
+            select_timeIntervalUnit.name = select_id_6;
+            select_timeIntervalUnit.id = select_id_6;
+            select_timeIntervalUnit.required = true;
+            select_timeIntervalUnit.size = 1;
+            container.appendChild(select_timeIntervalUnit);
+            const timeIntervalUnit_list = ["h", "m", "s"];
+            //["D", "M", "Y", "h", "m", "s"]
+            var option, option_text, item;
+            let funcLen_6 = timeIntervalUnit_list.length;
+            for(let idx = 0; idx < funcLen_6; idx++){
+                item = timeIntervalUnit_list[idx]
+                option = document.createElement("option");
+                option.value = item;
+                option_text = document.createTextNode(item);
+                option.appendChild(option_text);
+                select_timeIntervalUnit.appendChild(option);
+            }
+            container.appendChild(document.createElement("br"));
 
             // add textboxs for dispatch_group_para_sch_DERCurveData
             let p_curve = document.createElement("p");
@@ -347,6 +376,7 @@
                 input_temp.name = temp_str;
                 input_temp.required = false;
                 input_temp.min = "1"
+                //input_temp.value = i_inter
                 input_temp.size = "16";
                 container.appendChild(input_temp);
 
@@ -470,7 +500,8 @@
 {% if status %}
 <br>
 <br>
-<p id="status" style="color:red">Dispatch Status: {{status}}.</p>
+<p id="comment" style="color:red">{{comment}}</p>
+<p id="status" style="color:red">{{status}}</p>
 <br>
 {% endif %}
 

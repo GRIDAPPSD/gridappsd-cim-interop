@@ -21,6 +21,7 @@ import sys
 
 
 _log = logging.getLogger(__name__)
+# conn = GridAPPSD("('localhost', 61613)", username='system', password='manager')
 
 
 def __build_endpoint_header(verb, noun, message_id=None, correlation_id=None):
@@ -667,11 +668,13 @@ def run_simulation(path):
 
     # run_config load from the path
     run_config = json.load(open(path))
-    gapps_sim = GridAPPSD("('localhost', 61613)",
+    conn = GridAPPSD("('localhost', 61613)",
                           username='system', password='manager')
-    simulation_obj = Simulation(gapps_sim, run_config)
+    simulation_obj = Simulation(conn, run_config)
     simulation_obj.start_simulation()
     simulation_id = simulation_obj.simulation_id
+    temp = simulation_id # in case of return 'Simulator-xxx'
+    simulation_id = ''.join(filter(str.isdigit, temp))
 
     # pass simulation_id to soap server
     history = HistoryPlugin()
@@ -683,14 +686,11 @@ def run_simulation(path):
 
     log_file_0 = open("message.log", 'w')
     log_file_0.close()
-    list_process_status = []
 
     def demoLogFunction(header, message):
 
         process_status = message["processStatus"] #'STARTING', 'STARTED', 'RUNNING', 'COMPLETE'
         log_message = message["logMessage"]
-
-        list_process_status.append(process_status)
 
         old_stdout = sys.stdout
         log_file = open("message.log", 'a')
@@ -703,7 +703,7 @@ def run_simulation(path):
         sys.stdout = old_stdout
         log_file.close()
 
-    gapps_sim.subscribe(log_topic, demoLogFunction)
+    conn.subscribe(log_topic, demoLogFunction)
 
     # # print simulation status every 5 seconds
     # while True:
@@ -711,7 +711,63 @@ def run_simulation(path):
     #     if 'COMPLETE' in list_process_status:
     #         break
 
-    return simulation_id, list_process_status
+    return simulation_id
+
+
+def simulation_status(simulation_id):
+
+    # local connection
+    conn_local = GridAPPSD("('localhost', 61613)", username='system', password='manager')
+
+    # query the running simulation id
+    success = False
+
+    try:
+        # message = {"query": "select process_id from log where process_type like \"%goss.gridappsd.process.request.simulation%\" order by timestamp desc limit 1"}
+        message = {
+            "query": "select * from log where source like \"%gov.pnnl.goss.gridappsd.simulation.SimulationProcess%\" order by timestamp desc limit 1"}
+        response_obj = conn_local.get_response(t.LOGS, message)
+        if 'data' in response_obj.keys() and len(response_obj["data"]) > 0:
+            simulation = response_obj["data"][0]
+            if 'process_id' and 'process_status' in simulation:
+                print('query simulation id and status from log')
+                # simu_id = simulation['process_id']
+                temp = simulation['process_id']
+                simu_id = ''.join(filter(str.isdigit, temp))
+
+                simu_status = simulation['process_status']
+                if simu_id != simulation_id and simu_status == 'RUNNING':
+                    simulation_id = simu_id
+                    success = True
+    except:
+        print('gridappsd.goss.TimeoutError: Request not responded to in a timely manner!')
+
+    if success:
+        # subscribe to logging API
+        log_topic = simulation_log_topic(simulation_id)
+
+        log_file_0 = open("message.log", 'w')
+        log_file_0.close()
+
+        def demoLogFunction(header, message):
+
+            process_status = message["processStatus"] #'STARTING', 'STARTED', 'RUNNING', 'COMPLETE'
+            log_message = message["logMessage"]
+
+            old_stdout = sys.stdout
+            log_file = open("message.log", 'a')
+            sys.stdout = log_file
+
+            print(".......... Log message ..........")
+            print(process_status)
+            print(log_message)
+
+            sys.stdout = old_stdout
+            log_file.close()
+
+        conn_local.subscribe(log_topic, demoLogFunction)
+
+    return simulation_id
 
 
 if __name__ == '__main__':

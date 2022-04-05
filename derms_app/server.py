@@ -14,6 +14,7 @@ import json, jsons
 from jinja2 import Environment
 from jinja2.loaders import FileSystemLoader
 import time
+import datetime
 
 
 # set the project root directory as the static folder, you can set others.
@@ -48,7 +49,8 @@ def target_chosen():
             from epri_simulator import (CREATE_NAMESPACE_SOAP_BINDING, CHANGE_NAMESPACE_SOAP_BINDING,
                                           CREATE_DERGROUP_ENDPOINT, CHANGE_DERGROUP_ENDPOINT,
                                           QUERY_DERGROUP_ENDPOINT, QUERY_NAMESPACE_SOAP_BINDING,
-                                        QUERY_NAMESPACE_STATUS_SOAP_BINDING, QUERY_DERGROUP_STATUS_ENDPOINT)
+                                        QUERY_NAMESPACE_STATUS_SOAP_BINDING, QUERY_DERGROUP_STATUS_ENDPOINT,
+                                        CREATE_DISPATCH_ENDPOINT, CREATE_DISPATCH_NAMESPACE_SOAP_BINDING)
             derms_client.c.CHANGE_NAMESPACE_SOAP_BINDING = CHANGE_NAMESPACE_SOAP_BINDING
             derms_client.c.CREATE_NAMESPACE_SOAP_BINDING = CREATE_NAMESPACE_SOAP_BINDING
             derms_client.c.CREATE_DERGROUP_ENDPOINT = CREATE_DERGROUP_ENDPOINT
@@ -57,6 +59,8 @@ def target_chosen():
             derms_client.c.QUERY_NAMESPACE_SOAP_BINDING = QUERY_NAMESPACE_SOAP_BINDING
             derms_client.c.QUERY_NAMESPACE_STATUS_SOAP_BINDING = QUERY_NAMESPACE_STATUS_SOAP_BINDING
             derms_client.c.QUERY_DERGROUP_STATUS_ENDPOINT = QUERY_DERGROUP_STATUS_ENDPOINT
+            derms_client.c.CREATE_DISPATCH_ENDPOINT = CREATE_DISPATCH_ENDPOINT
+            derms_client.c.CREATE_DISPATCH_NAMESPACE_SOAP_BINDING = CREATE_DISPATCH_NAMESPACE_SOAP_BINDING
             derms_client.c.SOAP_BINDINGS = dict(
                 CREATE=CREATE_NAMESPACE_SOAP_BINDING,
                 # Both delete and change use the same binding
@@ -70,6 +74,9 @@ def target_chosen():
                 DELETE=CHANGE_NAMESPACE_SOAP_BINDING,
                 CHANGE=CHANGE_NAMESPACE_SOAP_BINDING,
                 GET=QUERY_NAMESPACE_STATUS_SOAP_BINDING
+            )
+            derms_client.c.SOAP_BINDINGS_DISPATCH = dict(
+                CREATE=CREATE_DISPATCH_NAMESPACE_SOAP_BINDING
             )
         else:
             derms_client.c.USE_SIMULATOR_FOR_SOAP = False
@@ -419,13 +426,19 @@ def configuration():
         path = request.form.get('path')
         global simulation_id
 
-        simulation_id, list_process_status = derms_client.run_simulation(path)
+        simulation_id = derms_client.run_simulation(path)
         return simulation_status()
         # return render_template("simulation-status.html", simu_id=simulation_id)
 
 
 @app.route("/simulation_status", methods=['GET', 'POST'])
 def simulation_status():
+
+    # query log for potential running simulation
+    global simulation_id
+    simulation_id = derms_client.simulation_status(simulation_id)
+
+    # continuously read message.log changes
     def inner():
             length_old = 0
             while True:
@@ -488,6 +501,11 @@ def dispath_group_html():
             second = int(request.form.get('Sec_' + str(g_count + 1)))
             dispatch_group_para_sch_startTime = f'{year:02}-{month:02}-{day:02}' + 'T' + f'{hour:02}:{minute:02}:{second:02}' + '-00:00'
 
+            epoch_time = request.form.get('Epoch_' + str(g_count +1))
+            if epoch_time:
+                tmp = datetime.datetime.fromtimestamp(int(epoch_time))
+                dispatch_group_para_sch_startTime = tmp.strftime("%Y%m%dT%H:%M:%S-00:00")
+
             # tn = time.localtime() # by default, pacific time zone
             # dispatch_group_para_sch_startTime = f'{tn.tm_year:02}-{tn.tm_mon:02}-{tn.tm_mday:02}'+'T'+f'{tn.tm_hour:02}:{tn.tm_min:02}:{tn.tm_sec:02}'+'-08:00'
 
@@ -522,19 +540,33 @@ def dispath_group_html():
         if response.Reply.Result == "OK":
             # store dispatches globally
             dispatch_list_global.append(dispatch_list)
-            return render_template("dispatch-group.html", status="Dispatch groups job submitted!", groups=groupList)
+            status = "DERGroup Dispatch status: " + response.Reply.Result + "."
+            response_time = response.Header.Timestamp.strftime("%m/%d/%Y, %H:%M:%S")
+            if response.Header.Comment:
+                comment = response_time + ': ' + response.Header.Comment
+            else:
+                comment = response_time + ': '
+            return render_template("dispatch-group.html", status=status,
+                                   comment=comment, groups=groupList)
         else:
-            reply_error_code = "Dispatch groups error: " + response.Reply.Result + "."
-            return render_template("dispatch-group.html", status=reply_error_code)
-
-        return render_template("dispatch-group.html", status="No response.", groups=groupList)
+            status = "DERGroup Dispatch status: Error-" + response.Reply.Result + "."
+            response_time = response.Header.Timestamp.strftime("%m/%d/%Y, %H:%M:%S")
+            if response.Header.Comment:
+                comment = response_time + ': ' + response.Header.Comment
+            else:
+                comment = response_time + ': '
+            return render_template("dispatch-group.html", status=status,
+                                   comment=comment, groups=groupList)
 
     if not groupList:
         try:
             response = derms_client.query_all_groups()
             _sortGroups(response.Payload.DERGroups.EndDeviceGroup)
         except Exception as e:
-            return render_template("dispatch-group.html", status="DER Groups could not be found.", groups=groupList)
+            status = "DERGroup Dispatch status: Error-DERGroups not exist, create one."
+            comment = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + ': '
+            return render_template("dispatch-group.html", status=status,
+                                   comment=comment, groups=groupList)
 
     # if simulation_id == None:
     #     # detect if there is a simulation running
